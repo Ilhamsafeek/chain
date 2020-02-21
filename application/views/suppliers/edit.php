@@ -28,42 +28,51 @@
             </div>
           <?php endif; ?>
 
-          <div class="ibox ">
+          <div class="ibox" style="padding:50px">
                   <div class="ibox-title">
             <form role="form" action="<?php base_url('suppliers/create') ?>" method="post">
               <div class="box-body">
 
                 <?php echo validation_errors(); ?>
 
-              
-                <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4">
+                  <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Supplier Name" value="<?php echo $supplier_data['name'] ?>" autocomplete="off">
                 </div>
-
-                <div class="form-group">
+                  </div>
+                  <div class="col-md-8">
+                  <div class="form-group">
                   <label for="address">Address</label>
                   <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="<?php echo $supplier_data['address'] ?>" autocomplete="off">
                 </div>
-
-                <div class="form-group">
+                  </div>
+                  <div class="col-md-3">
+                  <div class="form-group">
                   <label for="email">Email</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $supplier_data['email'] ?>" autocomplete="off">
                 </div>
+                  </div>
+                  <div class="col-md-3">
                   <div class="form-group">
                       <label for="web">Web</label>
                       <input type="text" class="form-control" id="web" name="web" placeholder="Web" value="<?php echo $supplier_data['web'] ?>" autocomplete="off">
                   </div>
-
-                <div class="form-group">
+                  </div>
+                  <div class="col-md-3">
+                  <div class="form-group">
                   <label for="phone">Phone</label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" value="<?php echo $supplier_data['phone'] ?>" autocomplete="off">
                 </div>
-
+                  </div>
+                  <div class="col-md-3">
                   <div class="form-group">
                       <label for="source">Source</label>
                       <input type="text" class="form-control" id="source" name="source" placeholder="Source" value="<?php echo $supplier_data['source'] ?>" autocomplete="off">
                   </div>
+                  </div>
+                  <div class="col-md-8">
                   <div class="form-group">
                       <label for="overview">Overview</label>
                       <textarea type="text" id="overview" name="overview" placeholder="Overview" class="form-control" autocomplete="off">
@@ -72,6 +81,21 @@
                 
 
               </div>
+                  </div>
+
+                </div>
+              
+                
+
+                
+
+                
+                 
+
+                
+
+                  
+                
               <!-- /.box-body -->
 
               <div class="box-footer">

@@ -65,20 +65,9 @@
 
                                                 <td class="text-right">
                                                     <div class="btn-group">
+                                                    <a class="dropdown-item" href="<?php echo base_url('users/edit/'.$v['user_info']['id']) ?>"><i class="fa fa-pencil"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['user_info']['id']; ?>"><i class="fa fa-trash"></i> Delete</a>
 
-                                                        <button class="btn btn-sm" type="button">
-                                                            Print
-                                                        </button>
-                                                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Action</a>
-                                                            <a class="dropdown-item" href="#">Another action</a>
-                                                            <a class="dropdown-item" href="#">Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="<?php echo base_url('users/edit/'.$v['user_info']['id']) ?>"><i class="fa fa-pencil"></i> Edit</a>
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['user_info']['id']; ?>"><i class="fa fa-trash"></i> Delete</a>
-                                                        </div>
                                                     </div>
 
 

@@ -94,6 +94,7 @@
                 </div>
                 </div>
 
+                <div class="col-md-4">
                 <div class="form-group">
                   <label for="gender">Gender</label>
                   <div class="radio">
@@ -111,25 +112,30 @@
                     </label>
                   </div>
                 </div>
-                    </div>
-
-                    <div class="form-group">
+                </div>
+               
+                <div class="col-md-12">
+                <div class="form-group">
                   <div class="alert alert-info alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       Leave the password field empty if you don't want to change.
                   </div>
-                </div>
-
-                <div class="form-group">
+                </div>                
+                </div>  
+                     
+               
+                 <div class="col-md-4">
+                 <div class="form-group">
                   <label for="password">Password</label>
                   <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
                 </div>
-
+                 </div>       
+                
+                 <div class="col-md-4">      
                 <div class="form-group">
                   <label for="cpassword">Confirm password</label>
                   <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" autocomplete="off">
                 </div>
-   
+                </div>
                
               </div>        
               

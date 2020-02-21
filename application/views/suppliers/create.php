@@ -28,7 +28,7 @@
             </div>
           <?php endif; ?>
 
-          <div class="box">
+          <div class="box" style="padding:80px">
            
 
             <div class="ibox ">
@@ -37,39 +37,55 @@
 
                 <form role="form" action="<?php base_url('suppliers/create') ?>" method="post">
                 <?php echo validation_errors(); ?>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                     
                 <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Supplier Name" autocomplete="off">
                 </div>
-
-                <div class="form-group">
+                  </div>
+                  <div class="col-md-8">
+                  <div class="form-group">
                   <label for="address">Address</label>
                   <input type="address" class="form-control" id="address" name="address" placeholder="Address" autocomplete="off">
                 </div>
-
-                <div class="form-group">
+                  </div>
+                  <div class="col-md-3">
+                  <div class="form-group">
                   <label for="email">Email</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
                 </div>
-
-                    <div class="form-group">
+                  </div>
+                  <div class="col-md-3">
+                  <div class="form-group">
                         <label for="web">Web</label>
                         <input type="text" class="form-control" id="web" name="web" placeholder="Web" autocomplete="off">
                     </div>
 
-                <div class="form-group">
+                  </div>
+                  <div class="col-md-3">
+                  <div class="form-group">
                   <label for="phone">Phone</label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" autocomplete="off">
                 </div>
-
-                    <div class="form-group">
+                  </div>
+                  <div class="col-md-3">
+                  <div class="form-group">
                         <label for="source">Source</label>
                         <input type="text" class="form-control" id="source" name="source" placeholder="Source" autocomplete="off">
                     </div>
-                    <div class="form-group">
+                  </div>
+                  <div class="col-md-12">
+                  <div class="form-group">
                         <label for="overview">Overview</label>
                         <textarea type="text" id="overview" name="overview" placeholder="Overview" class="form-control" autocomplete="off">
                     </textarea>
+                </div>
+                  </div>
+                  
+                    
                     </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Save Changes</button>

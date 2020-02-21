@@ -76,44 +76,37 @@
                                                 <td class="text-right">
 
                                                     <div class="btn-group">
-
-                                                        <button class="btn btn-sm" type="button">
-                                                            Print
-                                                        </button>
-                                                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Action</a>
-                                                            <a class="dropdown-item" href="#">Another action</a>
-                                                            <a class="dropdown-item" href="#">Something else here</a>
-                                                            <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="<?php echo base_url('customers/edit/'.$v['customer_info']['id']) ?>"><i class="fa fa-pencil"></i> Edit</a>
-                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['customer_info']['id']; ?>"><i class="fa fa-trash"></i> Delete</a>
-                                                        </div>
+                                                    <a class="dropdown-item" href="<?php echo base_url('customers/edit/'.$v['customer_info']['id']) ?>" ><i class="fa fa-pencil"></i> Edit</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['customer_info']['id']; ?>"><i class="fa fa-trash"></i> Delete</a>
                                                     </div>
 
                                                 </td>
 
                                             <?php endif; ?>
                                         </tr>
+                  
                                         <div class="modal inmodal" id="deleteModal<?php echo $v['customer_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                                                        <h4 class="modal-title">Confirm Delete?</h4>
+                                                    </div>
                                                     <form role="form" action="<?php echo base_url('customers/delete/'.$v['customer_info']['id']) ?>" method="post" id="issueForm">
-                                                        <div class="confirmation-modal-body">
-                                                            <p><strong>Do you really want to delete?</strong></p>
-                                                            <div class="modal-footer d-flex justify-content-around">
-                                                                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                                                <button type="submit" class="btn btn-primary" name="confirm" value="Confirm">Yes</button>
-                                                            </div>
+                                                    <div class="confirmation-modal-body">
+                                                       
+                                                        <div class="modal-footer d-flex justify-content-around">
+                                                            <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                                            <button type="submit" class="btn btn-primary" name="confirm" value="Confirm">Yes</button>
                                                         </div>
+                                                    </div>
 
 
-                                                    </form>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
-
+                                    </div>
                                     <?php endforeach ?>
 
                                     </tbody>
@@ -135,19 +128,18 @@
         <?php }else{ ?>
 
 
-            <div class="row justify-content-center">
-                <div class="col-sm-6 align-item-center">
-                    <div class="row justify-content-center">
+            <div class="notfoundpanel">
+                
+            <div class="row">
                         <img src="https://plugin.intuitcdn.net/improved-inventory/2.4.29/images/aedd71ce8d4a14e839494d68e8de5cce.svg">
                     </div>
-                   <div class="row text-center">
+                   <div class="row">
                        <h2><strong>Add your Existing customers to create your next invoice or receipt</strong></h2>
                    </div>
-                    <div class="row justify-content-center">
+                    <div class="row">
                        <a href="<?php echo base_url('customers/create') ?>" class="btn btn-primary btn-md"><i class="fa fa-plus"></i> Create new Customer</a>
                     </div>
-                    </div>
-            </div>
+        </div>
 
         <?php }?>
     </div>

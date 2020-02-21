@@ -54,7 +54,7 @@
                                                         <div class="col-sm-4">
                                                             <div class="form-group">
                                                                 <label class="col-form-label" for="description">Supplier</label>
-                                                                <select class="form-control select_group material"
+                                                                <select class="select_group material"
                                                                         id="supplier" name="supplier" style="width:100%;" onchange="getProductData(1)" required>
                                                                     <option value=""></option>
                                                                     <?php foreach ($supplier_data as $k => $v): ?>
@@ -89,7 +89,7 @@
                                                             <tbody>
                                                             <tr id="row_1">
                                                                 <td>
-                                                                    <select class="form-control select_group material" data-row-id="row_1"
+                                                                    <select class="select_group material" data-row-id="row_1"
                                                                             id="material_1" name="material[]" style="width:100%;" onchange="getProductData(1)" required>
                                                                         <option value=""></option>
                                                                         <?php foreach ($materials as $k => $v): ?>

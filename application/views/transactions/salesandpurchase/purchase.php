@@ -64,8 +64,7 @@
                                     <div class="col-sm-8">
                                         <div class="form-group">
                                             <label class="col-form-label" for="description">Supplier</label>
-                                            <select class="form-control select_group material"
-                                                    id="supplier" name="supplier" style="width:100%;" required >
+                                            <select class="select_group material" id="supplier" name="supplier" style="width:100%;" required >
                                                 <option value=""></option>
                                                 <?php foreach ($supplier_data as $k => $v):
                                                     if($v['status']=='approved'){?>

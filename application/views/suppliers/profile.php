@@ -40,6 +40,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="m-b-md">
+                            <a href="<?php echo base_url('suppliers') ?>" class="btn btn-primary btn-xs"><i class="fa fa-unsorted"></i> All Suppliers</a>
+
                                 <a href="<?php echo base_url('suppliers/edit/'.$supplier_data['id']) ?>" class="btn btn-white btn-xs float-right">Edit profile</a>
                                 <h2><?php echo $supplier_data['name']; ?></h2>
                             </div>
@@ -72,13 +74,14 @@
                                 <div class="col-sm-4 text-sm-right"><dt>Status:</dt> </div>
                                 <div class="col-sm-8 text-sm-left">
                                     <dd class="mb-1">
+                                 
                                     <div class="btn-group">
-                                        <button class="btn <?php echo $color; ?> btn-sm" type="button">
-                                            <?php echo $supplier_data['status']; ?>
-                                        </button>
-                                        <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        </button>
-                                        <div class="dropdown-menu" id="dropdown">
+                                           <button type="button" class="btn btn-xs <?php echo $color; ?>"><?php echo $supplier_data['status'];?></button>
+                                           <button type="button" class="btn btn-xs <?php echo $color; ?> dropdown-toggle" data-toggle="dropdown">
+                                              <span class="caret"></span>
+
+                                            </button>
+                                            <div class="dropdown-menu" id="dropdown">
                                             <form action="<?php echo base_url('suppliers/updatestatus/'.$supplier_data['id']); ?>" method="post">
 
                                                 <button type="submit" id="status" name="status" value="pending" class="dropdown-item">Make Pending</button>
@@ -91,6 +94,7 @@
 
                                         </div>
                                     </div>
+
                                     </dd>
                                 </div>
                             </dl>

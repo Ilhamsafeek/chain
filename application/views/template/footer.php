@@ -15,6 +15,8 @@ jQuery(document).ready(function () {
                 event.stopPropagation();
             });
 
+            
+
             jQuery('#shCol input').on('click', function () {
 
                 // Get the column API object

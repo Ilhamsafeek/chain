@@ -34,7 +34,7 @@
                             <h5>All Roles</h5>
                             <?php if(in_array('createRole', $user_permission)): ?>
                             <div class="ibox-tools">
-                                <a href="<?php echo base_url('roles/create') ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create new Role</a>
+                                <a href="<?php echo base_url('roles/create') ?>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Create new Role</a>
                             </div>
 
                             <br /> <br />
@@ -59,19 +59,19 @@
 
                                         </td>
                                         <td class="project-completion">
-                                                <small>Completion with: 48%</small>
-                                                <div class="progress progress-mini">
-                                                    <div style="width: 48%;" class="progress-bar"></div>
-                                                </div>
+                                                <p>
+                                                    <?php 
+                                                   
+                                                   
+                                                   foreach (unserialize($v['permission']) as $value) {?>
+                                                        <span class="label label-default"><?php echo $value; ?></span>
+                                                       
+                                                   <?php } ?>
+                                                    
+                                                </p>
+                                                
                                         </td>
-                                        <td class="project-people">
-                                            <a href=""><img alt="image" class="rounded-circle" src="img/a3.jpg"></a>
-                                            <a href=""><img alt="image" class="rounded-circle" src="img/a1.jpg"></a>
-                                            <a href=""><img alt="image" class="rounded-circle" src="img/a2.jpg"></a>
-                                            <a href=""><img alt="image" class="rounded-circle" src="img/a4.jpg"></a>
-                                            <a href=""><img alt="image" class="rounded-circle" src="img/a5.jpg"></a>
-                                        </td>
-
+                                       
                                         <?php if(in_array('updateRole', $user_permission) || in_array('deleteRole', $user_permission)): ?>
                         <td class="project-actions">
                           <?php if(in_array('updateRole', $user_permission)): ?>
@@ -101,7 +101,7 @@
                                                        
                                                         <div class="modal-footer d-flex justify-content-around">
                                                             <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                                            <button type="submit" class="btn btn-primary" name="confirm" value="Confirm">Yes</button>
+                                                            <button type="submit" class="btn btn-success" name="confirm" value="Confirm">Yes</button>
                                                         </div>
                                                     </div>
 
