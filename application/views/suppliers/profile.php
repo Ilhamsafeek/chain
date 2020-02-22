@@ -8,9 +8,9 @@
                         <div class="media-body">
                             <ul class="breadcrumb">
                                 <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                                <li>Users</li>
+                                <li>Profiles</li>
                             </ul>
-                            <h4>Creare User</h4>
+                            <h4>Supplier Profile</h4>
                         </div>
                     </div><!-- media -->
                 </div><!-- pageheader -->
@@ -146,23 +146,7 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <dl class="row mb-0">
-                                <div class="col-sm-2 text-sm-right">
-                                    <dt>Completed:</dt>
-                                </div>
-                                <div class="col-sm-10 text-sm-left">
-                                    <dd>
-                                        <div class="progress m-b-1">
-                                            <div style="width: 60%;" class="progress-bar progress-bar-striped progress-bar-animated"></div>
-                                        </div>
-                                        <small>Evaluation completed in <strong>60%</strong>. To Approve the supplier, do a research.</small>
-                                    </dd>
-                                </div>
-                            </dl>
-                        </div>
-                    </div>
+                  
                     <div class="row m-t-sm">
                         <div class="col-lg-12">
                             <div class="panel blank-panel">

@@ -9,7 +9,7 @@
           <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
           <li>Users</li>
         </ul>
-        <h4>Creare User</h4>
+        <h4>Create User</h4>
       </div>
     </div><!-- media -->
   </div><!-- pageheader -->
@@ -52,8 +52,8 @@
 
                 <div class="form-group">
                   <label class="col-form-label" for="description">Role</label>
-                  <select class="select_group material" id="roles" name="roles" style="width:100%;">
-                  <option value="">Select Role</option>
+                  <select class="select_group material" data-placeholder="Choose Role" id="roles" name="roles" style="width:100%;">
+                  <option value=""></option>
                     <?php foreach ($role_data as $k => $v) : ?>
                       <option value="<?php echo $v['id'] ?>"><?php echo $v['role'] ?></option>
                     <?php endforeach ?>

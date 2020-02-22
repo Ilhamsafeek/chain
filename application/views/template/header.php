@@ -21,7 +21,7 @@
     <link href="<?php echo base_url('assets/css/weather-icons.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/style.datatables.css'); ?>" rel="stylesheet">
     <link href="//cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css" rel="stylesheet">
-   
+
     <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -47,13 +47,25 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
         <![endif]-->
+    <style>
+        ::-moz-selection {
+            /* Code for Firefox */
+            color: white;
+            background: #494d54;
+        }
+
+        ::selection {
+            color: white;
+            background: #494d54;
+        }
+    </style>
 </head>
 
 
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
         <![endif]-->
-        </head>
+</head>

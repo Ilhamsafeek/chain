@@ -56,9 +56,8 @@
                                             <label class="col-form-label" for="description">Customer</label>
                                             <select class="select_group product"
                                                     id="customer" name="customer" style="width:100%;" required>
-                                                <option value=""></option>
-                                                <?php foreach ($customer_data as $k => $v): ?>
-                                                    <option value="<?php echo $v['name'] ?>" placeholder="Choose Customer"><?php echo $v['name'] ?></option>
+                                                    <?php foreach ($customer_data as $k => $v): ?>
+                                                    <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
@@ -160,7 +159,7 @@
                         '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="cost[]" id="cost_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control"></td>' +
-                        '<td> <a class="delete" title="Delete"><i class="fa fa-close"></i></a> </td>' +
+                        '<td> <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a> </td>' +
                         '</tr>';
 
                     if (count_table_tbody_tr >= 1) {

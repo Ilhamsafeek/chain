@@ -8,9 +8,9 @@
                         <div class="media-body">
                             <ul class="breadcrumb">
                                 <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                                <li>Users</li>
+                                <li>Transactions</li>
                             </ul>
-                            <h4>Creare User</h4>
+                            <h4>Purchase(GRN)</h4>
                         </div>
                     </div><!-- media -->
                 </div><!-- pageheader -->
@@ -64,7 +64,7 @@
                                     <div class="col-sm-8">
                                         <div class="form-group">
                                             <label class="col-form-label" for="description">Supplier</label>
-                                            <select class="select_group material" id="supplier" name="supplier" style="width:100%;" required >
+                                            <select class="select_group material" data-placeholder="Choose Supplier" id="supplier" name="supplier" style="width:100%;" required >
                                                 <option value=""></option>
                                                 <?php foreach ($supplier_data as $k => $v):
                                                     if($v['status']=='approved'){?>
@@ -96,7 +96,7 @@
                                         <tbody>
                                         <tr id="row_1">
                                             <td>
-                                                <select class="form-control select_group material" data-row-id="row_1"
+                                                <select class="select_group material" data-placeholder="Choose Item" data-row-id="row_1"
                                                         id="material_1" name="material[]" style="width:100%;" required>
                                                     <option value=""></option>
                                                     <?php foreach ($materials as $k => $v): ?>
@@ -211,7 +211,7 @@
 
                     var html = '<tr id="row_' + row_id + '">' +
                         '<td>' +
-                        '<select class="form-control select_group material" data-row-id="' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;" >' +
+                        '<select class="select_group material" data-placeholder="Choose Item" data-row-id="' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;" >' +
                         '<option value=""></option>';
                     $.each(response, function (index, value) {
                         html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -222,7 +222,7 @@
                         '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="cost[]" id="cost_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control"></td>' +
-                        '<td> <a class="delete" title="Delete"><i class="fa fa-close"></i></a> </td>' +
+                        '<td> <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a> </td>' +
                         '</tr>';
 
                     if (count_table_tbody_tr >= 1) {

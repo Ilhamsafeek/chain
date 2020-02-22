@@ -8,9 +8,9 @@
                         <div class="media-body">
                             <ul class="breadcrumb">
                                 <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                                <li>Dashboard</li>
+                                <li>Profiles</li>
                             </ul>
-                            <h4>Dashboard</h4>
+                            <h4>Create Role</h4>
                         </div>
                     </div><!-- media -->
                 </div><!-- pageheader -->

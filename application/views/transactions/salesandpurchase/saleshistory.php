@@ -7,9 +7,9 @@
             <div class="media-body">
                 <ul class="breadcrumb">
                     <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                    <li>Users</li>
+                    <li>Transactions</li>
                 </ul>
-                <h4>Creare User</h4>
+                <h4>Sales History</h4>
             </div>
         </div><!-- media -->
     </div><!-- pageheader -->

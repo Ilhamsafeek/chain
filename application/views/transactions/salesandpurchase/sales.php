@@ -8,9 +8,9 @@
                         <div class="media-body">
                             <ul class="breadcrumb">
                                 <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                                <li>Users</li>
+                                <li>Transactions</li>
                             </ul>
-                            <h4>Creare User</h4>
+                            <h4>Sales</h4>
                         </div>
                     </div><!-- media -->
                 </div><!-- pageheader -->
@@ -65,9 +65,8 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="col-form-label" for="description">Customer</label>
-                                            <select class="select_group product"
-                                                    id="customer" name="customer" style="width:100%;" required>
-                                                <option selected="false" value=""><i class="fa fa-plus"></i>Test</option>
+                                            <select class="select_group product" data-placeholder="Choose Customer" id="customer" name="customer" style="width:100%;" required>
+                                                <option selected="false" value=""></option>
 
                                                 <?php foreach ($customer_data as $k => $v): ?>
                                                     <option value="<?php echo $v['name'] ?>" placeholder="Choose customer"><?php echo $v['name'] ?></option>
@@ -101,8 +100,7 @@
                                         <tbody>
                                         <tr id="row_1">
                                             <td>
-                                                <select class="select_group product" data-row-id="row_1"
-                                                        id="product_1" name="product[]" style="width:100%;" required>
+                                                <select class="select_group product" data-row-id="row_1" data-placeholder="Choose Item" id="product_1" name="product[]" style="width:100%;" required>
                                                     <option value=""></option>
                                                     <?php foreach ($products as $k => $v): ?>
                                                         <option value="<?php echo $v['name'] ?>" placeholder="Choose a product"><?php echo $v['name'] ?></option>
@@ -202,14 +200,7 @@
         $("#salesMenu").addClass('active');
         $(".product").select2();
 
-        var mem = $('#data_1 .input-group.date').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
-
+ 
         // Append table with add row form on add new button click ==Add new Task==
         $(".add-new").click(function () {
             var base_url = "<?php echo base_url(); ?>";
@@ -228,7 +219,7 @@
 
                     var html = '<tr id="row_' + row_id + '">' +
                         '<td>' +
-                        '<select class="form-control select_group product" data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" >' +
+                        '<select class="select_group product" data-placeholder="Choose Item" data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" >' +
                         '<option value=""></option>';
                     $.each(response, function (index, value) {
                         html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -239,7 +230,7 @@
                         '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="cost[]" id="cost_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control"></td>' +
-                        '<td> <a class="delete" title="Delete"><i class="fa fa-close"></i></a> </td>' +
+                        '<td> <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a> </td>' +
                         '</tr>';
 
                     if (count_table_tbody_tr >= 1) {

@@ -11,9 +11,8 @@
 
                 <ul class="nav nav-pills nav-stacked">
                     <li id="dashboardMainMenu"><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-                    <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-envelope-o"></i>
-                            <span>Messages</span></a></li>
-                    <li class="parent" id="profileMainMenu"><a href="chain.html"><i class="fa fa-suitcase"></i> <span>Profiles</span></a>
+                   
+                    <li class="parent" id="profileMainMenu"><a href="chain.html"><i class="fa fa-users"></i> <span>Profiles</span></a>
                         <ul class="children">
                             <li id="rolesMenu"><a href="<?php echo base_url('roles'); ?>">Roles</a></li>
                             <li id="userMenu"><a href="<?php echo base_url('users'); ?>">Users</a></li>
@@ -23,14 +22,11 @@
 
                         </ul>
                     </li>
-                    <li class="parent"><a href="chain.html"><i class="fa fa-edit"></i> <span>Stock</span></a>
+                    <li class="parent" id="stockMainMenu"><a href="chain.html"><i class="fa fa-cubes"></i> <span>Stock</span></a>
                         <ul class="children">
-                            <li><a href="code-editor.html">Code Editor</a></li>
-                            <li><a href="general-forms.html">General Forms</a></li>
-                            <li><a href="form-layouts.html">Layouts</a></li>
-                            <li><a href="wysiwyg.html">Text Editor</a></li>
-                            <li><a href="form-validation.html">Validation</a></li>
-                            <li><a href="form-wizards.html">Wizards</a></li>
+                            <li id="mainStockMenu"><a href="<?php echo base_url('mainstock'); ?>">Main Stock</a></li>
+                            <li id="finishedProductsMenu"><a href="<?php echo base_url('finalstock'); ?>">Finished Products</a></li>
+                           
                         </ul>
                     </li>
                     <li class="parent" id="transactionMainMenu"><a href="chain.html"><i class="fa fa-bars"></i> <span>Transactions</span></a>
@@ -48,7 +44,9 @@
                             <li><a href="form-validation.html">Validation</a></li>
                             <li><a href="form-wizards.html">Wizards</a></li>
                         </ul>
-                    </li>                    
+                    </li>     
+                    <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-truck"></i>
+                            <span>Distribution</span></a></li>               
                     <li class="parent"><a href="chain.html"><i class="fa fa-file-text"></i> <span>Maintanance</span></a>
                         <ul class="children">
                             <li><a href="notfound.html">404 Page</a></li>
@@ -64,7 +62,7 @@
                             <li><a href="signup.html">Sign Up</a></li>
                         </ul>
                     </li>
-                    <li class="parent"><a href="chain.html"><i class="fa fa-file-text"></i> <span>Reports</span></a>
+                    <li class="parent"><a href="chain.html"><i class="fa fa-file-pdf-o"></i> <span>Reports</span></a>
                         <ul class="children">
                             <li><a href="notfound.html">404 Page</a></li>
                             <li><a href="blank.html">Blank Page</a></li>
