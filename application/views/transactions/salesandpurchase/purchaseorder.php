@@ -144,15 +144,6 @@
         $("#purchaseMenu").addClass('active');
         $(".material").select2();
 
-
-        var mem = $('#data_1 .input-group.date').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
-
         // Append table with add row form on add new button click ==Add new Task==
         $(".add-new").click(function() {
             var base_url = "<?php echo base_url(); ?>";
@@ -171,7 +162,7 @@
 
                     var html = '<tr id="row_' + row_id + '">' +
                         '<td>' +
-                        '<select class="select_group material" data-placeholder="Choose Item" data-row-id="' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;" >' +
+                        '<select class="select_group material" data-placeholder="Choose Item" data-row-id="row_' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;" >' +
                         '<option value=""></option>';
                     $.each(response, function(index, value) {
                         html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -190,8 +181,7 @@
                     } else {
                         $("#material_info_table tbody").html(html);
                     }
-                    $(".material").select2();
-
+                    $("#material_"+row_id).select2();
                 }
             });
         })

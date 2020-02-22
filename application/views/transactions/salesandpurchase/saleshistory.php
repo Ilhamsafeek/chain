@@ -104,14 +104,14 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-xs btn-success">Print</button>
+                                                        <button type="button" class="btn btn-xs btn-success">View</button>
                                                         <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown">
                                                             <span class="caret"></span>
 
                                                         </button>
-                                                        <ul role="menu" class="dropdown-menu dropdown-demo-only">
+                                                        <ul role="menu" class="dropdown-menu dropdown-menu-right dropdown-demo-only">
 
-                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['sales_info']['id']; ?>"><i class="fa fa-trash"></i> Delete</a></li>
+                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['sales_info']['id']; ?>"><i class="fa fa-trash-o"></i>   Delete</a></li>
 
                                                         </ul>
                                                     </div>

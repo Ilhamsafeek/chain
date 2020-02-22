@@ -123,7 +123,7 @@
 
                     var html = '<tr id="row_' + row_id + '">' +
                         '<td>' +
-                        '<select class="form-control select_group product" data-placeholder="Choose Item"  data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" >' +
+                        '<select class="form-control select_group product" data-placeholder="Choose Item"  data-row-id="row_' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" >' +
                         '<option value=""></option>';
                     $.each(response, function (index, value) {
                         html += '<option value="' + value.name + '">' + value.name + '</option>';
