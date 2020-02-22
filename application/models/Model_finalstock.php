@@ -7,11 +7,11 @@ class Model_finalstock extends CI_Model
 		parent::__construct();
 	}
 
-	public function getProductData($productId = null)
+	public function getProductData($product_id = null)
 	{
-		if($productId) {
+		if($product_id) {
 			$sql = "SELECT * FROM products WHERE id = ?";
-			$query = $this->db->query($sql, array($productId));
+			$query = $this->db->query($sql, array($product_id));
 			return $query->row_array();
 		}
 

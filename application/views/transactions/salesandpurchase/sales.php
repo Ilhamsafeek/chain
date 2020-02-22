@@ -100,17 +100,18 @@
                                         <tbody>
                                         <tr id="row_1">
                                             <td>
-                                                <select class="select_group product" data-row-id="row_1" data-placeholder="Choose Item" id="product_1" name="product[]" style="width:100%;" required>
+                                                <select class="select_group product" data-row-id="row_1" data-placeholder="Choose Item" id="product_1" name="product[]" style="width:100%;"  onchange="getProductData(1)" required>
                                                     <option value=""></option>
                                                     <?php foreach ($products as $k => $v): ?>
-                                                        <option value="<?php echo $v['name'] ?>" placeholder="Choose a product"><?php echo $v['name'] ?></option>
+                                                        <option value="<?php echo $v['id'] ?>" placeholder="Choose a product"><?php echo $v['name'] ?></option>
                                                     <?php endforeach ?>
                                                 </select>
                                             </td>
-                                            <td><input type="text" name="qty[]" id="qty_1" class="form-control" required>
-                                            </td>
                                             <td><input type="text" name="cost[]" id="cost_1" class="form-control" required>
                                             </td>
+                                            <td><input type="number" name="qty[]" id="qty_1" class="form-control" required>
+                                            </td>
+                                            
                                             <td><input type="text" name="amount[]" id="amount_1" class="form-control" required>
                                             </td>
                                             <td>
@@ -195,6 +196,8 @@
 
 
 <script type="text/javascript">
+    var base_url = "<?php echo base_url(); ?>";
+
     $(document).ready(function () {
         $("#transactionMainMenu").addClass('active');
         $("#salesMenu").addClass('active');
@@ -219,16 +222,16 @@
 
                     var html = '<tr id="row_' + row_id + '">' +
                         '<td>' +
-                        '<select class="select_group product" data-placeholder="Choose Item" data-row-id="row_' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" >' +
+                        '<select class="select_group product" data-placeholder="Choose Item" data-row-id="row_' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;"  onchange="getProductData('+row_id+')">' +
                         '<option value=""></option>';
                     $.each(response, function (index, value) {
-                        html += '<option value="' + value.name + '">' + value.name + '</option>';
+                        html += '<option value="' + value.id + '">' + value.name + '</option>';
                     });
 
                     html += '</select>' +
                         '</td>' +
-                        '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="cost[]" id="cost_' + row_id + '" class="form-control"></td>' +
+                        '<td><input type="number" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
                         '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control"></td>' +
                         '<td> <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a> </td>' +
                         '</tr>';
@@ -255,7 +258,40 @@
         });
     });
 
+// get the product information from the server
+function getProductData(row_id) {
 
+var product_id = $("#product_" + row_id).val();
+if (product_id == "") {
+   
+    $("#cost_" + row_id).val("");
+    $("#qty_" + row_id).val("");
+    $("#amount_" + row_id).val("");
+    
+} else {
+    $.ajax({
+        url: base_url + 'task/getProductRow',
+        type: 'post',
+        data: {
+            product_id: product_id
+        },
+        dataType: 'json',
+        success: function(response) {
+            // setting the rate value into the rate input field
+               
+            $("#cost_" + row_id).val(response.price);                 
+            $("#qty_" + row_id).val(1);
+          
+             var total = Number(response.price) * 1;
+             total = total.toFixed(2);
+            $("#amount_" + row_id).val(total);
+           
+
+           // subAmount();
+        } // /success
+    }); // /ajax function to fetch the product data 
+}
+}
 
 </script>
 

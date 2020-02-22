@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Task extends Admin_Controller
 {
@@ -14,7 +14,7 @@ class Task extends Admin_Controller
 
         $this->load->model('model_task');
         $this->load->model('model_mainstock');
-            $this->load->model('model_finalstock');
+        $this->load->model('model_finalstock');
     }
 
     /* 
@@ -34,7 +34,6 @@ class Task extends Admin_Controller
         foreach ($task_data as $k => $v) {
 
             $result[$k]['task_info'] = $v;
-
         }
 
         $this->data['task_data'] = $result;
@@ -43,9 +42,6 @@ class Task extends Admin_Controller
         $this->data['products'] = $this->model_finalstock->getProductData();
 
         $this->render_template('task/index', $this->data);
-
-
-
     }
 
     public function all()
@@ -60,15 +56,11 @@ class Task extends Admin_Controller
         foreach ($task_data as $k => $v) {
 
             $result[$k]['task_info'] = $v;
-
         }
 
         $this->data['task_data'] = $result;
 
         $this->render_template('task/alltask', $this->data);
-
-
-
     }
 
     public function createTask()
@@ -87,7 +79,6 @@ class Task extends Admin_Controller
             if ($create == true) {
                 $response['success'] = true;
                 $response['messages'] = 'Succesfully created';
-
             } else {
                 $response['success'] = false;
                 $response['messages'] = 'Error in the database while creating the brand information';
@@ -100,7 +91,6 @@ class Task extends Admin_Controller
         }
 
         echo json_encode($response);
-
     }
 
 
@@ -121,7 +111,6 @@ class Task extends Admin_Controller
             if ($create == true) {
                 $response['success'] = true;
                 $response['messages'] = 'Succesfully completed';
-
             } else {
                 $response['success'] = false;
                 $response['messages'] = 'Error in the database while creating the brand information';
@@ -134,47 +123,44 @@ class Task extends Admin_Controller
         }
 
         echo json_encode($response);
-
     }
 
 
-    public function updateTask(){
+    public function updateTask()
+    {
 
         $task_id = $this->input->post('task_id');
         $status = $this->input->post('status');
         $response = array();
-        if($task_id) {
-            if ($this->input->post('status')=='todo') {
+        if ($task_id) {
+            if ($this->input->post('status') == 'todo') {
 
-            $updated_data = array(
-                'status' => $status,
-                'date_time_issued' => ''
+                $updated_data = array(
+                    'status' => $status,
+                    'date_time_issued' => ''
 
-            );
-        }else if ($this->input->post('status')=='progress') {
+                );
+            } else if ($this->input->post('status') == 'progress') {
                 $updated_data = array(
                     'status' => $status,
                     'date_time_issued' => date("h:i a d.m.Y"),
-                    'production'=>'',
-                    'damage'=>'',
-                    'return_materials'=>'',
-                    'date_time_completed' =>''
+                    'production' => '',
+                    'damage' => '',
+                    'return_materials' => '',
+                    'date_time_completed' => ''
 
                 );
             }
-            $update = $this->model_task->updateTask($updated_data,$task_id);
-            if($update == true) {
+            $update = $this->model_task->updateTask($updated_data, $task_id);
+            if ($update == true) {
                 $response['success'] = true;
                 $response['messages'] = "Successfully issued";
                 redirect('task', 'refresh');
-
-            }
-            else {
+            } else {
                 $response['success'] = false;
                 $response['messages'] = "Error in the database while removing the brand information";
             }
-        }
-        else {
+        } else {
             $response['success'] = false;
             $response['messages'] = "Refersh the page again!!";
         }
@@ -188,7 +174,8 @@ class Task extends Admin_Controller
 */
     public function getMaterialRow()
     {
-        $materials = $this->model_mainstock->getMaterialData();
+        $material_id = $this->input->post('material_id');
+        $materials = $this->model_mainstock->getMaterialData($material_id);
 
         echo json_encode($materials);
     }
@@ -201,9 +188,11 @@ class Task extends Admin_Controller
 */
     public function getProductRow()
     {
-        $products = $this->model_finalstock->getProductData();
-
+        $product_id = $this->input->post('product_id');
+        $products = $this->model_finalstock->getProductData($product_id);
+        
         echo json_encode($products);
+       
     }
 
     public function deleteTask()
@@ -212,26 +201,21 @@ class Task extends Admin_Controller
         $task_id = $this->input->post('task_id');
 
         $response = array();
-        if($task_id) {
+        if ($task_id) {
             $delete = $this->model_task->deleteTask($task_id);
-            if($delete == true) {
+            if ($delete == true) {
                 $response['success'] = true;
                 $response['messages'] = "Successfully deleted";
                 redirect('task', 'refresh');
-            }
-            else {
+            } else {
                 $response['success'] = false;
                 $response['messages'] = "Error in the database while removing the brand information";
             }
-        }
-        else {
+        } else {
             $response['success'] = false;
             $response['messages'] = "Refersh the page again!!";
         }
 
         echo json_encode($response);
     }
-
-
-
 }

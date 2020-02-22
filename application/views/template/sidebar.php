@@ -1,8 +1,8 @@
 
             <div class="leftpanel" style="position: fixed; padding-top: 50px">
                 <div class="media profile-left">
-                    <a class="pull-left profile-thumb" href="profile.html">
-                        <img class="img-circle" src="images/photos-profile.png" alt=""></a>
+                    <a class="pull-left profile-thumb" href="">
+                        <img class="img-circle" src="<?php echo base_url('assets/images/photos-profile.png '); ?>" alt=""></a>
                     <div class="media-body">
                         <h4 class="media-heading"><?php echo $this->session->userdata('username');?></h4>
                         <small class="text-muted"><?php echo $this->session->userdata('email');?></small>

@@ -96,14 +96,14 @@ class Sales extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 
-//        $this->form_validation->set_rules('customer', 'Customer', 'trim|required');
-//        $this->form_validation->set_rules('material[]', 'Material', 'required');
-//        $this->form_validation->set_rules('qty[]', 'Quantity', 'trim|required|number');
-//        $this->form_validation->set_rules('cost[]', 'Cost', 'trim|required|number');
+    //    $this->form_validation->set_rules('customer', 'Customer', 'trim|required');
+    //    $this->form_validation->set_rules('material[]', 'Material', 'required');
+    //    $this->form_validation->set_rules('qty[]', 'Quantity', 'trim|required|number');
+    //    $this->form_validation->set_rules('cost[]', 'Cost', 'trim|required|number');
 
 
-//        if ($this->form_validation->run() == TRUE) {
-        // true case
+    //    if ($this->form_validation->run() == TRUE) {
+    //     // true case
 
         $create = $this->model_invoice->create();
         if($create == true) {
@@ -114,10 +114,10 @@ class Sales extends Admin_Controller
             $this->session->set_flashdata('errors', 'Error occurred!!');
             redirect('sales/invoice', 'refresh');
         }
-//        } else {
-//            // false case
-//            $this->render_template('transactions/salesandpurchase/purchase', $this->data);
-//        }
+    //    } else {
+    //        // false case
+    //        redirect('sales/invoice', 'refresh');
+    //    }
 
 
     }
@@ -298,8 +298,17 @@ class Sales extends Admin_Controller
             $result[$k]['sales_info'] = $v;
 
         }
+        
+        $sales_details_data = $this->model_sales->getOrdersItemData();
+        $result1 = array();
+        foreach ($sales_details_data as $k => $v) {
+
+            $result1[$k]['sales_details_info'] = $v;
+
+        }
 
         $this->data['sales_data'] = $result;
+        $this->data['sales_details_data'] = $result1;
 
         $this->render_template('transactions/salesandpurchase/saleshistory', $this->data);
 

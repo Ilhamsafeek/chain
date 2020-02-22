@@ -123,7 +123,17 @@ class Purchase extends Admin_Controller
 
         }
 
+        $purchase_details_data = $this->model_purchase->getOrdersItemData();
+        $result1 = array();
+        foreach ($purchase_details_data as $k => $v) {
+
+            $result1[$k]['purchase_details_info'] = $v;
+
+        }
+
+    
         $this->data['purchase_data'] = $result;
+        $this->data['purchase_details_data'] = $result1;
 
         $this->render_template('transactions/salesandpurchase/purchasehistory', $this->data);
 

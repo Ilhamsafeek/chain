@@ -104,19 +104,57 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-xs btn-success">View</button>
+                                                        <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#viewModal<?php echo $v['sales_info']['id']; ?>">View</button>
                                                         <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown">
                                                             <span class="caret"></span>
 
                                                         </button>
                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right dropdown-demo-only">
 
-                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['sales_info']['id']; ?>"><i class="fa fa-trash-o"></i>   Delete</a></li>
+                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['sales_info']['id']; ?>"><i class="fa fa-trash-o"></i> Delete</a></li>
 
                                                         </ul>
                                                     </div>
                                                 </td>
                                             </tr>
+
+                                            <div class="modal fade bs-example-modal-lg" id="viewModal<?php echo $v['sales_info']['id']; ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                                                            <h4 class="modal-title"><?php echo $v['sales_info']['type']; ?></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                          
+                                                                    <div class="panel panel-primary widget-messaging">
+                                                                        <div class="panel-heading">
+
+                                                                            <h3 class="panel-title"><?php echo $v['sales_info']['customer']; ?></h3>
+                                                                        </div>
+
+                                                                        <ul class="list-group">
+                                                                        <?php foreach ($sales_details_data as $key => $value) :
+                                                                        
+                                                                            if ($value['sales_details_info']['sales_order_no']==$v['sales_info']['no']) {
+                                                                           ?>
+                                                                           <li class="list-group-item">
+                                                                            <small class="pull-right"><?php echo $value['sales_details_info']['price']; ?></small>
+                                                                            <h4 class="sender">Jennier Lawrence</h4>
+                                                                            <p>Lorem ipsum dolor sit amet...</p>
+                                                                        </li>
+                                                                        <?php    
+                                                                        }
+                                                                        ?>
+
+                                                                       <?php endforeach ?>
+                                                                        </ul>
+                                                                    </div><!-- panel -->
+                                                                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="modal inmodal" id="deleteModal<?php echo $v['sales_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm">
@@ -143,7 +181,7 @@
                                         <?php endforeach ?>
 
                                     </tbody>
-                                  
+
                                 </table>
 
 

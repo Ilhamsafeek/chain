@@ -46,8 +46,8 @@
                                         </button>
 
                                         <ul role="menu" class="dropdown-menu dropdown-demo-only">
-                                        <li><a href="<?php echo base_url('purchase') ?>" tabindex="-1" role="menuitem">Purchase (GRN)</a></li>
-                                        <li><a href="<?php echo base_url('purchase/purchaseorder') ?>" tabindex="-1" role="menuitem">Purchase Order</a></li>
+                                            <li><a href="<?php echo base_url('purchase') ?>" tabindex="-1" role="menuitem">Purchase (GRN)</a></li>
+                                            <li><a href="<?php echo base_url('purchase/purchaseorder') ?>" tabindex="-1" role="menuitem">Purchase Order</a></li>
 
                                         </ul>
                                     </div>
@@ -58,13 +58,13 @@
                                 <table id="shTable" class="footable table table-bordered table-stripped table-hover" data-page-size="8" data-filter=#filter>
                                     <thead>
                                         <tr>
-                                        <th data-hide="phone">Time</th>
-                                                <th data-hide="phone">Type</th>
-                                                <th data-toggle="true">No</th>
-                                                <th data-hide="phone">Supplier</th>
-                                                <th data-hide="phone">Total</th>
-                                                <th data-hide="phone">Status</th>
-                                                <th class="text-right" data-sort-ignore="true">Action</th>
+                                            <th data-hide="phone">Time</th>
+                                            <th data-hide="phone">Type</th>
+                                            <th data-toggle="true">No</th>
+                                            <th data-hide="phone">Supplier</th>
+                                            <th data-hide="phone">Total</th>
+                                            <th data-hide="phone">Status</th>
+                                            <th class="text-right" data-sort-ignore="true">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,7 +83,7 @@
                                                 <td>
                                                     <?php echo $v['purchase_info']['supplier']; ?>
                                                 </td>
-                                  
+
                                                 <td class="text-right">
                                                     <?php echo $v['purchase_info']['total']; ?>
                                                 </td>
@@ -92,19 +92,57 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-xs btn-success">View</button>
+                                                        <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#viewModal<?php echo $v['purchase_info']['id']; ?>">View</button>
                                                         <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown">
                                                             <span class="caret"></span>
 
                                                         </button>
                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right dropdown-demo-only">
 
-                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['purchase_info']['id']; ?>"><i class="fa fa-trash-o"></i>  Delete</a></li>
+                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['purchase_info']['id']; ?>"><i class="fa fa-trash-o"></i> Delete</a></li>
 
                                                         </ul>
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <div class="modal fade bs-example-modal-lg" id="viewModal<?php echo $v['purchase_info']['id']; ?>" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                                                            <h4 class="modal-title"><?php echo $v['purchase_info']['type']; ?></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <div class="panel panel-primary widget-messaging">
+                                                                <div class="panel-heading">
+
+                                                                    <h3 class="panel-title"><?php echo $v['purchase_info']['supplier']; ?></h3>
+                                                                </div>
+
+                                                                <ul class="list-group">
+                                                                    <?php foreach ($purchase_details_data as $key => $value) :
+                                                                        if ($value['purchase_details_info']['purchase_order_no']==$v['purchase_info']['no']) {
+                                                                           ?>
+                                                                           <li class="list-group-item">
+                                                                            <small class="pull-right"><?php echo $value['purchase_details_info']['price']; ?></small>
+                                                                            <h4 class="sender">Jennier Lawrence</h4>
+                                                                            <p>Lorem ipsum dolor sit amet...</p>
+                                                                        </li>
+                                                                        <?php    
+                                                                        }
+                                                                        ?>
+
+                                                                        
+                                                                    <?php endforeach ?>
+                                                                </ul>
+                                                            </div><!-- panel -->
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="modal inmodal" id="deleteModal<?php echo $v['purchase_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm">
@@ -131,7 +169,7 @@
                                         <?php endforeach ?>
 
                                     </tbody>
-                                  
+
                                 </table>
 
 

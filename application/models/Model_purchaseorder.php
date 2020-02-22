@@ -79,7 +79,18 @@ class Model_purchaseorder extends CI_Model
         );
 
         $insert = $this->db->insert('purchase', $data);
+		$count_product = count($this->input->post('product'));
+    	for($x = 0; $x < $count_product; $x++) {
+    		$items = array(
+                'purchase_order_no' => $purchase_no,
+    			'product_id' => $this->input->post('product')[$x],
+    			'quantity' => $this->input->post('qty')[$x],
+    			'price' => $this->input->post('cost')[$x],
+    			'amount' => $this->input->post('amount')[$x],
+    		);
 
+    		$this->db->insert('sales_detail', $items);
+   	}
 
     	
 		return ($purchase_id) ? $purchase_id : false;

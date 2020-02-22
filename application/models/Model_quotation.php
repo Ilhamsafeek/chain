@@ -77,7 +77,18 @@ class Model_quotation extends CI_Model
         );
 
         $insert = $this->db->insert('sales', $data);
+		$count_product = count($this->input->post('product'));
+    	for($x = 0; $x < $count_product; $x++) {
+    		$items = array(
+                'sales_order_no' => $sales_no,
+    			'product_id' => $this->input->post('product')[$x],
+    			'quantity' => $this->input->post('qty')[$x],
+    			'price' => $this->input->post('cost')[$x],
+    			'amount' => $this->input->post('amount')[$x],
+    		);
 
+    		$this->db->insert('sales_detail', $items);
+   	}
     	
 		return ($quotation_id) ? $quotation_id : false;
 	}

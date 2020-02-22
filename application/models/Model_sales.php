@@ -18,29 +18,24 @@ class Model_sales extends CI_Model
 			return $query->row_array();
 		}
 
-		$user_id = $this->session->userdata('id');
-		if($user_id == 1) {
+		
 			$sql = "SELECT * FROM sales ORDER BY id DESC";
 			$query = $this->db->query($sql);
 			return $query->result_array();
-		}
-		else {
-			$user_data = $this->model_users->getUserData($user_id);
-			$sql = "SELECT * FROM sales_detail WHERE store_id = ? ORDER BY id DESC";
-			$query = $this->db->query($sql, array($user_data['store_id']));
-			return $query->result_array();	
-		}
+		
 	}
 
 	// get the orders item data
 	public function getOrdersItemData($order_id = null)
 	{
-		if(!$order_id) {
-			return false;
+		if($order_id) {
+			$sql = "SELECT * FROM sales_detail WHERE order_id = ?";
+		$query = $this->db->query($sql, array($order_id));
+		return $query->result_array();
 		}
 
-		$sql = "SELECT * FROM purchase_order_detail WHERE order_id = ?";
-		$query = $this->db->query($sql, array($order_id));
+		$sql = "SELECT * FROM sales_detail";
+		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 
@@ -75,18 +70,19 @@ class Model_sales extends CI_Model
     	);
 
 		$insert = $this->db->insert('sales', $data);
-//
-//		$count_product = count($this->input->post('product'));
-//    	for($x = 0; $x < $count_product; $x++) {
-//    		$items = array(
-//    			'product_id' => $this->input->post('product')[$x],
-//    			'quantity' => $this->input->post('qty')[$x],
-//    			'price' => $this->input->post('cost')[$x],
-//    			'amount' => $this->input->post('amount')[$x],
-//    		);
-//
-//    		$this->db->insert('sales_detail', $items);
-//    	}
+
+		$count_product = count($this->input->post('product'));
+    	for($x = 0; $x < $count_product; $x++) {
+    		$items = array(
+                'sales_order_no' => $sales_no,
+    			'product_id' => $this->input->post('product')[$x],
+    			'quantity' => $this->input->post('qty')[$x],
+    			'price' => $this->input->post('cost')[$x],
+    			'amount' => $this->input->post('amount')[$x],
+    		);
+
+    		$this->db->insert('sales_detail', $items);
+   	}
 
     	
 		return ($sales_id) ? $sales_id : false;
@@ -164,11 +160,14 @@ class Model_sales extends CI_Model
 	public function delete($id)
 	{
 		if($id) {
+			$sales_order_no= $this->getSalesData($id)['no'];
 			$this->db->where('id', $id);
 			$delete = $this->db->delete('sales');
 
+			$this->db->where('sales_order_no', $sales_order_no);
+			$delete1 = $this->db->delete('sales_detail');
 
-			return ($delete == true) ? true : false;
+			return ($delete == true && $delete1 == true) ? true : false;
 		}
 	}
 

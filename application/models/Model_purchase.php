@@ -35,21 +35,20 @@ class Model_purchase extends CI_Model
 	// get the orders item data
 	public function getOrdersItemData($order_id = null)
 	{
-		if(!$order_id) {
-			return false;
+		if($order_id) {
+			$sql = "SELECT * FROM purchase_order_detail WHERE order_id = ?";
+		$query = $this->db->query($sql, array($order_id));
+		return $query->result_array();
 		}
 
-		$sql = "SELECT * FROM purchase_order_detail WHERE order_id = ?";
-		$query = $this->db->query($sql, array($order_id));
+		$sql = "SELECT * FROM purchase_order_detail";
+		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 
 	public function create()
 	{
 		$user_id = $this->session->userdata('id');
-
-		echo $user_id;
-
 
         //Get Next id
         $sql = "SELECT no FROM purchase WHERE no IS NOT NULL ORDER BY id ASC";
@@ -79,7 +78,18 @@ class Model_purchase extends CI_Model
     	);
 
 		$insert = $this->db->insert('purchase', $data);
+		$count_product = count($this->input->post('material'));
+    	for($x = 0; $x < $count_product; $x++) {
+    		$items = array(
+                'purchase_order_no' => $purchase_no,
+    			'material_id' => $this->input->post('product')[$x],
+    			'quantity' => $this->input->post('qty')[$x],
+    			'price' => $this->input->post('cost')[$x],
+    			'amount' => $this->input->post('amount')[$x],
+    		);
 
+    		$this->db->insert('purchase_detail', $items);
+		}
 		return ($purchase_id) ? $purchase_id : false;
 	}
 
@@ -155,10 +165,14 @@ class Model_purchase extends CI_Model
 	public function delete($id)
 	{
 		if($id) {
+			$purchase_order_no= $this->getPurchaseData($id)['no'];
 			$this->db->where('id', $id);
 			$delete = $this->db->delete('purchase');
 
-			return ($delete == true) ? true : false;
+			$this->db->where('purchase_order_no', $purchase_order_no);
+			$delete1 = $this->db->delete('purchase_detail');
+
+			return ($delete == true && $delete1 == true) ? true : false;
 		}
 	}
 
