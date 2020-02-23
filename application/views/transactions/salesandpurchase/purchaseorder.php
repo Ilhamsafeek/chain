@@ -83,8 +83,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width:35%">Material</th>
-                                            <th style="width:10%">Quantity</th>
                                             <th style="width:10%">Cost</th>
+                                            <th style="width:10%">Quantity</th>
                                             <th style="width:10%">Amount</th>
                                             <th style="width:5%"></th>
                                         </tr>
@@ -101,7 +101,7 @@
                                             </td>
                                             <td><input type="text" name="cost[]" id="cost_1" class="form-control" required>
                                             </td>
-                                            <td><input type="number" name="qty[]" id="qty_1" class="form-control" required>
+                                            <td><input type="text" name="qty[]" id="qty_1" class="form-control" onkeyup="getTotal(1)" required>
                                             </td>         
                                             <td><input type="text" name="amount[]" id="amount_1" class="form-control"></td>
                                             <td>
@@ -173,7 +173,7 @@
                     html += '</select>' +
                         '</td>' +
                         '<td><input type="text" name="cost[]" id="cost_' + row_id + '" class="form-control"></td>' +
-                        '<td><input type="number" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
+                        '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control" onkeyup="getTotal('+row_id+')"></td>' +
                         '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control"></td>' +
                         '<td> <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a> </td>' +
                         '</tr>';
@@ -232,4 +232,16 @@ if (material_id == "") {
     }); // /ajax function to fetch the product data 
 }
 }
+
+function getTotal(row = null) {
+    
+    if(row) {
+      var total = Number($("#cost_"+row).val()) * Number($("#qty_"+row).val());
+      total = total.toFixed(2);
+      $("#amount_"+row).val(total);
+     
+    } else {
+      alert('no row !! please refresh the page');
+    }
+  }
 </script>

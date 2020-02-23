@@ -75,7 +75,12 @@ class Model_salesorder extends CI_Model
             'type' => 'Sales Order',
             'paid_status' => 'pending',
             'total'=>$this->input->post('net_amount'),
-            'user_id' => $user_id,
+			'user_id' => $user_id,
+			'gross_amount' => $this->input->post('gross_amount'),
+			'charge' =>$this->input->post('charge'),
+			'vat_charge' => $this->input->post('vat_charge'),
+			'discount' => $this->input->post('discount'),
+			'total' => $this->input->post('net_amount'),
     	);
 
 		$insert = $this->db->insert('sales', $data);

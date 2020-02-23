@@ -131,7 +131,7 @@
             <div class="notfoundpanel">
                 
             <div class="row">
-                        <img src="https://plugin.intuitcdn.net/improved-inventory/2.4.29/images/aedd71ce8d4a14e839494d68e8de5cce.svg">
+                        <img src="https://plugin.intuitcdn.net/transactions-list-ui/3.21.10/images/1369e3744cf993faa355b5f7f4833b1a.svg" width="200px">
                     </div>
                    <div class="row">
                        <h2><strong>Add your Existing customers to create your next invoice or receipt</strong></h2>

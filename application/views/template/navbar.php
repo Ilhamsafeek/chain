@@ -139,11 +139,11 @@
                     <ul class="dropdown-menu pull-right" role="menu">
                         <li><a href="#"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-star"></i> Activity Log</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Account Settings</a></li>
+                        <li><a href="<?php echo base_url('company') ?>"><i class="glyphicon glyphicon-cog"></i> Company Settings</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
                         <li class="divider">
                         </li>
-                        <li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i>Sign Out</a></li>
+                        <li><a href="<?php echo base_url('auth/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Sign Out</a></li>
                     </ul>
                 </div><!-- btn-group -->
 

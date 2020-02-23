@@ -73,7 +73,12 @@ class Model_quotation extends CI_Model
             'no' => $sales_no,
             'type' => 'Quotation',
             'paid_status' => 'pending',
-            'user_id' => $user_id,
+			'user_id' => $user_id,
+			'gross_amount' => $this->input->post('gross_amount'),
+			'charge' =>$this->input->post('charge'),
+			'vat_charge' => $this->input->post('vat_charge'),
+			'discount' => $this->input->post('discount'),
+			'total' => $this->input->post('net_amount'),
         );
 
         $insert = $this->db->insert('sales', $data);
