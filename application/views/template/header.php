@@ -23,6 +23,7 @@
     <link href="//cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css" rel="stylesheet">
 
     <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/modernizr.min.js'); ?>"></script>

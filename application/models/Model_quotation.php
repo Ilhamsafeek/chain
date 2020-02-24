@@ -79,6 +79,8 @@ class Model_quotation extends CI_Model
 			'vat_charge' => $this->input->post('vat_charge'),
 			'discount' => $this->input->post('discount'),
 			'total' => $this->input->post('net_amount'),
+			'balance' => $this->input->post('net_amount'),
+
         );
 
         $insert = $this->db->insert('sales', $data);

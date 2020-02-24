@@ -72,12 +72,22 @@
                       <input type="text" class="form-control" id="source" name="source" placeholder="Source" value="<?php echo $supplier_data['source'] ?>" autocomplete="off">
                   </div>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-3">
+                <div class="form-group">
+                  <label for="source">Service Charge (%)</label>
+                  <input type="text" class="form-control" id="service_charge_value" name="service_charge_value" value="<?php echo $supplier_data['service_charge_value'] ?>" placeholder="Service Charge" autocomplete="off">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="vat_charge_value">VAT Charge (%)</label>
+                  <input type="text" class="form-control" id="vat_charge_value" name="vat_charge_value" placeholder="VAT" value="<?php echo $supplier_data['vat_charge_value'] ?>" autocomplete="off">
+                </div>
+              </div>
+                  <div class="col-md-12">
                   <div class="form-group">
                       <label for="overview">Overview</label>
-                      <textarea type="text" id="overview" name="overview" placeholder="Overview" class="form-control" autocomplete="off">
-                        <?php echo $supplier_data['overview']; ?>
-                      </textarea>
+                      <textarea type="text" id="overview" name="overview" placeholder="Overview" class="form-control" autocomplete="off"><?php echo $supplier_data['overview']; ?></textarea>
                 
 
               </div>

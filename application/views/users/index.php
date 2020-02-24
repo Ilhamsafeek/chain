@@ -34,8 +34,8 @@
             <div class="panel panel-dark-head">
                         <div class="panel-heading">
                           
-                            <h4 class="panel-title">Show/Hide Columns Dynamically</h4>
-                            <p>This example shows how to dynamically show and hide columns in a table.</p>
+                            <h4 class="panel-title">Manage Users with permissions</h4>
+                            <p>Allow admins who can manage different departments by assigning under roles.</p>
                         </div><!-- panel-heading -->
 
                         <table id="shTable" class="table table-striped table-bordered">

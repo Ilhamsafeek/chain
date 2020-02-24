@@ -66,6 +66,7 @@
                                             <th data-toggle="true">No</th>
                                             <th data-hide="phone">Customer</th>
                                             <th data-hide="phone">Due Date</th>
+                                            <th data-hide="phone">Balance</th>
                                             <th data-hide="phone">Total</th>
                                             <th data-hide="phone">Status</th>
                                             <th class="text-right" data-sort-ignore="true">Action</th>
@@ -77,7 +78,7 @@
                                             <tr>
 
                                                 <td>
-                                                    <?php echo date("d/m/Y", strtotime($v['sales_info']['date_time'])); ?>
+                                                    <?php echo $v['sales_info']['date_time']; ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $v['sales_info']['type']; ?>
@@ -92,9 +93,12 @@
 
                                                     <?php
                                                     if ($v['sales_info']['due_date']) {
-                                                        echo date("d/m/Y", strtotime($v['sales_info']['due_date']));
+                                                        echo $v['sales_info']['due_date'];
                                                     }
                                                     ?>
+                                                </td>
+                                                <td class="text-right">
+                                                    <?php echo $v['sales_info']['balance']; ?>
                                                 </td>
                                                 <td class="text-right">
                                                     <?php echo $v['sales_info']['total']; ?>
@@ -110,6 +114,7 @@
 
                                                         </button>
                                                         <ul role="menu" class="dropdown-menu dropdown-menu-right dropdown-demo-only">
+                                                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['sales_info']['id']; ?>"> Send Reminder</a></li>
 
                                                             <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['sales_info']['id']; ?>"><i class="fa fa-trash-o"></i> Delete</a></li>
 
@@ -126,31 +131,31 @@
                                                             <h4 class="modal-title"><?php echo $v['sales_info']['type']; ?></h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                          
-                                                                    <div class="panel panel-primary widget-messaging">
-                                                                        <div class="panel-heading">
 
-                                                                            <h3 class="panel-title"><?php echo $v['sales_info']['customer']; ?></h3>
-                                                                        </div>
+                                                            <div class="panel panel-primary widget-messaging">
+                                                                <div class="panel-heading">
 
-                                                                        <ul class="list-group">
-                                                                        <?php foreach ($sales_details_data as $key => $value) :
-                                                                        
-                                                                            if ($value['sales_details_info']['sales_order_no']==$v['sales_info']['no']) {
-                                                                           ?>
-                                                                           <li class="list-group-item">
-                                                                            <small class="pull-right"><?php echo $value['sales_details_info']['price']; ?></small>
-                                                                            <h4 class="sender">Jennier Lawrence</h4>
-                                                                            <p>Lorem ipsum dolor sit amet...</p>
-                                                                        </li>
-                                                                        <?php    
+                                                                    <h3 class="panel-title"><?php echo $v['sales_info']['customer']; ?></h3>
+                                                                </div>
+
+                                                                <ul class="list-group">
+                                                                    <?php foreach ($sales_details_data as $key => $value) :
+
+                                                                        if ($value['sales_details_info']['sales_order_no'] == $v['sales_info']['no']) {
+                                                                    ?>
+                                                                            <li class="list-group-item">
+                                                                                <small class="pull-right"><?php echo $value['sales_details_info']['price']; ?></small>
+                                                                                <h4 class="sender">Jennier Lawrence</h4>
+                                                                                <p>Lorem ipsum dolor sit amet...</p>
+                                                                            </li>
+                                                                        <?php
                                                                         }
                                                                         ?>
 
-                                                                       <?php endforeach ?>
-                                                                        </ul>
-                                                                    </div><!-- panel -->
-                                                                
+                                                                    <?php endforeach ?>
+                                                                </ul>
+                                                            </div><!-- panel -->
+
                                                         </div>
                                                     </div>
                                                 </div>

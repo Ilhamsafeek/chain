@@ -53,14 +53,14 @@
                                     <label class="font-normal">Invoice Date</label>
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input id="invoice_date" name="invoice_date" type="text" class="form-control" value="03/04/2014">
+                                        <input id="invoice_date" name="invoice_date" type="text" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
                                 <div class="col-sm-3" id="data_2">
                                     <label class="font-normal">Due Date</label>
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input id="due_date" name="due_date" type="text" class="form-control" value="03/04/2014">
+                                        <input id="due_date" name="due_date" type="text" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +201,13 @@
         $("#transactionMainMenu").addClass('active');
         $("#salesMenu").addClass('active');
         $(".product").select2();
-
+        jQuery('#invoice_date').datepicker({
+            dateFormat: 'dd/mm/yy',
+        });
+        
+        jQuery('#due_date').datepicker({
+            dateFormat: 'dd/mm/yy',
+        });
 
 
         // Append table with add row form on add new button click ==Add new Task==
@@ -285,7 +291,7 @@
                     $("#amount_" + row_id).val(total);
 
 
-                     subAmount();
+                    subAmount();
                 } // /success
             }); // /ajax function to fetch the product data 
         }
@@ -303,7 +309,7 @@
         }
     }
 
-    
+
     // calculate the total amount of the order
     function subAmount() {
         var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value'] : 0; ?>;

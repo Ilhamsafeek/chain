@@ -80,7 +80,6 @@ class Purchase extends Admin_Controller
 
 
         $this->form_validation->set_rules('supplier', 'Supplier', 'trim|required');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required');
         $this->form_validation->set_rules('material[]', 'Material name', 'trim|required');
         $this->form_validation->set_rules('qty[]', 'Quantity', 'trim|numeric|required');
 
@@ -100,7 +99,11 @@ class Purchase extends Admin_Controller
         } else {
             $this->data['supplier_data'] = $this->model_suppliers->getSupplierData();
             $this->data['materials'] = $this->model_mainstock->getMaterialData();
-
+            $company = $this->model_company->getCompanyData(1);
+            $this->data['company_data'] = $company;
+            $this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
+            $this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
+    
             $this->render_template('transactions/salesandpurchase/purchaseorder', $this->data);
         }
 

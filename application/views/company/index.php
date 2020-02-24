@@ -31,7 +31,7 @@
 
     <div class="ibox ">
       <div class="ibox-title">
-        
+
         <div class="ibox-content">
 
           <form role="form" action="<?php base_url('company/update') ?>" method="post">
@@ -53,51 +53,49 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                <div class="form-group">
-                <label for="service_charge_value">Charge Amount (%)</label>
-                <input type="text" class="form-control" id="service_charge_value" name="service_charge_value" placeholder="Enter charge amount %" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
-              </div>
+                  <div class="form-group">
+                    <label for="service_charge_value">Charge Amount (%)</label>
+                    <input type="text" class="form-control" id="service_charge_value" name="service_charge_value" placeholder="Enter charge amount %" value="<?php echo $company_data['service_charge_value'] ?>" autocomplete="off">
+                  </div>
                 </div>
 
                 <div class="col-md-6">
-                <div class="form-group">
-                <label for="vat_charge_value">Vat Charge (%)</label>
-                <input type="text" class="form-control" id="vat_charge_value" name="vat_charge_value" placeholder="Enter vat charge %" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
-              </div>
+                  <div class="form-group">
+                    <label for="vat_charge_value">Vat Charge (%)</label>
+                    <input type="text" class="form-control" id="vat_charge_value" name="vat_charge_value" placeholder="Enter vat charge %" value="<?php echo $company_data['vat_charge_value'] ?>" autocomplete="off">
+                  </div>
                 </div>
 
                 <div class="col-md-6">
-                <div class="form-group">
-                <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" name="country" placeholder="Enter country" value="<?php echo $company_data['country'] ?>" autocomplete="off">
-              </div>
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Enter country" value="<?php echo $company_data['country'] ?>" autocomplete="off">
+                  </div>
                 </div>
 
                 <div class="col-md-6">
-                <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="<?php echo $company_data['phone'] ?>" autocomplete="off">
-              </div>
-              
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="<?php echo $company_data['phone'] ?>" autocomplete="off">
+                  </div>
+
                 </div>
                 <div class="col-md-10">
-                <div class="form-group">
-                <label for="permission">Message</label>
-                <textarea class="form-control" id="message" name="message">
-                     <?php echo $company_data['message'] ?>
-                  </textarea>
-              </div>
+                  <div class="form-group">
+                    <label for="permission">Message</label>
+                    <textarea class="form-control" id="message" name="message"><?php echo $company_data['message']; ?></textarea>
+                  </div>
 
                 </div>
 
 
               </div>
 
-              
-              
 
-             
-             
+
+
+
+
             </div>
             <!-- /.box-body -->
 

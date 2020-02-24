@@ -62,6 +62,7 @@
                                             <th data-hide="phone">Type</th>
                                             <th data-toggle="true">No</th>
                                             <th data-hide="phone">Supplier</th>
+                                            <th data-hide="phone">Balance</th>
                                             <th data-hide="phone">Total</th>
                                             <th data-hide="phone">Status</th>
                                             <th class="text-right" data-sort-ignore="true">Action</th>
@@ -72,7 +73,7 @@
                                             <tr>
 
                                                 <td>
-                                                    <?php echo date("d/m/Y", strtotime($v['purchase_info']['date_time'])); ?>
+                                                    <?php echo $v['purchase_info']['date_time']; ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $v['purchase_info']['type']; ?>
@@ -83,7 +84,9 @@
                                                 <td>
                                                     <?php echo $v['purchase_info']['supplier']; ?>
                                                 </td>
-
+                                                <td class="text-right">
+                                                    <?php echo $v['purchase_info']['balance']; ?>
+                                                </td>
                                                 <td class="text-right">
                                                     <?php echo $v['purchase_info']['total']; ?>
                                                 </td>
@@ -122,18 +125,18 @@
 
                                                                 <ul class="list-group">
                                                                     <?php foreach ($purchase_details_data as $key => $value) :
-                                                                        if ($value['purchase_details_info']['purchase_order_no']==$v['purchase_info']['no']) {
-                                                                           ?>
-                                                                           <li class="list-group-item">
-                                                                            <small class="pull-right"><?php echo $value['purchase_details_info']['price']; ?></small>
-                                                                            <h4 class="sender">Jennier Lawrence</h4>
-                                                                            <p>Lorem ipsum dolor sit amet...</p>
-                                                                        </li>
-                                                                        <?php    
+                                                                        if ($value['purchase_details_info']['purchase_order_no'] == $v['purchase_info']['no']) {
+                                                                    ?>
+                                                                            <li class="list-group-item">
+                                                                                <small class="pull-right"><?php echo $value['purchase_details_info']['price']; ?></small>
+                                                                                <h4 class="sender">Jennier Lawrence</h4>
+                                                                                <p>Lorem ipsum dolor sit amet...</p>
+                                                                            </li>
+                                                                        <?php
                                                                         }
                                                                         ?>
 
-                                                                        
+
                                                                     <?php endforeach ?>
                                                                 </ul>
                                                             </div><!-- panel -->

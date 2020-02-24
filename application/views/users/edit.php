@@ -84,8 +84,8 @@
                 <div class="form-group">
                   <label for="roles">Role</label>
                 
-                  <select class="form-control material" name="role" data-placeholder="Select role" class="width300">                  
-                    <option value="">Select Role</option>
+                  <select class="role" name="role" data-placeholder="Select role" style="width: 100%">                  
+                    
                   <?php foreach ($role_data as $k => $v): ?>
                       <option value="<?php echo $v['id'] ?>" <?php if($v['id']==$user_data['role_id']){ echo 'selected';}?>><?php echo $v['role'] ?></option>
                     <?php endforeach ?>
@@ -162,6 +162,7 @@
    
     $("#profileMainMenu").addClass('active');
     $("#userMenu").addClass('active');
+    $(".role").select2();
     
   });
 </script>

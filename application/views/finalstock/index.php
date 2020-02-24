@@ -170,50 +170,7 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>Stock </h5>
-
-                    </div>
-                    <div class="ibox-content">
-
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-
-                                        <th></th>
-                                        <th>Material </th>
-                                        <th>Type </th>
-                                        <th>Quantity</th>
-                                        <th>Unit</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" checked class="i-checks" name="input[]"></td>
-                                        <td>Project<small>This is example of project</small></td>
-                                        <td><span class="pie">0.52/1.561</span></td>
-                                        <td>20%</td>
-                                        <td>Jul 14, 2013</td>
-                                        <td>
-                                            <span class="label label-warning">Low stock</span>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+       
     </div>
 
 

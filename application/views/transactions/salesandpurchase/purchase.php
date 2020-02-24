@@ -52,7 +52,7 @@
                                     <label class="font-normal">Purchase Date</label>
                                     <div class="input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" id="datepicker" name="purchase_date" class="form-control" value="03/04/2014">
+                                        <input type="text" id="datepicker" name="purchase_date" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                             <table class="table" id="material_info_table">
                                 <thead>
                                     <tr>
-                                        <th style="width:35%">Product</th>
+                                        <th style="width:35%">Material</th>
                                         <th style="width:10%">Cost</th>
                                         <th style="width:10%">Quantity</th>
                                         <th style="width:10%">Amount</th>

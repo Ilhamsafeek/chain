@@ -51,16 +51,14 @@
 
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <!-- <div class="form-group" id="data_1">
+                                    <div class="form-group" id="data_1">
                                             <label class="font-normal">Order Date</label>
                                             <div class="input-group date">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                <input type="text" id="order_date" name="order_date" class="form-control" value="03/04/2014">
+                                                <input type="text" id="datepicker" name="order_date" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                             </div>
-                                        </div> -->
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                    </div><!-- input-group -->
+                                        </div>
+                                  
                                 </div>
                             </div>
                             <br>

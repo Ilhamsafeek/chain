@@ -54,7 +54,7 @@
                                         <label class="font-normal">Bill Date</label>
                                         <div class="input-group date">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input type="text" id="bill_date" name="bill_date" class="form-control" value="03/04/2014">
+                                            <input type="text" id="datepicker" name="bill_date" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                         </div>
                                     </div>
                                 </div>

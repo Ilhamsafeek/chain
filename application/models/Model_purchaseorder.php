@@ -70,26 +70,31 @@ class Model_purchaseorder extends CI_Model
         $purchase_id = $this->db->insert_id();
         $data = array(
 
-            'date_time' => $this->input->post('purchase_date'),
+            'date_time' => $this->input->post('order_date'),
             'supplier' => $this->input->post('supplier'),
             'no' => $purchase_no,
             'type' => 'Purchase Order',
-            'paid_status' => 'paid',
-            'user_id' => $user_id,
+            'paid_status' => 'pending',
+			'user_id' => $user_id,
+			'gross_amount' => $this->input->post('gross_amount'),
+			'charge' =>$this->input->post('charge'),
+			'vat_charge' => $this->input->post('vat_charge'),
+			'discount' => $this->input->post('discount'),
+			'total' => $this->input->post('net_amount'),
         );
 
         $insert = $this->db->insert('purchase', $data);
-		$count_product = count($this->input->post('product'));
+		$count_product = count($this->input->post('material'));
     	for($x = 0; $x < $count_product; $x++) {
     		$items = array(
                 'purchase_order_no' => $purchase_no,
-    			'product_id' => $this->input->post('product')[$x],
+    			'material_id' => $this->input->post('material')[$x],
     			'quantity' => $this->input->post('qty')[$x],
     			'price' => $this->input->post('cost')[$x],
     			'amount' => $this->input->post('amount')[$x],
     		);
 
-    		$this->db->insert('sales_detail', $items);
+    		$this->db->insert('purchase_detail', $items);
    	}
 
     	

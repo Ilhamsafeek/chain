@@ -53,7 +53,7 @@
                                 <div class="col-sm-3" id="data_1">
                                     <label class="font-normal">Quotation Date</label>
                                     <div class="input-group date">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="03/04/2014">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="datepicker" name="quotation_date" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
                             </div>
