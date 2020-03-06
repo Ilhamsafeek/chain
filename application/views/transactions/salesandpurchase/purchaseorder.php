@@ -56,14 +56,14 @@
                                         <input id="datepicker" name="order_date" type="text" class="form-control" value="<?php echo date("d/m/Y"); ?>">
                                     </div>
                                 </div>
-                               
+
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="col-form-label" for="description">Supplier</label>
-                                        <select class="select_group material" data-placeholder="Choose Supplier" data-placeholder="Choose Supplier" id="supplier" name="supplier" style="width:100%;" onchange="getProductData(1)" required>
+                                        <select class="select_group material" data-placeholder="Choose Supplier" data-placeholder="Choose Supplier" id="supplier" name="supplier" style="width:100%;" onchange="setCharges();"  required>
                                             <option value=""></option>
                                             <?php foreach ($supplier_data as $k => $v) :
                                                 if ($v['status'] == 'approved') { ?>
@@ -112,7 +112,7 @@
                                             <td><input type="text" name="cost[]" id="cost_1" class="form-control" required>
                                             </td>
                                             <td><input type="text" name="qty[]" id="qty_1" class="form-control" onkeyup="getTotal(1)" required>
-                                            </td>         
+                                            </td>
                                             <td><input type="text" name="amount[]" id="amount_1" class="form-control"></td>
                                             <td>
                                                 <a class="delete" title="Delete"><i class="fa fa-close"></i></a>
@@ -126,6 +126,7 @@
                                     </button>
 
                                 </div>
+                               
                                 <table class="table table-total">
                                 <tbody>
                                     <tr>
@@ -135,25 +136,25 @@
                                         </td>
 
                                     </tr>
-                                    <?php if ($is_service_enabled == true) : ?>
-                                        <tr>
-                                            <td><strong>S-Charge <?php echo $company_data['service_charge_value'] ?> % :</strong></td>
-                                            <td>
-                                                <input readonly type="text" class="form-control" id="service_charge" name="service_charge" autocomplete="off">
-                                            </td>
+
+                                    <tr>
+                                        <td><p>Service Charge <strong id="scharge"></strong> % :</p></td>
+                                        <td>
+                                            <input readonly type="text" class="form-control" id="service_charge" name="service_charge" autocomplete="off">
+                                        </td>
 
 
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($is_vat_enabled == true) : ?>
-                                        <tr>
-                                            <td><strong>Vat <?php echo $company_data['vat_charge_value'] ?> % :</strong></td>
-                                            <td>
-                                                <input readonly type="text" class="form-control" id="vat_charge" name="vat_charge" autocomplete="off">
-                                            </td>
+                                    </tr>
 
-                                        </tr>
-                                    <?php endif; ?>
+
+                                    <tr>
+                                        <td><p>Vat <strong id="vcharge"></strong> % :</p></td>
+                                        <td>
+                                            <input readonly type="text" class="form-control" id="vat_charge" name="vat_charge" autocomplete="off">
+                                        </td>
+
+                                    </tr>
+
                                     <tr>
                                         <td><strong>Discount :</strong></td>
                                         <td>
@@ -169,7 +170,7 @@
                                 </tbody>
                             </table>
 
-                        
+
 
                             </div>
                         </div>
@@ -217,7 +218,7 @@
 
                     var html = '<tr id="row_' + row_id + '">' +
                         '<td>' +
-                        '<select class="select_group material" data-placeholder="Choose Item" data-row-id="row_' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;"  onchange="getMaterialData('+row_id+')" required>' +
+                        '<select class="select_group material" data-placeholder="Choose Item" data-row-id="row_' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;"  onchange="getMaterialData(' + row_id + ')" required>' +
                         '<option value=""></option>';
                     $.each(response, function(index, value) {
                         html += '<option value="' + value.id + '">' + value.name + '</option>';
@@ -226,7 +227,7 @@
                     html += '</select>' +
                         '</td>' +
                         '<td><input type="text" name="cost[]" id="cost_' + row_id + '" class="form-control"></td>' +
-                        '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control" onkeyup="getTotal('+row_id+')"></td>' +
+                        '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control" onkeyup="getTotal(' + row_id + ')"></td>' +
                         '<td><input type="text" name="amount[]" id="amount_' + row_id + '" class="form-control"></td>' +
                         '<td> <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a> </td>' +
                         '</tr>';
@@ -236,7 +237,7 @@
                     } else {
                         $("#material_info_table tbody").html(html);
                     }
-                    $("#material_"+row_id).select2();
+                    $("#material_" + row_id).select2();
                 }
             });
         })
@@ -251,57 +252,57 @@
         });
     });
 
-   
-// get the product information from the server
-function getMaterialData(row_id) {
 
-var material_id = $("#material_" + row_id).val();
-if (material_id == "") {
-   
-    $("#cost_" + row_id).val("");
-    $("#qty_" + row_id).val("");
-    $("#amount_" + row_id).val("");
-    
-} else {
-    $.ajax({
-        url: base_url + 'task/getMaterialRow',
-        type: 'post',
-        data: {
-            material_id: material_id
-        },
-        dataType: 'json',
-        success: function(response) {
-            // setting the rate value into the rate input field
-               
-            $("#cost_" + row_id).val(response.price);                 
-            $("#qty_" + row_id).val(1);
-          
-             var total = Number(response.price) * 1;
-             total = total.toFixed(2);
-            $("#amount_" + row_id).val(total);
-           
+    // get the product information from the server
+    function getMaterialData(row_id) {
 
-            subAmount();
-        } // /success
-    }); // /ajax function to fetch the product data 
-}
-}
+        var material_id = $("#material_" + row_id).val();
+        if (material_id == "") {
 
-function getTotal(row = null) {
-    
-    if(row) {
-      var total = Number($("#cost_"+row).val()) * Number($("#qty_"+row).val());
-      total = total.toFixed(2);
-      $("#amount_"+row).val(total);
-      subAmount();
+            $("#cost_" + row_id).val("");
+            $("#qty_" + row_id).val("");
+            $("#amount_" + row_id).val("");
 
-    } else {
-      alert('no row !! please refresh the page');
+        } else {
+            $.ajax({
+                url: base_url + 'task/getMaterialRow',
+                type: 'post',
+                data: {
+                    material_id: material_id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    // setting the rate value into the rate input field
+
+                    $("#cost_" + row_id).val(response.price);
+                    $("#qty_" + row_id).val(1);
+
+                    var total = Number(response.price) * 1;
+                    total = total.toFixed(2);
+                    $("#amount_" + row_id).val(total);
+
+
+                    subAmount();
+                } // /success
+            }); // /ajax function to fetch the product data 
+        }
     }
-  }
 
-  // calculate the total amount of the order
-  function subAmount() {
+    function getTotal(row = null) {
+
+        if (row) {
+            var total = Number($("#cost_" + row).val()) * Number($("#qty_" + row).val());
+            total = total.toFixed(2);
+            $("#amount_" + row).val(total);
+            subAmount();
+
+        } else {
+            alert('no row !! please refresh the page');
+        }
+    }
+
+    // calculate the total amount of the order
+    function subAmount() {
         var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value'] : 0; ?>;
         var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value'] : 0; ?>;
 
@@ -321,13 +322,13 @@ function getTotal(row = null) {
         $("#gross_amount").val(totalSubAmount);
 
         // vat
-        var vat = (Number($("#gross_amount").val()) / 100) * vat_charge;
+        var vat = (Number($("#gross_amount").val()) / 100) * Number($("#vcharge").text());
         vat = vat.toFixed(2);
         $("#vat_charge").val(vat);
         $("#vat_charge_value").val(vat);
 
         // service
-        var service = (Number($("#gross_amount").val()) / 100) * service_charge;
+        var service = (Number($("#gross_amount").val()) / 100) * Number($("#scharge").text());
         service = service.toFixed(2);
         $("#service_charge").val(service);
         $("#service_charge_value").val(service);
@@ -351,4 +352,20 @@ function getTotal(row = null) {
         } // /else discount 
 
     } // /sub total amount
+
+    function setCharges() {
+
+        var supplier = document.getElementById("supplier").value
+        //    document.getElementById("scharge").value='5';
+        <?php foreach ($supplier_data as $k => $v) : ?>
+            if ('<?php echo $v['name']; ?>' == supplier) {
+
+
+                $("#scharge").html('<?php echo $v['service_charge_value']; ?>');
+                $("#vcharge").html('<?php echo $v['vat_charge_value']; ?>');
+            }
+        <?php endforeach ?>
+        subAmount();
+
+    }
 </script>

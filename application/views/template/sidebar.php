@@ -1,5 +1,5 @@
 
-            <div class="leftpanel" style="position: fixed; padding-top: 50px">
+            <div class="leftpanel" style=" position: fixed; padding-top: 50px;">
                 <div class="media profile-left">
                     <a class="pull-left profile-thumb" href="">
                         <img class="img-circle" src="<?php echo base_url('assets/images/photos-profile.png '); ?>" alt=""></a>
@@ -33,12 +33,14 @@
                         <ul class="children">
                             <li id="purchaseMenu"><a href="<?php echo base_url('purchase/history'); ?>">Purchase</a></li>
                             <li id="salesMenu"><a href="<?php echo base_url('sales/history'); ?>">Sales</a></li>
+                            <li id="expenseMenu"><a href="<?php echo base_url('sales/history'); ?>">Expense</a></li>
+
                         </ul>
                     </li>
-                    <li class="parent"><a href="chain.html"><i class="fa fa-edit"></i> <span>Manufacturing</span></a>
+                    <li class="parent" id="manufacturingMainMenu"><a href="chain.html"><i class="fa fa-edit"></i> <span>Manufacturing</span></a>
                         <ul class="children">
-                            <li><a href="code-editor.html">Code Editor</a></li>
-                            <li><a href="general-forms.html">General Forms</a></li>
+                            <li id="taskMenu"><a href="<?php echo base_url('task'); ?>">Daily Tasks</a></li>
+                            <li id="allTaskMenu"><a href="<?php echo base_url('task/all'); ?>">All Tasks</a></li>
                             <li><a href="form-layouts.html">Layouts</a></li>
                             <li><a href="wysiwyg.html">Text Editor</a></li>
                             <li><a href="form-validation.html">Validation</a></li>
@@ -70,6 +72,13 @@
                             <li><a href="invoice.html">Invoice</a></li>
                             <li><a href="locked.html">Locked Screen</a></li>
                    
+                        </ul>
+                    </li>
+                    <li class="parent" id="stockMainMenu"><a href="chain.html"><i class="fa fa-cubes"></i> <span>Payroll</span></a>
+                        <ul class="children">
+                            <li id="mainStockMenu"><a href="<?php echo base_url('mainstock'); ?>">Main Stock</a></li>
+                            <li id="finishedProductsMenu"><a href="<?php echo base_url('finalstock'); ?>">Finished Products</a></li>
+                           
                         </ul>
                     </li>
 

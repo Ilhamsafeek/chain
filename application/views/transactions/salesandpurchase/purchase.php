@@ -63,7 +63,7 @@
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label class="col-form-label" for="description">Supplier</label>
-                                    <select class="select_group" data-placeholder="Choose Supplier" id="supplier" name="supplier" style="width:100%;" required>
+                                    <select class="select_group" data-placeholder="Choose Supplier" id="supplier" name="supplier" style="width:100%;" onchange="setCharges();" required>
                                         <option value=""></option>
                                         <?php foreach ($supplier_data as $k => $v) :
                                             if ($v['status'] == 'approved') { ?>
@@ -128,25 +128,25 @@
                                         </td>
 
                                     </tr>
-                                    <?php if ($is_service_enabled == true) : ?>
-                                        <tr>
-                                            <td><strong>S-Charge <?php echo $company_data['service_charge_value'] ?> % :</strong></td>
-                                            <td>
-                                                <input readonly type="text" class="form-control" id="service_charge" name="service_charge" autocomplete="off">
-                                            </td>
+
+                                    <tr>
+                                        <td><p>Service Charge <strong id="scharge"></strong> % :</p></td>
+                                        <td>
+                                            <input readonly type="text" class="form-control" id="service_charge" name="service_charge" autocomplete="off">
+                                        </td>
 
 
-                                        </tr>
-                                    <?php endif; ?>
-                                    <?php if ($is_vat_enabled == true) : ?>
-                                        <tr>
-                                            <td><strong>Vat <?php echo $company_data['vat_charge_value'] ?> % :</strong></td>
-                                            <td>
-                                                <input readonly type="text" class="form-control" id="vat_charge" name="vat_charge" autocomplete="off">
-                                            </td>
+                                    </tr>
 
-                                        </tr>
-                                    <?php endif; ?>
+
+                                    <tr>
+                                        <td><p>Vat <strong id="vcharge"></strong> % :</p></td>
+                                        <td>
+                                            <input readonly type="text" class="form-control" id="vat_charge" name="vat_charge" autocomplete="off">
+                                        </td>
+
+                                    </tr>
+
                                     <tr>
                                         <td><strong>Discount :</strong></td>
                                         <td>
@@ -195,12 +195,12 @@
         $(".add-new").click(function() {
 
             var base_url = "<?php echo base_url(); ?>";
-
-
             var index = $("table tbody tr:last-child").index();
             var table = $("#material_info_table");
             var count_table_tbody_tr = $("#material_info_table tbody tr").length;
             var row_id = count_table_tbody_tr + 1;
+
+
 
             $.ajax({
                 url: base_url + '/task/getMaterialRow/',
@@ -239,7 +239,6 @@
 
         // Delete row on delete button click
         $(document).on("click", ".delete", function() {
-
             $(this).parents("tr").remove();
             subAmount();
         });
@@ -291,11 +290,11 @@
         }
     }
 
+
+
     // calculate the total amount of the order
     function subAmount() {
-        var service_charge = <?php echo ($company_data['service_charge_value'] > 0) ? $company_data['service_charge_value'] : 0; ?>;
-        var vat_charge = <?php echo ($company_data['vat_charge_value'] > 0) ? $company_data['vat_charge_value'] : 0; ?>;
-
+        
         var tableProductLength = $("#material_info_table tbody tr").length;
         var totalSubAmount = 0;
         for (x = 0; x < tableProductLength; x++) {
@@ -312,16 +311,17 @@
         $("#gross_amount").val(totalSubAmount);
 
         // vat
-        var vat = (Number($("#gross_amount").val()) / 100) * vat_charge;
+        var vat = (Number($("#gross_amount").val()) / 100) * Number($("#vcharge").text());
         vat = vat.toFixed(2);
         $("#vat_charge").val(vat);
         $("#vat_charge_value").val(vat);
 
         // service
-        var service = (Number($("#gross_amount").val()) / 100) * service_charge;
+        var service = (Number($("#gross_amount").val()) / 100) * Number($("#scharge").text());
         service = service.toFixed(2);
         $("#service_charge").val(service);
         $("#service_charge_value").val(service);
+
 
         // total amount
         var totalAmount = (Number(totalSubAmount) + Number(vat) + Number(service));
@@ -342,4 +342,20 @@
         } // /else discount 
 
     } // /sub total amount
+
+    function setCharges() {
+
+        var supplier = document.getElementById("supplier").value
+        //    document.getElementById("scharge").value='5';
+        <?php foreach ($supplier_data as $k => $v) : ?>
+            if ('<?php echo $v['name']; ?>' == supplier) {
+
+
+                $("#scharge").html('<?php echo $v['service_charge_value']; ?>');
+                $("#vcharge").html('<?php echo $v['vat_charge_value']; ?>');
+            }
+        <?php endforeach ?>
+
+        subAmount();
+    }
 </script>

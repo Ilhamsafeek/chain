@@ -116,7 +116,7 @@
                                             <td><input type="text" name="amount[]" id="amount_1" class="form-control" required>
                                             </td>
                                             <td>
-                                                <a class="delete" title="Delete"><i class="fa fa-close"></i></a>
+                                                <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -204,7 +204,7 @@
         jQuery('#invoice_date').datepicker({
             dateFormat: 'dd/mm/yy',
         });
-        
+
         jQuery('#due_date').datepicker({
             dateFormat: 'dd/mm/yy',
         });
@@ -257,8 +257,13 @@
         // Delete row on delete button click
         $(document).on("click", ".delete", function() {
 
-            $(this).parents("tr").remove();
-            subAmount();
+            var count_table_tbody_tr = $("#product_info_table tbody tr").length;
+
+            if (count_table_tbody_tr > 1) {
+
+                $(this).parents("tr").remove();
+                subAmount();
+            }
         });
     });
 
