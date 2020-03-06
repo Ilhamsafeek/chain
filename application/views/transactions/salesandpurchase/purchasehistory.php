@@ -48,6 +48,7 @@
                                         <ul role="menu" class="dropdown-menu dropdown-demo-only">
                                             <li><a href="<?php echo base_url('purchase') ?>" tabindex="-1" role="menuitem">Purchase (GRN)</a></li>
                                             <li><a href="<?php echo base_url('purchase/purchaseorder') ?>" tabindex="-1" role="menuitem">Purchase Order</a></li>
+                                            <li><a href="<?php echo base_url('purchase/purchasereturn') ?>" tabindex="-1" role="menuitem">Purchase Reurn</a></li>
 
                                         </ul>
                                     </div>

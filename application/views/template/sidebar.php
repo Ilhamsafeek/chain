@@ -33,7 +33,7 @@
                         <ul class="children">
                             <li id="purchaseMenu"><a href="<?php echo base_url('purchase/history'); ?>">Purchase</a></li>
                             <li id="salesMenu"><a href="<?php echo base_url('sales/history'); ?>">Sales</a></li>
-                            <li id="expenseMenu"><a href="<?php echo base_url('sales/history'); ?>">Expense</a></li>
+                            <li id="expenseMenu"><a href="<?php echo base_url('sales/expense'); ?>">Expenses</a></li>
 
                         </ul>
                     </li>
@@ -41,10 +41,7 @@
                         <ul class="children">
                             <li id="taskMenu"><a href="<?php echo base_url('task'); ?>">Daily Tasks</a></li>
                             <li id="allTaskMenu"><a href="<?php echo base_url('task/all'); ?>">All Tasks</a></li>
-                            <li><a href="form-layouts.html">Layouts</a></li>
-                            <li><a href="wysiwyg.html">Text Editor</a></li>
-                            <li><a href="form-validation.html">Validation</a></li>
-                            <li><a href="form-wizards.html">Wizards</a></li>
+     
                         </ul>
                     </li>     
                     <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-truck"></i>

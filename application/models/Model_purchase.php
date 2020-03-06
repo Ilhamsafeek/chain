@@ -96,6 +96,58 @@ class Model_purchase extends CI_Model
 		return ($purchase_id) ? $purchase_id : false;
 	}
 
+
+	public function createreturn()
+	{
+		$user_id = $this->session->userdata('id');
+
+		//Get Next id
+		$sql = "SELECT no FROM purchase WHERE no IS NOT NULL ORDER BY id ASC";
+		$query = $this->db->query($sql);
+		$result = $query->result_array();
+		$purchase_no = null;
+		if ($result) {
+
+			foreach ($result as $k => $v) :
+				$purchase_no = $v['no'] + 1;
+			endforeach;
+		} else {
+			$purchase_no = 1;
+		}
+
+
+		$purchase_id = $this->db->insert_id();
+		$data = array(
+
+			'date_time' => $this->input->post('purchase_date'),
+			'supplier' => $this->input->post('supplier'),
+			'no' => $purchase_no,
+			'type' => 'Purchase Return',
+			'paid_status' => 'paid',
+			'user_id' => $user_id,
+			'gross_amount' => $this->input->post('gross_amount'),
+			'charge' => $this->input->post('charge'),
+			'vat_charge' => $this->input->post('vat_charge'),
+			'discount' => $this->input->post('discount'),
+			'total' => $this->input->post('net_amount'),
+		);
+
+		$insert = $this->db->insert('purchase', $data);
+		$count_material = count($this->input->post('material'));
+		for ($x = 0; $x < $count_material; $x++) {
+			$items = array(
+				'purchase_order_no' => $purchase_no,
+				'material_id' => $this->input->post('material')[$x],
+				'quantity' => $this->input->post('qty')[$x],
+				'price' => $this->input->post('cost')[$x],
+				'amount' => $this->input->post('amount')[$x],
+			);
+
+			$this->db->insert('purchase_detail', $items);
+		}
+		return ($purchase_id) ? $purchase_id : false;
+	}
+
 	public function countOrderItem($order_id)
 	{
 		if ($order_id) {

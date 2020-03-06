@@ -51,6 +51,7 @@
                                             <li><a class="dropdown-item" href="<?php echo base_url('sales/quotation') ?>">Quotation</a></li>
                                             <li><a class="dropdown-item" href="<?php echo base_url('sales/payment') ?>">Payment</a></li>
                                             <li><a class="dropdown-item" href="<?php echo base_url('sales/salesorder') ?>">Sales Order</a></li>
+                                            <li><a class="dropdown-item" href="<?php echo base_url('sales/salesreturn') ?>">Sales Return</a></li>
 
                                         </ul>
                                     </div>

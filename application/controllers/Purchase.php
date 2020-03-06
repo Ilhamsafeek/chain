@@ -110,6 +110,46 @@ class Purchase extends Admin_Controller
 
     }
 
+    public function purchasereturn()
+    {
+        if (!in_array('createOrder', $this->permission)) {
+            redirect('dashboard', 'refresh');
+        }
+
+        $this->data['page_title'] = 'Create Order';
+
+
+        $this->form_validation->set_rules('supplier', 'Supplier', 'trim|required');
+        $this->form_validation->set_rules('material[]', 'Material name', 'trim|required');
+        $this->form_validation->set_rules('qty[]', 'Quantity', 'trim|numeric|required');
+
+
+
+        if ($this->form_validation->run() == TRUE) {
+
+            $order_id = $this->model_purchase->createreturn();
+
+            if ($order_id) {
+                $this->session->set_flashdata('success', 'Successfully created');
+                redirect('purchase/purchasereturn/' . $order_id, 'refresh');
+            } else {
+                $this->session->set_flashdata('errors', 'Error occurred!!');
+                redirect('purchase/purchasereturn/', 'refresh');
+            }
+        } else {
+            $this->data['supplier_data'] = $this->model_suppliers->getSupplierData();
+            $this->data['materials'] = $this->model_mainstock->getMaterialData();
+            $company = $this->model_company->getCompanyData(1);
+            $this->data['company_data'] = $company;
+            $this->data['is_vat_enabled'] = ($company['vat_charge_value'] > 0) ? true : false;
+            $this->data['is_service_enabled'] = ($company['service_charge_value'] > 0) ? true : false;
+    
+            $this->render_template('transactions/returns/purchasereturn', $this->data);
+        }
+
+
+    }
+
 
     public function history()
     {
