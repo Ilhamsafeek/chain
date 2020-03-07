@@ -33,7 +33,7 @@
                         <ul class="children">
                             <li id="purchaseMenu"><a href="<?php echo base_url('purchase/history'); ?>">Purchase</a></li>
                             <li id="salesMenu"><a href="<?php echo base_url('sales/history'); ?>">Sales</a></li>
-                            <li id="expenseMenu"><a href="<?php echo base_url('sales/expense'); ?>">Expenses</a></li>
+                            <li id="expenseMenu"><a href="<?php echo base_url('purchase/expense'); ?>">Expenses</a></li>
 
                         </ul>
                     </li>
