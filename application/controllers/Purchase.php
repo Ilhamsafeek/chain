@@ -8,8 +8,6 @@ class Purchase extends Admin_Controller
 
         $this->not_logged_in();
 
-        $this->data['page_title'] = 'Customers';
-
         $this->load->model('model_mainstock');
         $this->load->model('model_suppliers');
         $this->load->model('model_company');
@@ -151,18 +149,15 @@ class Purchase extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 
-        
-            $this->data['supplier_data'] = $this->model_suppliers->getSupplierData();
-            $expense_data = $this->model_expense->getExpenseData();
-            $result = array();
-            foreach ($expense_data as $k => $v) {
+        $expense_data = $this->model_expense->getExpenseData();
+        $result = array();
+        foreach ($expense_data as $k => $v) {
 
-                $result[$k]['expense_info'] = $v;
-            }
-            $this->data['expense_data'] = $result;
+            $result[$k]['expense_info'] = $v;
+        }
+        $this->data['expense_data'] = $result;
 
-            $this->render_template('transactions/expenses/expensehistory', $this->data);
-       
+        $this->render_template('transactions/expenses/expensehistory', $this->data);
     }
 
 
@@ -174,12 +169,12 @@ class Purchase extends Admin_Controller
             redirect('dashboard', 'refresh');
         }
 
-        $this->form_validation->set_rules('date', 'Date', 'trim|required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
         $this->form_validation->set_rules('method', 'Payment Method', 'required');
-        $this->form_validation->set_rules('supplier', 'Payee', 'required');
+        // $this->form_validation->set_rules('supplier', 'Payee', 'required');
         $this->form_validation->set_rules('category', 'Category', 'required');
-        $this->form_validation->set_rules('amount', 'Amount', 'trim|required|number');
-        
+        $this->form_validation->set_rules('amount', 'Amount', 'trim|required');
+
         if ($this->form_validation->run() == TRUE) {
 
 
@@ -193,15 +188,8 @@ class Purchase extends Admin_Controller
             }
         } else {
             // false case
-            
-            $this->data['supplier_data'] = $this->model_suppliers->getSupplierData();
-            $expense_data = $this->model_expense->getExpenseData();
-            $result = array();
-            foreach ($expense_data as $k => $v) {
 
-                $result[$k]['expense_info'] = $v;
-            }
-            $this->data['expense_data'] = $result;
+            $this->data['supplier_data'] = $this->model_suppliers->getSupplierData();
 
             $this->render_template('transactions/expenses/expense', $this->data);
         }

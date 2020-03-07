@@ -50,7 +50,7 @@ class Model_expense extends CI_Model
 		$invoice_id = $this->db->insert_id();
 		$data = array(
 
-			'date' => $this->input->post('payment_date'),
+			'date' => $this->input->post('date'),
 			'payee' => $this->input->post('supplier'),
 			'category' =>  $this->input->post('category'),
 			'description' =>  $this->input->post('description'),

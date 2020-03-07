@@ -46,7 +46,7 @@
                                 <table id="shTable" class="footable table table-bordered table-stripped table-hover" data-page-size="8" data-filter=#filter>
                                     <thead>
                                         <tr>
-                                            <th data-hide="phone">Time</th>
+                                            <th data-hide="phone">Date</th>
                                             <th data-hide="phone">Category</th>
                                             <th data-toggle="true">No</th>
                                             <th data-hide="phone">Payee</th>
@@ -72,13 +72,13 @@
                                                 <td>
                                                     <?php echo $v['expense_info']['payee']; ?>
                                                 </td>
-                                                <td class="text-right">
+                                                <td>
                                                     <?php echo $v['expense_info']['description']; ?>
                                                 </td>
-                                                <td class="text-right">
+                                                <td>
                                                     <?php echo $v['expense_info']['method']; ?>
                                                 </td>
-                                                <td>
+                                                <td class="text-right">
                                                     <?php echo $v['expense_info']['amount']; ?>
                                                 </td>
                                                 <td class="text-right">

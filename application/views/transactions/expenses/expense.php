@@ -42,10 +42,11 @@
                 </div>
                 <div class="ibox-title">
 
-                    <form role="form" action="<?php echo base_url('purchase/expense') ?>" method="post" id="createForm">
+                    <form role="form" id="createForm" action="<?php echo base_url('purchase/createexpense') ?>" method="post">
 
+                        <?php echo validation_errors(); ?>
                         <div class="modal-body">
-                            <div id="messages"></div>
+
 
                             <div class="row">
                                 <div class="col-sm-3" id="data_1">
@@ -58,7 +59,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="col-form-label" for="method">Payment Method</label>
-                                        <select class="select_group product" data-placeholder="Choose Method" data-placeholder="Choose Item" id="method" name="mehtod" style="width:100%;" required>
+                                        <select class="select_group product" data-placeholder="Choose Method" data-placeholder="Choose Item" id="method" name="method" style="width:100%;" required>
                                             <option value="Cash">Cash</option>
                                             <option value="Cheque">Cheque</option>
                                             <option value="Card">Card</option>
@@ -69,7 +70,7 @@
 
                                 </div>
                             </div>
-                            <br>
+
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -108,29 +109,25 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="font-normal">Amount</label>
-                                    <input id="amount" name="amount" type="text" class="form-control text-right">
+                                    <input id="amount" name="amount" type="text" class="form-control text-right" required>
                                 </div>
                             </div>
-
 
                         </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-white" data-dismiss="modal"><i class="fa fa-pencil"></i> Clear</button>
-
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Save &amp Mail</button>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Save &amp Print</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Save</button>
                         </div>
+
+                    </form>
+                  
+
                 </div>
-                </form>
-                <!-- /.box-body -->
-
-
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
 </div>
 
 
