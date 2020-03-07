@@ -29,7 +29,6 @@
 
         <div class="row">
             <div class="input-group">
-
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#createModal"> <i class="fa fa-plus"></i> Add task</button>
                 </span>
@@ -41,95 +40,90 @@
 
 
 
-                        <?php $colors = array('danger-element', 'info-element', 'success-element', 'warning-element'); ?>
+                        <?php if ($task_data) : ?>
+                            <?php foreach ($task_data as $k => $v) : ?>
+                                <?php if ($v['task_info']['status'] == 'todo') : ?>
 
-                        <ul class="sortable-list connectList agile-list" id="todo">
+                                    <div class="panel panel-primary widget-messaging">
+                                        <div class="panel-heading">
+                                            <div class="pull-right">
+                                                <a style="color:white" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
+                                            </div><!-- pull-right -->
+                                            <h3 class="panel-title"><?php echo $v['task_info']['description']; ?></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>Ingredients:</p>
+                                            <ul class="list-group">
 
 
-                            <?php if ($task_data) : ?>
-                                <?php foreach ($task_data as $k => $v) : ?>
-                                    <?php if ($v['task_info']['status'] == 'todo') : ?>
+                                                <?php foreach (json_decode($v['task_info']['ingredients'], true) as $ki => $vi) : ?>
+                                                    <li class="list-group-item">
 
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <li class="<?php echo $colors[array_rand($colors)]; ?>">
+                                                        <strong class="pull-right"><?php echo $vi; ?></strong>
+                                                        <h4 class="sender"><?php echo $ki; ?></h4>
 
+                                                    </li>
+                                                <?php endforeach ?>
+                                            </ul>
+                                            <div class="agile-detail">
+                                                <i class="fa fa-clock-o"></i> Reserved
+                                                <a href="#" class="float-right btn btn-xs btn-success" data-toggle="modal" data-target="#issueModal<?php echo $v['task_info']['id']; ?>">Issue</a>
 
-                                                    <div class="d-flex justify-content-between">
-                                                        <div>
-                                                            <strong><?php echo $v['task_info']['description']; ?></strong>
-                                                        </div>
-                                                        <div>
-                                                            <a href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <p>Ingredients:</p>
-                                                    <ul>
-                                                        <li>
-                                                            <?php foreach (json_decode($v['task_info']['ingredients'], true) as $ki => $vi) : ?>
-                                                                <p><strong><?php echo $ki; ?>:</strong><?php echo $vi; ?></p>
-                                                            <?php endforeach ?>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="agile-detail">
-                                                        <a href="#" class="float-right btn btn-xs btn-primary" data-toggle="modal" data-target="#issueModal<?php echo $v['task_info']['id']; ?>">Issue</a>
-                                                        <i class="fa fa-clock-o"></i> Reserved
-                                                    </div>
-                                                </li>
                                             </div>
                                         </div>
-                                        <div class="modal inmodal fade" id="issueModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h3>Issue Confirmation</h3>
-                                                    </div>
-                                                    <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
-                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
-                                                        <input type="hidden" name="status" value="progress">
-                                                        <div class="modal-body">
-                                                            <p><strong>Do you really want to issue the ingredients?</strong></p>
-                                                        </div>
+                                    </div>
 
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
-                                                            <button type="submit" class="btn btn-primary">Issue</button>
-                                                        </div>
-                                                    </form>
+
+
+                                    <div class="modal inmodal fade" id="issueModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h3>Issue Confirmation</h3>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal inmodal fade" id="deleteModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h3>Delete Confirmation</h3>
+                                                <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
+                                                    <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                    <input type="hidden" name="status" value="progress">
+                                                    <div class="modal-body">
+                                                        <p><strong>Do you really want to issue the ingredients?</strong></p>
                                                     </div>
-                                                    <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
-                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
-                                                        <div class="modal-body">
-                                                            <p><strong>Do you really want to delete?</strong></p>
-                                                        </div>
 
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
-                                                            <button type="submit" class="btn btn-primary">Yes</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                        <button type="submit" class="btn btn-primary">Issue</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="modal inmodal fade" id="deleteModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h3>Delete Confirmation</h3>
+                                                </div>
+                                                <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
+                                                    <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                    <div class="modal-body">
+                                                        <p><strong>Do you really want to delete?</strong></p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-                                    <?php endif; ?>
-                                <?php endforeach ?>
-                            <?php endif; ?>
-
-                        </ul>
+                                <?php endif; ?>
+                            <?php endforeach ?>
+                        <?php endif; ?>
 
 
                     </div>
@@ -140,186 +134,186 @@
                     <div class="ibox-content">
                         <h3>In Progress</h3>
 
-                        <ul class="sortable-list connectList agile-list" id="inprogress">
 
 
-                            <?php if ($task_data) : ?>
-                                <?php foreach ($task_data as $k => $v) : ?>
-                                    <?php if ($v['task_info']['status'] == 'progress') : ?>
+                        <?php if ($task_data) : ?>
+                            <?php foreach ($task_data as $k => $v) : ?>
+                                <?php if ($v['task_info']['status'] == 'progress') : ?>
 
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <li class="<?php echo $colors[array_rand($colors)]; ?>" id="<?php echo $v['task_info']['id']; ?>">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div>
-                                                            <strong><?php echo $v['task_info']['description']; ?></strong>
-                                                        </div>
-                                                        <div>
-                                                            <a href="#" data-toggle="modal" data-target="#revertModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply" aria-hidden="true"></i></a>&nbsp&nbsp
-                                                            <a href="#" data-toggle="modal" data-target="#deleteProgressModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <p>Ingredients:</p>
-                                                    <ul>
 
-                                                        <li>
-                                                            <?php foreach (json_decode($v['task_info']['ingredients'], true) as $ki => $vi) : ?>
-                                                                <p><strong><?php echo $ki; ?>:</strong><?php echo $vi; ?></p>
-                                                            <?php endforeach ?>
-                                                        </li>
+                                    <div class="panel panel-warning widget-messaging">
+                                        <div class="panel-heading">
+                                            <div class="pull-right">
+                                                <a href="#" data-toggle="modal" data-target="#revertModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply" aria-hidden="true"></i></a>&nbsp&nbsp
+                                                <a href="#" data-toggle="modal" data-target="#deleteProgressModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
+                                            </div><!-- pull-right -->
+                                            <h3 class="panel-title"><?php echo $v['task_info']['description']; ?></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>Ingredients:</p>
+                                            <ul class="list-group">
 
-                                                    </ul>
-                                                    <div class="agile-detail">
-                                                        <a href="#" class="float-right btn btn-xs btn-primary" data-toggle="modal" data-target="#completeModal<?php echo $v['task_info']['id']; ?>">Complete</a>
-                                                        <i class="fa fa-clock-o"></i> <?php echo $v['task_info']['date_time_issued']; ?>
-                                                    </div>
-                                                </li>
+
+                                                <?php foreach (json_decode($v['task_info']['ingredients'], true) as $ki => $vi) : ?>
+
+                                                    <li class="list-group-item">
+
+                                                        <strong class="pull-right"><?php echo $vi; ?></strong>
+                                                        <h4 class="sender"><?php echo $ki; ?></h4>
+
+                                                    </li>
+                                                <?php endforeach ?>
+                                            </ul>
+                                            <div class="agile-detail">
+                                                <i class="fa fa-clock-o"></i> <?php echo $v['task_info']['date_time_issued']; ?>
+                                                <a href="#" class="float-right btn btn-xs btn-success" data-toggle="modal" data-target="#completeModal<?php echo $v['task_info']['id']; ?>">Complete</a>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="modal inmodal fade" id="deleteProgressModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h3>Delete Confirmation</h3>
-                                                    </div>
-                                                    <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
-                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
-                                                        <div class="modal-body">
-                                                            <p><strong>Do you really want to delete?</strong></p>
-                                                        </div>
 
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
-                                                            <button type="submit" class="btn btn-primary">Yes</button>
-                                                        </div>
-                                                    </form>
+                                    <div class="modal inmodal fade" id="deleteProgressModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h3>Delete Confirmation</h3>
                                                 </div>
+                                                <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
+                                                    <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                    <div class="modal-body">
+                                                        <p><strong>Do you really want to delete?</strong></p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="modal inmodal fade" id="revertModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h3>Revert Confirmation</h3>
-                                                    </div>
-                                                    <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
-                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
-                                                        <input type="hidden" name="status" value="todo">
-                                                        <div class="modal-body">
-                                                            <p><strong>Do you really want to revert the task?</strong></p>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
-                                                            <button type="submit" class="btn btn-primary">Yes</button>
-                                                        </div>
-                                                    </form>
+                                    <div class="modal inmodal fade" id="revertModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h3>Revert Confirmation</h3>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal inmodal fade" id="completeModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h3>Record Final Production</h3>
+                                                <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
+                                                    <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                    <input type="hidden" name="status" value="todo">
+                                                    <div class="modal-body">
+                                                        <p><strong>Do you really want to revert the task?</strong></p>
                                                     </div>
 
-                                                    <form role="form" id="finalRecordForm" action="<?php echo base_url('task/completetask') ?>" method="post">
-                                                        <div class="modal-body">
-                                                            <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
-                                                            <div class="row">
-                                                                <table class="table" id="product_info_table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="width:35%">Product</th>
-                                                                            <th style="width:10%">Quantity</th>
-                                                                            <th style="width:10%">Damage</th>
-                                                                            <th style="width:5%"></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr id="row_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
-                                                                            <td>
-                                                                                <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" required>
-                                                                                    <option value=""></option>
-                                                                                    <?php foreach ($products as $k => $val) : ?>
-                                                                                        <option value="<?php echo $val['name'] ?>"><?php echo $val['name'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </td>
-                                                                            <td><input type="text" name="productqty[]" id="productqty_1" class="form-control" required></td>
-                                                                            <td><input type="text" name="damageqty[]" id="damageqty_1" class="form-control"></td>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
+                                    <div class="modal inmodal fade" id="completeModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h3>Record Final Production</h3>
+                                                </div>
+
+                                                <form role="form" id="finalRecordForm" action="<?php echo base_url('task/completetask') ?>" method="post">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                        <div class="row">
+                                                            <table class="table" id="product_info_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width:35%">Product</th>
+                                                                        <th style="width:10%">Quantity</th>
+                                                                        <th style="width:10%">Damage</th>
+                                                                        <th style="width:5%"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr id="row_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
+                                                                        <td>
+                                                                            <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" required>
+                                                                                <option value=""></option>
+                                                                                <?php foreach ($products as $k => $val) : ?>
+                                                                                    <option value="<?php echo $val['name'] ?>"><?php echo $val['name'] ?></option>
+                                                                                <?php endforeach ?>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td><input type="text" name="productqty[]" id="productqty_1" class="form-control" required></td>
+                                                                        <td><input type="text" name="damageqty[]" id="damageqty_1" class="form-control"></td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
 
 
-                                                            </div>
-                                                            <div class="box-footer">
-                                                                <button type="button" class="btn btn-default add-new-product" id="<?php echo $v['task_info']['id']; ?>"><i class="fa fa-plus"></i> Add Row
-                                                                </button>
+                                                        </div>
+                                                        <div class="box-footer">
+                                                            <button type="button" class="btn btn-default add-new-product" id="<?php echo $v['task_info']['id']; ?>"><i class="fa fa-plus"></i> Add Row
+                                                            </button>
 
-                                                            </div>
-                                                            <div class="row">
-                                                                <table class="table" id="return_material_info_table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="width:35%">Return Material</th>
-                                                                            <th style="width:10%">Quantity</th>
-                                                                            <th style="width:5%"></th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                        </div>
+                                                        <div class="row">
+                                                            <table class="table" id="return_material_info_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width:35%">Return Material</th>
+                                                                        <th style="width:10%">Quantity</th>
+                                                                        <th style="width:5%"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
                                                                     <tr id="materialrow_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
-                                                                            <td>
-                                                                                <select class="form-control select_group return_material" data-row-id="row_1" id="returnmaterial_1" name="returnmaterial[]" style="width:100%;">
-                                                                                    <option value=""></option>
-                                                                                    <?php foreach ($materials as $k => $value) : ?>
-                                                                                        <option value="<?php echo $value['name'] ?>"><?php echo $value['name'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </td>
-                                                                            <td><input type="text" name="returnqty[]" id="returnqty_1" class="form-control"></td>
+                                                                        <td>
+                                                                            <select class="form-control select_group return_material" data-row-id="row_1" id="returnmaterial_1" name="returnmaterial[]" style="width:100%;">
+                                                                                <option value=""></option>
+                                                                                <?php foreach ($materials as $k => $value) : ?>
+                                                                                    <option value="<?php echo $value['name'] ?>"><?php echo $value['name'] ?></option>
+                                                                                <?php endforeach ?>
+                                                                            </select>
+                                                                        </td>
+                                                                        <td><input type="text" name="returnqty[]" id="returnqty_1" class="form-control"></td>
 
-                                                                        </tr>
+                                                                    </tr>
 
 
-                                                                    </tbody>
+                                                                </tbody>
 
-                                                                </table>
+                                                            </table>
 
-                                                            </div>
-
-                                                            <div class="box-footer">
-                                                                <button type="button" class="btn btn-default add-new-return" id="<?php echo $v['task_info']['id']; ?>"><i class="fa fa-plus"></i> Add Row
-                                                                </button>
-
-                                                            </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">Save</button>
+
+                                                        <div class="box-footer">
+                                                            <button type="button" class="btn btn-default add-new-return" id="<?php echo $v['task_info']['id']; ?>"><i class="fa fa-plus"></i> Add Row
+                                                            </button>
+
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
+                                    </div>
 
 
 
 
-                                    <?php endif; ?>
-                                <?php endforeach ?>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach ?>
+                        <?php endif; ?>
 
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -328,106 +322,109 @@
                     <div class="ibox-content">
                         <h3>Completed</h3>
 
-                        <ul class="sortable-list connectList agile-list" id="completed">
 
-                            <?php if ($task_data) : ?>
-                                <?php foreach ($task_data as $k => $v) : ?>
-                                    <?php if ($v['task_info']['status'] == 'completed') : ?>
 
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                <li class="<?php echo $colors[array_rand($colors)]; ?>" id="<?php echo $v['task_info']['id']; ?>">
+                        <?php if ($task_data) : ?>
+                            <?php foreach ($task_data as $k => $v) : ?>
+                                <?php if ($v['task_info']['status'] == 'completed') : ?>
 
-                                                    <div class="d-flex justify-content-between">
-                                                        <div>
-                                                            <strong><?php echo $v['task_info']['description']; ?></strong>
-                                                        </div>
-                                                        <div>
-                                                            <a href="#" data-toggle="modal" data-target="#revertCompletedModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <p>Ingredients:</p>
-                                                    <ul>
 
-                                                        <li>
-                                                            <?php foreach (json_decode($v['task_info']['ingredients'], true) as $ki => $vi) : ?>
-                                                                <p><strong><?php echo $ki; ?>:</strong><?php echo $vi; ?></p>
-                                                            <?php endforeach ?>
+                                    <div class="panel panel-success widget-messaging">
+                                        <div class="panel-heading">
+                                            <div class="pull-right">
+                                                <a style="color:white" href="#" data-toggle="modal" data-target="#revertCompletedModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply"></i></a>
+
+                                            </div><!-- pull-right -->
+                                            <h3 class="panel-title"><?php echo $v['task_info']['description']; ?></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>Ingredients:</p>
+                                            <ul class="list-group">
+
+
+                                                <?php foreach (json_decode($v['task_info']['ingredients'], true) as $ki => $vi) : ?>
+                                                    <li class="list-group-item">
+
+                                                        <strong class="pull-right"><?php echo $vi; ?></strong>
+                                                        <h4 class="sender"><?php echo $ki; ?></h4>
+
+                                                    </li>
+                                                <?php endforeach ?>
+                                            </ul>
+
+                                            <p>Production:</p>
+                                            <ul class="list-group">
+                                                <?php if ($v['task_info']['production']) : ?>
+                                                    <?php foreach (json_decode($v['task_info']['production'], true) as $ki => $vi) : ?>
+                                                        <li class="list-group-item">
+
+
+                                                            <strong class="pull-right"><?php echo $vi; ?></strong>
+                                                            <h4 class="sender"><?php echo $ki; ?></h4>
                                                         </li>
+                                                    <?php endforeach ?>
+                                                <?php endif; ?>
+                                            </ul>
 
-                                                    </ul>
-                                                    <p>Production:</p>
-                                                    <ul>
-                                                        <?php if ($v['task_info']['production']) : ?>
-                                                            <li>
-                                                                <?php foreach (json_decode($v['task_info']['production'], true) as $ki => $vi) : ?>
-                                                                    <p><strong><?php echo $ki; ?>:</strong><?php echo $vi; ?></p>
-                                                                <?php endforeach ?>
-                                                            </li>
-                                                        <?php endif; ?>
-                                                    </ul>
+                                            <?php if ($v['task_info']['return_materials']) : ?>
+                                                <p>Return Materials:</p>
 
-                                                    <?php if ($v['task_info']['return_materials']) : ?>
-                                                        <p>Return Materials:</p>
+                                                <p class="font-bold  alert alert-info m-b-sm">
+                                                    <?php foreach (json_decode($v['task_info']['return_materials'], true) as $ki => $vi) : ?>
 
-                                                        <p class="font-bold  alert alert-info m-b-sm">
-                                                            <?php foreach (json_decode($v['task_info']['return_materials'], true) as $ki => $vi) : ?>
+                                                        <?php echo $ki; ?>:</strong><?php echo $vi; ?>
 
-                                                                <?php echo $ki; ?>:</strong><?php echo $vi; ?>
-
-                                                            <?php endforeach ?>
-                                                        </p>
+                                                    <?php endforeach ?>
+                                                </p>
 
 
 
-                                                    <?php endif; ?>
+                                            <?php endif; ?>
 
-                                                    <?php if ($v['task_info']['damage']) : ?>
-                                                        <p>Damage:</p>
-                                                        <p class="font-bold  alert alert-warning m-b-sm">
-                                                            <?php foreach (json_decode($v['task_info']['damage'], true) as $ki => $vi) : ?>
+                                            <?php if ($v['task_info']['damage']) : ?>
+                                                <p>Damage:</p>
+                                                <p class="font-bold  alert alert-warning m-b-sm">
+                                                    <?php foreach (json_decode($v['task_info']['damage'], true) as $ki => $vi) : ?>
 
-                                                                <?php echo $ki; ?>:</strong><?php echo $vi; ?>
+                                                        <?php echo $ki; ?>:</strong><?php echo $vi; ?>
 
-                                                            <?php endforeach ?>
-                                                        </p>
-                                                    <?php endif; ?>
-
-                                                    <div class="agile-detail">
-                                                        <i class="fa fa-clock-o"></i> <?php echo $v['task_info']['date_time_completed']; ?>
-                                                    </div>
-                                                </li>
+                                                    <?php endforeach ?>
+                                                </p>
+                                            <?php endif; ?>
+                                            <div class="agile-detail">
+                                                <i class="fa fa-clock-o"></i> <?php echo $v['task_info']['date_time_completed']; ?>
                                             </div>
                                         </div>
-                                        <div class="modal inmodal fade" id="revertCompletedModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h3>Revert Confirmation</h3>
-                                                    </div>
-                                                    <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
-                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
-                                                        <input type="hidden" name="status" value="progress">
-                                                        <div class="modal-body">
-                                                            <p><strong>Do you really want to revert the task?</strong></p>
-                                                        </div>
+                                    </div>
 
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
-                                                            <button type="submit" class="btn btn-primary">Yes</button>
-                                                        </div>
-                                                    </form>
+                                    <div class="modal inmodal fade" id="revertCompletedModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h3>Revert Confirmation</h3>
                                                 </div>
+                                                <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
+                                                    <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                    <input type="hidden" name="status" value="progress">
+                                                    <div class="modal-body">
+                                                        <p><strong>Do you really want to revert the task?</strong></p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
+                                    </div>
 
-                                    <?php endif; ?>
-                                <?php endforeach ?>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach ?>
+                        <?php endif; ?>
 
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -677,7 +674,7 @@
                 var index = $("table tbody tr:last-child").index();
                 var actions = $("table td:last-child").html();
                 var table = $("#return_material_info_table");
-                var count_table_tbody_tr = $('#return_material_info_table tbody tr[name="' +row_name +'"]').length;
+                var count_table_tbody_tr = $('#return_material_info_table tbody tr[name="' + row_name + '"]').length;
                 var row_index = count_table_tbody_tr + 1;
 
                 $.ajax({
@@ -686,7 +683,7 @@
                     dataType: 'json',
                     success: function(response) {
 
-                        var html = '<tr id="materialrow_' +row_name +'_'+ row_index + '" name="' +row_name +'">' +
+                        var html = '<tr id="materialrow_' + row_name + '_' + row_index + '" name="' + row_name + '">' +
                             '<td>' +
                             '<select class="form-control select_group return_material" data-row-id="' + row_index + '" id="returnmaterial_' + row_index + '" name="returnmaterial[]" style="width:100%;" >' +
                             '<option value=""></option>';
@@ -701,7 +698,7 @@
                             '</tr>';
 
                         if (count_table_tbody_tr >= 1) {
-                            $('tr[id="materialrow_' +row_name +'_'+ count_table_tbody_tr + '"]').after(html);
+                            $('tr[id="materialrow_' + row_name + '_' + count_table_tbody_tr + '"]').after(html);
                         } else {
                             $("#return_material_info_table tbody").html(html);
                         }
@@ -715,11 +712,11 @@
             $(".add-new-product").click(function() {
                 var base_url = "<?php echo base_url(); ?>";
                 var row_name = this.id;
-                
+
                 var index = $("table tbody tr:last-child").index();
                 var actions = $("table td:last-child").html();
                 var table = $("#product_info_table");
-                var count_table_tbody_tr = $('#product_info_table tbody tr[name="' +row_name +'"]').length;
+                var count_table_tbody_tr = $('#product_info_table tbody tr[name="' + row_name + '"]').length;
                 var row_index = count_table_tbody_tr + 1;
                 $.ajax({
                     url: base_url + '/task/getProductRow/',
@@ -727,7 +724,7 @@
                     dataType: 'json',
                     success: function(response) {
 
-                        var html = '<tr id="row_' +row_name +'_'+ row_index + '" name="' +row_name +'">' +
+                        var html = '<tr id="row_' + row_name + '_' + row_index + '" name="' + row_name + '">' +
                             '<td>' +
                             '<select class="form-control select_group product" data-row-id="' + row_index + '" id="product_' + row_index + '" name="product[]" style="width:100%;" >' +
                             '<option value=""></option>';
@@ -743,7 +740,7 @@
                             '</tr>';
 
                         if (count_table_tbody_tr >= 1) {
-                            $('tr[id="row_' +row_name +'_'+ count_table_tbody_tr + '"]').after(html);
+                            $('tr[id="row_' + row_name + '_' + count_table_tbody_tr + '"]').after(html);
                         } else {
                             $("#product_info_table tbody").html(html);
                         }

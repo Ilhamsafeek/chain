@@ -90,11 +90,11 @@
                                                     <?php endif; ?>
                                                     </ </td> <td>
                                                     <?php if ($v['task_info']['status'] == 'todo') {
-                                                        $color = 'label label-success';
+                                                        $color = 'label label-primary';
                                                     } else if ($v['task_info']['status'] == 'progress') {
                                                         $color = 'label label-warning';
                                                     } else {
-                                                        $color = 'label label-primary';
+                                                        $color = 'label label-success';
                                                     }
 
                                                     ?>
