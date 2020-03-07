@@ -42,7 +42,7 @@
                             <div class="m-b-md">
                             <a href="<?php echo base_url('suppliers') ?>" class="btn btn-primary btn-xs"><i class="fa fa-unsorted"></i> All Suppliers</a>
 
-                                <a href="<?php echo base_url('suppliers/edit/'.$supplier_data['id']) ?>" class="btn btn-white btn-xs float-right">Edit profile</a>
+                                <a href="<?php echo base_url('suppliers/edit/'.$supplier_data['id']) ?>" class="btn btn-default btn-xs float-right">Edit profile</a>
                                 <h2><?php echo $supplier_data['name']; ?></h2>
                             </div>
 

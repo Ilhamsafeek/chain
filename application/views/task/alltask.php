@@ -7,9 +7,9 @@
             <div class="media-body">
                 <ul class="breadcrumb">
                     <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                    <li>Users</li>
+                    <li>Manufacturing</li>
                 </ul>
-                <h4>Create User</h4>
+                <h4>All Tasks</h4>
             </div>
         </div><!-- media -->
     </div><!-- pageheader -->
@@ -32,29 +32,11 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>All Tasks</h5>
 
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#" class="dropdown-item">Config option 1</a>
-                                    </li>
-                                    <li><a href="#" class="dropdown-item">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
+                          
                         </div>
                         <div class="ibox-content">
-                            <input type="text" class="form-control form-control-sm m-b-xs" id="filter" placeholder="Search in table">
-
+                            
                             <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
                                 <thead>
                                     <tr>

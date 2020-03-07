@@ -7,9 +7,9 @@
             <div class="media-body">
                 <ul class="breadcrumb">
                     <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-                    <li>Users</li>
+                    <li>Manufacturing</li>
                 </ul>
-                <h4>Create User</h4>
+                <h4>Track Production</h4>
             </div>
         </div><!-- media -->
     </div><!-- pageheader -->
@@ -28,18 +28,19 @@
         <?php endif; ?>
 
         <div class="row">
+            <div class="input-group">
+
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#createModal"> <i class="fa fa-plus"></i> Add task</button>
+                </span>
+            </div>
             <div class="col-lg-4">
                 <div class="ibox">
                     <div class="ibox-content">
                         <h3>To-do</h3>
 
 
-                        <div class="input-group">
 
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-sm btn-white" data-toggle="modal" data-target="#createModal"> <i class="fa fa-plus"></i> Add task</button>
-                            </span>
-                        </div>
                         <?php $colors = array('danger-element', 'info-element', 'success-element', 'warning-element'); ?>
 
                         <ul class="sortable-list connectList agile-list" id="todo">
@@ -227,18 +228,12 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h4 class="modal-title">Record Final Production</h4>
-                                                        <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                            industry.
-                                                        </small>
+                                                        <h3>Record Final Production</h3>
                                                     </div>
-                                                    <form role="form" action="<?php echo base_url('task/completetask') ?>" method="post" id="finalRecordForm">
-                                                        <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
 
+                                                    <form role="form" id="finalRecordForm" action="<?php echo base_url('task/completetask') ?>" method="post">
                                                         <div class="modal-body">
-
-                                                            <div id="messages"></div>
-
+                                                            <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
                                                             <div class="row">
                                                                 <table class="table" id="product_info_table">
                                                                     <thead>
@@ -250,32 +245,29 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr id="row_1">
+                                                                        <tr id="row_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
                                                                             <td>
                                                                                 <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" required>
                                                                                     <option value=""></option>
-                                                                                    <?php foreach ($products as $k => $v) : ?>
-                                                                                        <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
+                                                                                    <?php foreach ($products as $k => $val) : ?>
+                                                                                        <option value="<?php echo $val['name'] ?>"><?php echo $val['name'] ?></option>
                                                                                     <?php endforeach ?>
                                                                                 </select>
                                                                             </td>
                                                                             <td><input type="text" name="productqty[]" id="productqty_1" class="form-control" required></td>
                                                                             <td><input type="text" name="damageqty[]" id="damageqty_1" class="form-control"></td>
-                                                                            <td>
-                                                                                <a class="delete" title="Delete"><i class="fa fa-close"></i></a>
-                                                                            </td>
+
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
-                                                                <div class="box-footer">
-                                                                    <button type="button" class="btn btn-info add-new-product"><i class="fa fa-plus"></i> Add Row
-                                                                    </button>
-
-                                                                </div>
 
 
                                                             </div>
-                                                            <hr>
+                                                            <div class="box-footer">
+                                                                <button type="button" class="btn btn-default add-new-product" id="<?php echo $v['task_info']['id']; ?>"><i class="fa fa-plus"></i> Add Row
+                                                                </button>
+
+                                                            </div>
                                                             <div class="row">
                                                                 <table class="table" id="return_material_info_table">
                                                                     <thead>
@@ -286,41 +278,42 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <tr id="row_1">
+                                                                    <tr id="materialrow_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
                                                                             <td>
                                                                                 <select class="form-control select_group return_material" data-row-id="row_1" id="returnmaterial_1" name="returnmaterial[]" style="width:100%;">
                                                                                     <option value=""></option>
-                                                                                    <?php foreach ($materials as $k => $v) : ?>
-                                                                                        <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
+                                                                                    <?php foreach ($materials as $k => $value) : ?>
+                                                                                        <option value="<?php echo $value['name'] ?>"><?php echo $value['name'] ?></option>
                                                                                     <?php endforeach ?>
                                                                                 </select>
                                                                             </td>
                                                                             <td><input type="text" name="returnqty[]" id="returnqty_1" class="form-control"></td>
-                                                                            <td>
-                                                                                <a class="delete" title="Delete"><i class="fa fa-close"></i></a>
-                                                                            </td>
+
                                                                         </tr>
 
 
                                                                     </tbody>
+
                                                                 </table>
-                                                                <div class="box-footer">
-                                                                    <button type="button" class="btn btn-info add-new-return"><i class="fa fa-plus"></i> Add Row
-                                                                    </button>
 
-                                                                </div>
+                                                            </div>
 
+                                                            <div class="box-footer">
+                                                                <button type="button" class="btn btn-default add-new-return" id="<?php echo $v['task_info']['id']; ?>"><i class="fa fa-plus"></i> Add Row
+                                                                </button>
 
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
                                                         </div>
+                                                    </form>
                                                 </div>
-                                                </form>
                                             </div>
                                         </div>
+
+
+
 
                                     <?php endif; ?>
                                 <?php endforeach ?>
@@ -445,8 +438,6 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <h4 class="modal-title">Add New Task</h4>
-                            <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry.
                             </small>
                         </div>
 
@@ -486,13 +477,13 @@
                                                 <td><input type="text" name="qty[]" id="qty_1" class="form-control" required>
                                                 </td>
                                                 <td>
-                                                    <a class="delete" title="Delete"><i class="fa fa-close"></i></a>
+                                                    <a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="box-footer">
-                                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add
+                                        <button type="button" class="btn btn-default add-new"><i class="fa fa-plus"></i> Add
                                             Row
                                         </button>
 
@@ -503,8 +494,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                     </div>
                     </form>
@@ -522,119 +512,118 @@
             $("#taskMenu").addClass('active');
 
             // submit the create from
-            $("#createForm").unbind('submit').on('submit', function() {
-                var form = $(this);
+            // $("#createForm").unbind('submit').on('submit', function() {
+            //     var form = $(this);
 
-                // remove the text-danger
-                $(".text-danger").remove();
+            //     // remove the text-danger
+            //     $(".text-danger").remove();
 
-                $.ajax({
-                    url: form.attr('action'),
-                    type: form.attr('method'),
-                    data: form.serialize(), // /converting the form data into array and sending it to server
-                    dataType: 'json',
-                    success: function(response) {
-
-
-                        if (response.success === true) {
-
-                            $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
-                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                                '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
-                                '</div>');
+            //     $.ajax({
+            //         url: form.attr('action'),
+            //         type: form.attr('method'),
+            //         data: form.serialize(), // /converting the form data into array and sending it to server
+            //         dataType: 'json',
+            //         success: function(response) {
 
 
-                            // hide the modal
-                            $("#createModal").modal('hide');
-                            location.reload();
-                            // reset the form
-                            $("#createForm")[0].reset();
-                            $("#createForm .form-group").removeClass('has-error').removeClass('has-success');
+            //             if (response.success === true) {
 
-                        } else {
-
-                            if (response.messages instanceof Object) {
-                                $.each(response.messages, function(index, value) {
-                                    var id = $("#" + index);
-
-                                    id.closest('.form-group')
-                                        .removeClass('has-error')
-                                        .removeClass('has-success')
-                                        .addClass(value.length > 0 ? 'has-error' : 'has-success');
-
-                                    id.after(value);
-
-                                });
-                            } else {
-                                $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
-                                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                                    '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
-                                    '</div>');
-                            }
-                        }
-                    }
-                });
-
-                return false;
-            });
-            // submit the create from
-            $("#finalRecordForm").unbind('submit').on('submit', function() {
-                var form = $(this);
-
-                // remove the text-danger
-                $(".text-danger").remove();
-
-                $.ajax({
-                    url: form.attr('action'),
-                    type: form.attr('method'),
-                    data: form.serialize(), // /converting the form data into array and sending it to server
-                    dataType: 'json',
-                    success: function(response) {
+            //                 $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+            //                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            //                     '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+            //                     '</div>');
 
 
-                        if (response.success === true) {
+            //                 // hide the modal
+            //                 $("#createModal").modal('hide');
+            //                 location.reload();
+            //                 // reset the form
+            //                 $("#createForm")[0].reset();
+            //                 $("#createForm .form-group").removeClass('has-error').removeClass('has-success');
 
-                            $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
-                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                                '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
-                                '</div>');
+            //             } else {
+
+            //                 if (response.messages instanceof Object) {
+            //                     $.each(response.messages, function(index, value) {
+            //                         var id = $("#" + index);
+
+            //                         id.closest('.form-group')
+            //                             .removeClass('has-error')
+            //                             .removeClass('has-success')
+            //                             .addClass(value.length > 0 ? 'has-error' : 'has-success');
+
+            //                         id.after(value);
+
+            //                     });
+            //                 } else {
+            //                     $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+            //                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            //                         '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+            //                         '</div>');
+            //                 }
+            //             }
+            //         }
+            //     });
+
+            //     return false;
+            // });
+            // // submit the create from
+            // $("#finalRecordForm").unbind('submit').on('submit', function() {
+            //     var form = $(this);
+
+            //     // remove the text-danger
+            //     $(".text-danger").remove();
+
+            //     $.ajax({
+            //         url: form.attr('action'),
+            //         type: form.attr('method'),
+            //         data: form.serialize(), // /converting the form data into array and sending it to server
+            //         dataType: 'json',
+            //         success: function(response) {
 
 
-                            // hide the modal
-                            // $("#createModal").modal('hide');
-                            location.reload();
+            //             if (response.success === true) {
 
-                            // reset the form
-                            $("#finalRecordForm")[0].reset();
-                            $("#finalRecordForm .form-group").removeClass('has-error').removeClass('has-success');
+            //                 $("#messages").html('<div class="alert alert-success alert-dismissible" role="alert">' +
+            //                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            //                     '<strong> <span class="glyphicon glyphicon-ok-sign"></span> </strong>' + response.messages +
+            //                     '</div>');
 
-                        } else {
 
-                            if (response.messages instanceof Object) {
-                                $.each(response.messages, function(index, value) {
-                                    var id = $("#" + index);
+            //                 // hide the modal
+            //                 // $("#createModal").modal('hide');
+            //                 location.reload();
 
-                                    id.closest('.form-group')
-                                        .removeClass('has-error')
-                                        .removeClass('has-success')
-                                        .addClass(value.length > 0 ? 'has-error' : 'has-success');
+            //                 // reset the form
+            //                 $("#finalRecordForm")[0].reset();
+            //                 $("#finalRecordForm .form-group").removeClass('has-error').removeClass('has-success');
 
-                                    id.after(value);
+            //             } else {
 
-                                });
-                            } else {
-                                $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
-                                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                                    '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
-                                    '</div>');
-                            }
-                        }
-                    }
-                });
+            //                 if (response.messages instanceof Object) {
+            //                     $.each(response.messages, function(index, value) {
+            //                         var id = $("#" + index);
 
-                return false;
-            });
-            $("#purchaseOrderSubMenu").addClass('active');
+            //                         id.closest('.form-group')
+            //                             .removeClass('has-error')
+            //                             .removeClass('has-success')
+            //                             .addClass(value.length > 0 ? 'has-error' : 'has-success');
+
+            //                         id.after(value);
+
+            //                     });
+            //                 } else {
+            //                     $("#messages").html('<div class="alert alert-warning alert-dismissible" role="alert">' +
+            //                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+            //                         '<strong> <span class="glyphicon glyphicon-exclamation-sign"></span> </strong>' + response.messages +
+            //                         '</div>');
+            //                 }
+            //             }
+            //         }
+            //     });
+
+            //     return false;
+            // });
 
 
 
@@ -666,7 +655,7 @@
                         html += '</select>' +
                             '</td>' +
                             '<td><input type="text" name="qty[]" id="qty_' + row_id + '" class="form-control"></td>' +
-                            '<td>' + actions + '</td>' +
+                            '<td><a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a></td>' +
                             '</tr>';
 
                         if (count_table_tbody_tr >= 1) {
@@ -683,13 +672,13 @@
             // Append table with add row form on add new button click ==Add Return Material==
             $(".add-new-return").click(function() {
                 var base_url = "<?php echo base_url(); ?>";
-
+                var row_name = this.id;
 
                 var index = $("table tbody tr:last-child").index();
                 var actions = $("table td:last-child").html();
                 var table = $("#return_material_info_table");
-                var count_table_tbody_tr = $("#return_material_info_table tbody tr").length;
-                var row_id = count_table_tbody_tr + 1;
+                var count_table_tbody_tr = $('#return_material_info_table tbody tr[name="' +row_name +'"]').length;
+                var row_index = count_table_tbody_tr + 1;
 
                 $.ajax({
                     url: base_url + '/task/getMaterialRow/',
@@ -697,9 +686,9 @@
                     dataType: 'json',
                     success: function(response) {
 
-                        var html = '<tr id="row_' + row_id + '">' +
+                        var html = '<tr id="materialrow_' +row_name +'_'+ row_index + '" name="' +row_name +'">' +
                             '<td>' +
-                            '<select class="form-control select_group return_material" data-row-id="' + row_id + '" id="returnmaterial_' + row_id + '" name="returnmaterial[]" style="width:100%;" >' +
+                            '<select class="form-control select_group return_material" data-row-id="' + row_index + '" id="returnmaterial_' + row_index + '" name="returnmaterial[]" style="width:100%;" >' +
                             '<option value=""></option>';
                         $.each(response, function(index, value) {
                             html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -707,12 +696,12 @@
 
                         html += '</select>' +
                             '</td>' +
-                            '<td><input type="text" name="returnqty[]" id="returnqty_' + row_id + '" class="form-control"></td>' +
-                            '<td>' + actions + '</td>' +
+                            '<td><input type="text" name="returnqty[]" id="returnqty_' + row_index + '" class="form-control"></td>' +
+                            '<td><a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a></td>' +
                             '</tr>';
 
                         if (count_table_tbody_tr >= 1) {
-                            $("#return_material_info_table tbody tr:last").after(html);
+                            $('tr[id="materialrow_' +row_name +'_'+ count_table_tbody_tr + '"]').after(html);
                         } else {
                             $("#return_material_info_table tbody").html(html);
                         }
@@ -725,23 +714,22 @@
             // Append table with add row form on add new button click ==Add new Product==
             $(".add-new-product").click(function() {
                 var base_url = "<?php echo base_url(); ?>";
-
-
+                var row_name = this.id;
+                
                 var index = $("table tbody tr:last-child").index();
                 var actions = $("table td:last-child").html();
                 var table = $("#product_info_table");
-                var count_table_tbody_tr = $("#product_info_table tbody tr").length;
-                var row_id = count_table_tbody_tr + 1;
-
+                var count_table_tbody_tr = $('#product_info_table tbody tr[name="' +row_name +'"]').length;
+                var row_index = count_table_tbody_tr + 1;
                 $.ajax({
                     url: base_url + '/task/getProductRow/',
                     type: 'post',
                     dataType: 'json',
                     success: function(response) {
 
-                        var html = '<tr id="row_' + row_id + '">' +
+                        var html = '<tr id="row_' +row_name +'_'+ row_index + '" name="' +row_name +'">' +
                             '<td>' +
-                            '<select class="form-control select_group product" data-row-id="' + row_id + '" id="product_' + row_id + '" name="product[]" style="width:100%;" >' +
+                            '<select class="form-control select_group product" data-row-id="' + row_index + '" id="product_' + row_index + '" name="product[]" style="width:100%;" >' +
                             '<option value=""></option>';
                         $.each(response, function(index, value) {
                             html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -749,13 +737,13 @@
 
                         html += '</select>' +
                             '</td>' +
-                            '<td><input type="text" name="productqty[]" id="productqty_' + row_id + '" class="form-control"></td>' +
-                            '<td><input type="text" name="damageqty[]" id="damageqty_' + row_id + '" class="form-control"></td>' +
-                            '<td>' + actions + '</td>' +
+                            '<td><input type="text" name="productqty[]" id="productqty_' + row_index + '" class="form-control"></td>' +
+                            '<td><input type="text" name="damageqty[]" id="damageqty_' + row_index + '" class="form-control"></td>' +
+                            '<td><a class="delete" title="Delete"><i class="fa fa-trash-o"></i></a></td>' +
                             '</tr>';
 
                         if (count_table_tbody_tr >= 1) {
-                            $("#product_info_table tbody tr:last").after(html);
+                            $('tr[id="row_' +row_name +'_'+ count_table_tbody_tr + '"]').after(html);
                         } else {
                             $("#product_info_table tbody").html(html);
                         }

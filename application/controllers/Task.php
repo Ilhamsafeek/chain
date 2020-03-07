@@ -118,7 +118,7 @@ class Task extends Admin_Controller
         } else {
             $response['success'] = false;
             foreach ($_POST as $key => $value) {
-                $response['messages'][$key] = form_error($key);
+                $response['messages'][$key] = $value;
             }
         }
 

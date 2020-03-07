@@ -39,7 +39,7 @@
                     </li>
                     <li class="parent" id="manufacturingMainMenu"><a href="chain.html"><i class="fa fa-edit"></i> <span>Manufacturing</span></a>
                         <ul class="children">
-                            <li id="taskMenu"><a href="<?php echo base_url('task'); ?>">Daily Tasks</a></li>
+                            <li id="taskMenu"><a href="<?php echo base_url('task'); ?>">Track Production</a></li>
                             <li id="allTaskMenu"><a href="<?php echo base_url('task/all'); ?>">All Tasks</a></li>
      
                         </ul>
