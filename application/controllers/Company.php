@@ -28,7 +28,9 @@ class Company extends Admin_Controller
         
 		$this->form_validation->set_rules('company_name', 'Company name', 'trim|required');
 		$this->form_validation->set_rules('service_charge_value', 'Charge Amount', 'trim|integer');
-		$this->form_validation->set_rules('vat_charge_value', 'Vat Charge', 'trim|integer');
+		$this->form_validation->set_rules('epf', 'EPF amount', 'trim|integer');
+		$this->form_validation->set_rules('etf', 'ETF amount', 'trim|integer');
+		$this->form_validation->set_rules('epf_emp', 'EPF Employee', 'trim|integer');
 		$this->form_validation->set_rules('address', 'Address', 'trim|required');
 		$this->form_validation->set_rules('message', 'Message', 'trim|required');
 	
@@ -39,7 +41,10 @@ class Company extends Admin_Controller
         	$data = array(
         		'company_name' => $this->input->post('company_name'),
         		'service_charge_value' => $this->input->post('service_charge_value'),
-        		'vat_charge_value' => $this->input->post('vat_charge_value'),
+				'vat_charge_value' => $this->input->post('vat_charge_value'),
+				'epf' => $this->input->post('epf'),
+				'epf_emp' => $this->input->post('epf_emp'),
+				'etf' => $this->input->post('etf'),
         		'address' => $this->input->post('address'),
         		'phone' => $this->input->post('phone'),
         		'country' => $this->input->post('country'),

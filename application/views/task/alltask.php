@@ -37,7 +37,7 @@
                         </div>
                         <div class="ibox-content">
                             
-                            <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                        <table id="shTable" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
 
@@ -112,13 +112,7 @@
                                     <?php endif; ?>
 
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="6">
-                                            <ul class="pagination float-right"></ul>
-                                        </td>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
 
 

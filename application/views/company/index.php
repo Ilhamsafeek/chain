@@ -7,9 +7,9 @@
       <div class="media-body">
         <ul class="breadcrumb">
           <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
-          <li>Settings</li>
+          <li>Company</li>
         </ul>
-        <h4>Company</h4>
+        <h4>General Settings</h4>
       </div>
     </div><!-- media -->
   </div><!-- pageheader -->
@@ -87,6 +87,32 @@
                   </div>
 
                 </div>
+
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="epf">EPF (%)</label>
+                    <input type="text" class="form-control" id="epf" name="epf" placeholder="Enter amount %" value="<?php echo $company_data['epf'] ?>" autocomplete="off">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="epf_emp">EPF - Employee (%)</label>
+                    <input type="text" class="form-control" id="epf_emp" name="epf_emp" placeholder="Enter amount %" value="<?php echo $company_data['epf_emp'] ?>" autocomplete="off">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="etf">ETF (%)</label>
+                    <input type="text" class="form-control" id="etf" name="etf" placeholder="Enter amount %" value="<?php echo $company_data['etf'] ?>" autocomplete="off">
+                  </div>
+                </div>
+
+
 
 
               </div>

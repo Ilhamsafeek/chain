@@ -37,9 +37,9 @@
                     <div class="col-lg-12">
                         <div class="ibox ">
                             <div class="ibox-title">
-                            <div class="ibox-tools">
-                            <a href="<?php echo base_url('purchase/createexpense') ?>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> New Expense</a>
-                        </div>
+                                <div class="ibox-tools">
+                                    <a href="<?php echo base_url('purchase/createexpense') ?>" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> New Expense</a>
+                                </div>
                             </div>
                             <div class="ibox-content">
 
@@ -173,16 +173,16 @@
 
             <div class="notfoundpanel">
 
-<div class="row">
-    <img src="https://plugin.intuitcdn.net/transactions-list-ui/3.21.10/images/1369e3744cf993faa355b5f7f4833b1a.svg" width="200px">
-</div>
-<div class="row">
-    <h2><strong>Enter transactions, bills and payments to get an in-depth view of your expenses.</strong></h2>
-</div>
-<div class="row">
-    <a href="<?php echo base_url('purchase/createexpense') ?>" class="btn btn-primary btn-md"><i class="fa fa-plus"></i> Record New Expense</a>
-</div>
-</div>
+                <div class="row">
+                    <img src="https://plugin.intuitcdn.net/transactions-list-ui/3.21.10/images/1369e3744cf993faa355b5f7f4833b1a.svg" width="200px">
+                </div>
+                <div class="row">
+                    <h2><strong>Enter transactions, bills and payments to get an in-depth view of your expenses.</strong></h2>
+                </div>
+                <div class="row">
+                    <a href="<?php echo base_url('purchase/createexpense') ?>" class="btn btn-primary btn-md"><i class="fa fa-plus"></i> Record New Expense</a>
+                </div>
+            </div>
 
         <?php } ?>
 
