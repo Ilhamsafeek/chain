@@ -20,18 +20,15 @@ class Model_payroll extends CI_Model
 		return $query->result_array();
 	}
 
-	public function getEmployeeRole($userId = null)
+	public function getAttendanceById($id)
 	{
-		if ($userId) {
-			$sql = "SELECT * FROM employees WHERE id = ?";
-			$query = $this->db->query($sql, array($userId));
-			$result = $query->row_array();
-
-			$role_id = $result['role'];
-			$g_sql = "SELECT * FROM roles WHERE id = ?";
-			$g_query = $this->db->query($g_sql, array($role_id));
-			$q_result = $g_query->row_array();
-			return $q_result;
+		if(isset($_POST['id'])){
+			$id = $_POST['id'];
+			$sql = "SELECT *, attendance.id as attid FROM attendance LEFT JOIN employees ON employees.emp_id=attendance.employee_id WHERE attendance.id = '$id'";
+			$query = $this->db->query($sql);
+			return $query->row_array();
+	
+		
 		}
 	}
 
@@ -55,10 +52,10 @@ class Model_payroll extends CI_Model
 		return ($update == true) ? true : false;
 	}
 
-	public function delete($id)
+	public function deleteAttendance($id)
 	{
 		$this->db->where('id', $id);
-		$delete = $this->db->delete('employees');
+		$delete = $this->db->delete('attendance');
 		return ($delete == true) ? true : false;
 	}
 

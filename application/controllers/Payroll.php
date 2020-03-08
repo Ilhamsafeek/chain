@@ -17,7 +17,7 @@ class Payroll extends Admin_Controller
 		$this->load->model('model_payroll');
 	}
 
-	public function index()
+	public function attendance()
 	{
 
 		if (!in_array('viewUser', $this->permission)) {
@@ -51,9 +51,7 @@ class Payroll extends Admin_Controller
 		$this->data['ontime_percent'] =  $this->model_payroll->calculateOnTimePercentage();
 		$this->data['ontime_today'] =  $this->model_payroll->onTimeToday();
 		$this->data['late_today'] =  $this->model_payroll->lateToday();
-	 	$this->render_template('payroll/attendance', $this->data);
-
-	
+		$this->render_template('payroll/attendance', $this->data);
 	}
 
 	public function create()
@@ -102,6 +100,17 @@ class Payroll extends Admin_Controller
 		}
 	}
 
+	public function attendanceById()
+	{
+
+		if (isset($_POST['id'])) {
+			$id = $_POST['id'];
+			$attendance_data = $this->model_payroll->getAttendanceById($id);
+
+			echo json_encode($attendance_data);
+		}
+	}
+
 	public function password_hash($pass = '')
 	{
 		if ($pass) {
@@ -110,87 +119,65 @@ class Payroll extends Admin_Controller
 		}
 	}
 
-	public function edit($id = null)
+	public function edit_attendance($id = null)
 	{
 
 		if (!in_array('updateUser', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
 
-		if ($id) {
-			$this->form_validation->set_rules('role', 'Role', 'required');
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required');
-			$this->form_validation->set_rules('fname', 'First name', 'trim|required');
 
+		// true case
+		if (empty($this->input->post('password')) && empty($this->input->post('cpassword'))) {
+			$data = array(
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'firstname' => $this->input->post('fname'),
+				'lastname' => $this->input->post('lname'),
+				'phone' => $this->input->post('phone'),
+				'gender' => $this->input->post('gender'),
+				'role_id' => $this->input->post('role'),
+			);
+
+			$update = $this->model_users->edit($data, $id, $this->input->post('roles'));
+			if ($update == true) {
+				$this->session->set_flashdata('success', 'Successfully created');
+				redirect('users/', 'refresh');
+			} else {
+				$this->session->set_flashdata('errors', 'Error occurred!!');
+				redirect('users/edit/' . $id, 'refresh');
+			}
+		} else {
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+			$this->form_validation->set_rules('cpassword', 'Confirm password', 'trim|required|matches[password]');
 
 			if ($this->form_validation->run() == TRUE) {
-				// true case
-				if (empty($this->input->post('password')) && empty($this->input->post('cpassword'))) {
-					$data = array(
-						'username' => $this->input->post('username'),
-						'email' => $this->input->post('email'),
-						'firstname' => $this->input->post('fname'),
-						'lastname' => $this->input->post('lname'),
-						'phone' => $this->input->post('phone'),
-						'gender' => $this->input->post('gender'),
-						'role_id' => $this->input->post('role'),
-					);
 
-					$update = $this->model_users->edit($data, $id, $this->input->post('roles'));
-					if ($update == true) {
-						$this->session->set_flashdata('success', 'Successfully created');
-						redirect('users/', 'refresh');
-					} else {
-						$this->session->set_flashdata('errors', 'Error occurred!!');
-						redirect('users/edit/' . $id, 'refresh');
-					}
+				$password = $this->password_hash($this->input->post('password'));
+
+				$data = array(
+					'username' => $this->input->post('username'),
+					'password' => $password,
+					'email' => $this->input->post('email'),
+					'firstname' => $this->input->post('fname'),
+					'lastname' => $this->input->post('lname'),
+					'phone' => $this->input->post('phone'),
+					'gender' => $this->input->post('gender'),
+					'store_id' => $this->input->post('store'),
+				);
+
+				$update = $this->model_users->edit($data, $id, $this->input->post('roles'));
+				if ($update == true) {
+					$this->session->set_flashdata('success', 'Successfully updated');
+					redirect('users/', 'refresh');
 				} else {
-					$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-					$this->form_validation->set_rules('cpassword', 'Confirm password', 'trim|required|matches[password]');
-
-					if ($this->form_validation->run() == TRUE) {
-
-						$password = $this->password_hash($this->input->post('password'));
-
-						$data = array(
-							'username' => $this->input->post('username'),
-							'password' => $password,
-							'email' => $this->input->post('email'),
-							'firstname' => $this->input->post('fname'),
-							'lastname' => $this->input->post('lname'),
-							'phone' => $this->input->post('phone'),
-							'gender' => $this->input->post('gender'),
-							'store_id' => $this->input->post('store'),
-						);
-
-						$update = $this->model_users->edit($data, $id, $this->input->post('roles'));
-						if ($update == true) {
-							$this->session->set_flashdata('success', 'Successfully updated');
-							redirect('users/', 'refresh');
-						} else {
-							$this->session->set_flashdata('errors', 'Error occurred!!');
-							redirect('users/edit/' . $id, 'refresh');
-						}
-					} else {
-						// false case
-						$user_data = $this->model_users->getUserData($id);
-						$roles = $this->model_users->getUserRole($id);
-
-						$this->data['user_data'] = $user_data;
-						$this->data['user_role'] = $roles;
-
-						$role_data = $this->model_roles->getRoleData();
-						$this->data['role_data'] = $role_data;
-
-						$this->render_template('users/edit', $this->data);
-					}
+					$this->session->set_flashdata('errors', 'Error occurred!!');
+					redirect('users/edit/' . $id, 'refresh');
 				}
 			} else {
 				// false case
 				$user_data = $this->model_users->getUserData($id);
 				$roles = $this->model_users->getUserRole($id);
-
 
 				$this->data['user_data'] = $user_data;
 				$this->data['user_role'] = $roles;
@@ -203,28 +190,25 @@ class Payroll extends Admin_Controller
 		}
 	}
 
-	public function delete($id)
+
+	public function deleteAttendance()
 	{
 
 		if (!in_array('deleteUser', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
 
-		if ($id) {
-			if ($this->input->post('confirm')) {
+
+		if (isset($_POST['delete'])) {
 
 
-				$delete = $this->model_users->delete($id);
-				if ($delete == true) {
-					$this->session->set_flashdata('success', 'Successfully removed');
-					redirect('users/', 'refresh');
-				} else {
-					$this->session->set_flashdata('error', 'Error occurred!!');
-					redirect('users/delete/' . $id, 'refresh');
-				}
+			$delete = $this->model_payroll->deleteAttendance($this->input->post('id'));
+			if ($delete == true) {
+				$this->session->set_flashdata('success', 'Attendance deleted successfully');
+				redirect('payroll/attendance/', 'refresh');
 			} else {
-				$this->data['id'] = $id;
-				$this->render_template('users/delete', $this->data);
+				$this->session->set_flashdata('error', 'Error occurred!!');
+				redirect('payroll/attendance/', 'refresh');
 			}
 		}
 	}
