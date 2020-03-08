@@ -29,7 +29,10 @@ class Employees extends Admin_Controller
 		foreach ($employee_data as $k => $v) {
 
 			$result[$k]['employee_info'] = $v;
+			$role = $this->model_employees->getEmployeeRole($v['id']);
+			$result[$k]['user_role'] = $role;
 		}
+
 
 		$this->data['employee_data'] = $result;
 

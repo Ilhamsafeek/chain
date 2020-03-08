@@ -20,7 +20,20 @@ class Model_employees extends CI_Model
 		return $query->result_array();
 	}
 
-	
+	public function getEmployeeRole($userId = null) 
+	{
+		if($userId) {
+			$sql = "SELECT * FROM employees WHERE id = ?";
+			$query = $this->db->query($sql, array($userId));
+			$result = $query->row_array();
+
+			$role_id = $result['role'];
+			$g_sql = "SELECT * FROM roles WHERE id = ?";
+			$g_query = $this->db->query($g_sql, array($role_id));
+			$q_result = $g_query->row_array();
+			return $q_result;
+		}
+	}
 
 	public function create($data = '')
 	{
@@ -51,8 +64,8 @@ class Model_employees extends CI_Model
 
 	public function countTotalEmployees()
 	{
-		$sql = "SELECT * FROM employees WHERE id != ?";
-		$query = $this->db->query($sql, array(1));
+		$sql = "SELECT * FROM employees";
+		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
 	

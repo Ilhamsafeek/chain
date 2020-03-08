@@ -50,7 +50,9 @@
                                 <table id="shTable" class="footable table table-stripped table-hover" data-page-size="8" data-filter=#filter>
                                     <thead>
                                         <tr>
+                                            <th>Employee ID</th>
                                             <th>Name</th>
+                                            <th>Role</th>
                                             <th>Address</th>
                                             <th>Phone</th>
                                             <th>Email</th>
@@ -65,7 +67,9 @@
                                     <tbody>
                                         <?php foreach ($employee_data as $k => $v) : ?>
                                             <tr>
+                                                <td><strong><?php echo $v['employee_info']['emp_id']; ?></strong></td>
                                                 <td><a href="#" class="client-link"><?php echo $v['employee_info']['name']; ?></a></td>
+                                                <td><?php echo $v['user_role']['role']; ?></td>
                                                 <td><?php echo $v['employee_info']['address']; ?></td>
                                                 <td><?php echo $v['employee_info']['phone']; ?></td>
                                                 <td><?php echo $v['employee_info']['email']; ?></td>

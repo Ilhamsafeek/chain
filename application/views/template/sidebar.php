@@ -46,21 +46,7 @@
                     </li>     
                     <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-truck"></i>
                             <span>Distribution</span></a></li>               
-                    <li class="parent"><a href="chain.html"><i class="fa fa-file-text"></i> <span>Maintanance</span></a>
-                        <ul class="children">
-                            <li><a href="notfound.html">404 Page</a></li>
-                            <li><a href="blank.html">Blank Page</a></li>
-                            <li><a href="calendar.html">Calendar</a></li>
-                            <li><a href="invoice.html">Invoice</a></li>
-                            <li><a href="locked.html">Locked Screen</a></li>
-                            <li><a href="media-manager.html">Media Manager</a></li>
-                            <li><a href="people-directory.html">People Directory</a></li>
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="search-results.html">Search Results</a></li>
-                            <li><a href="signin.html">Sign In</a></li>
-                            <li><a href="signup.html">Sign Up</a></li>
-                        </ul>
-                    </li>
+                 
                     <li class="parent"><a href="chain.html"><i class="fa fa-file-pdf-o"></i> <span>Reports</span></a>
                         <ul class="children">
                             <li><a href="notfound.html">404 Page</a></li>
@@ -71,9 +57,9 @@
                    
                         </ul>
                     </li>
-                    <li class="parent" id="stockMainMenu"><a href="chain.html"><i class="fa fa-cubes"></i> <span>Payroll</span></a>
+                    <li class="parent" id="payrollMainMenu"><a href="chain.html"><i class="fa fa-cubes"></i> <span>Payroll</span></a>
                         <ul class="children">
-                            <li id="mainStockMenu"><a href="<?php echo base_url('mainstock'); ?>">Main Stock</a></li>
+                            <li id="attendanceMenu"><a href="<?php echo base_url('payroll'); ?>">Attendance</a></li>
                             <li id="finishedProductsMenu"><a href="<?php echo base_url('finalstock'); ?>">Finished Products</a></li>
                            
                         </ul>
