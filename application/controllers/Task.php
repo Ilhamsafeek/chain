@@ -111,7 +111,7 @@ class Task extends Admin_Controller
             $create = $this->model_task->completeTask();
             if ($create == true) {
                
-                $this->session->set_flashdata('success', 'Successfully created');
+                $this->session->set_flashdata('success', 'Successfully Completed');
                 redirect('task', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'Error occurred!!');

@@ -33,18 +33,18 @@
                     <div class="ibox ">
                         <div class="ibox-title">
 
-                          
+
                         </div>
                         <div class="ibox-content">
-                            
-                        <table id="shTable" class="table table-striped table-bordered">
+
+                            <table id="shTable" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
 
                                         <th data-toggle="true">Task</th>
-                                        <th data-hide="phone">Time</th>
+                                        <th data-hide="phone">Start Time</th>
+                                        <th data-hide="phone">End Time</th>
                                         <th data-hide="all">Ingredients</th>
-                                        <th data-hide="phone">Price</th>
                                         <th data-hide="phone,tablet">Production</th>
                                         <th data-hide="phone">Status</th>
                                         <th class="text-right" data-sort-ignore="true">Action</th>
@@ -65,12 +65,12 @@
                                                     } else if ($v['task_info']['status'] == 'progress') { ?>
                                                         <p><?php echo $v['task_info']['date_time_issued']; ?></p>
 
-                                                    <?php
 
-                                                    } else { ?>
-                                                        <p><?php echo $v['task_info']['date_time_completed']; ?></p>
                                                     <?php } ?>
 
+                                                </td>
+                                                <td>
+                                                    <p><?php echo $v['task_info']['date_time_completed']; ?></p>
                                                 </td>
                                                 <td>
                                                     <?php if ($v['task_info']['ingredients']) : ?>
@@ -79,9 +79,7 @@
                                                         <?php endforeach ?>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td>
-                                                    $50.00
-                                                </td>
+
                                                 <td>
                                                     <?php if ($v['task_info']['production']) : ?>
                                                         <?php foreach (json_decode($v['task_info']['production'], true) as $ki => $vi) : ?>
@@ -104,15 +102,39 @@
                                                 <td class="text-right">
                                                     <div class="btn-group">
                                                         <button class="btn-white btn btn-xs">View</button>
-                                                        <button class="btn-white btn btn-xs"><i class="fa fa-trash"></i> Delete</button>
+                                                        <button class="btn-white btn btn-xs" data-toggle="modal" data-target="#deleteModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash"></i> Delete</button>
                                                     </div>
                                                 </td>
                                             </tr>
+
+                                            <div class="modal inmodal fade" id="deleteModal<?php echo $v['task_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                            <h4>Delete Confirmation</h4>
+                                                        </div>
+                                                        <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
+                                                            <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
+                                                            <div class="modal-body">
+                                                                <p><strong>Do you really want to delete?</strong></p>
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                                <button type="submit" class="btn btn-primary">Yes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         <?php endforeach ?>
                                     <?php endif; ?>
 
                                 </tbody>
-                                
+
                             </table>
 
 
