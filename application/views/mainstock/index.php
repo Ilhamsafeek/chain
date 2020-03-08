@@ -48,19 +48,24 @@
                                 <div class="col-lg-10"><input type="text" id="name" name="name" placeholder="Material Name" class="form-control" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="form-group row"> <label class="col-lg-2 col-form-label">Type</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control" id="type" name="type">
-                                        <option value="">Select type</option>
+                            <div class="row">
+                                
+                            <div class="form-group"> 
+                                <label class="col-lg-2 col-form-label">Type</label>
+                                <div class="col-md-10">
+                                    <select class="select_group" id="type" name="type" data-placeholder="Choose Type" style="width:100%;">
+                                        <option value=""></option>
                                         <option value="Raw Material">Raw Material</option>
                                         <option value="Packing Material">Packing Material</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row"><label class="col-lg-2 col-form-label">Unit</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control" id="type" name="unit">
-                                        <option value="">Select Unit</option>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label">Unit</label>
+                                <div class="col-md-10">
+                                    <select class="select_group" id="type" name="unit" data-placeholder="Choose Unit" style="width:100%;">
+                                        <option value=""></option>
                                         <option value="Kg">Kg</option>
                                         <option value="g">g</option>
                                         <option value="mg">mg</option>

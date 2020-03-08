@@ -143,7 +143,7 @@
             </div>
 
 
-            <div class="box-footer">
+            <div class="modal-footer">
               <button type="submit" class="btn btn-success">Create user</button>
               <a href="<?php echo base_url('users/') ?>" class="btn btn-warning">Back</a>
             </div>

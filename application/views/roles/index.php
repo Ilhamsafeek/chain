@@ -62,11 +62,13 @@
                                                 <p>
                                                     <?php 
                                                    
-                                                   
+                                                   if ($v['permission']!="N;") {
+                                                     
+                                                 
                                                    foreach (unserialize($v['permission']) as $value) {?>
                                                         <span class="label label-default"><?php echo $value; ?></span>
                                                        
-                                                   <?php } ?>
+                                                   <?php }   } ?>
                                                     
                                                 </p>
                                                 

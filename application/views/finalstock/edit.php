@@ -102,7 +102,7 @@
               </div>
               <!-- /.box-body -->
 
-              <div class="box-footer">
+              <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
                 <a href="<?php echo base_url('products/') ?>" class="btn btn-warning">Back</a>
               </div>

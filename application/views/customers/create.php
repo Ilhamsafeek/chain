@@ -9,7 +9,7 @@
           <li><a href="chain.html"><i class="glyphicon glyphicon-home"></i></a></li>
           <li>Profiles</li>
         </ul>
-        <h4>Creare Customer</h4>
+        <h4>Create Customer</h4>
       </div>
     </div><!-- media -->
   </div><!-- pageheader -->
@@ -70,7 +70,7 @@
 
 
 
-            <div class="box-footer">
+            <div class="modal-footer">
               <button type="submit" class="btn btn-success">Create Customer</button>
               <a href="<?php echo base_url('customers/') ?>" class="btn btn-warning">Back</a>
             </div>

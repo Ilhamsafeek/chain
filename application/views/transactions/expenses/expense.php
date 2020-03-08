@@ -76,7 +76,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label" for="description">Payee</label>
                                         <select class="select_group product" data-placeholder="Choose Supplier" data-placeholder="Choose Item" id="supplier" name="supplier" style="width:100%;">
-                                            <?php foreach ($supplier_data as $k => $v) : ?>
+                                           <option value=""></option>
+                                        <?php foreach ($supplier_data as $k => $v) : ?>
                                                 <option value="<?php echo $v['name'] ?>" placeholder="Choose supplier"><?php echo $v['name'] ?></option>
                                             <?php endforeach ?>
                                         </select>
@@ -121,7 +122,7 @@
                         </div>
 
                     </form>
-                  
+
 
                 </div>
             </div>

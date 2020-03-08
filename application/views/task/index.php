@@ -250,7 +250,7 @@
                                                                                     <tbody>
                                                                                         <tr id="row_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
                                                                                             <td>
-                                                                                                <select class="form-control select_group product" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" required>
+                                                                                                <select class="select_group product" data-placeholder="Choose Material" data-row-id="row_1" id="product_1" name="product[]" style="width:100%;" required>
                                                                                                     <option value=""></option>
                                                                                                     <?php foreach ($products as $k => $val) : ?>
                                                                                                         <option value="<?php echo $val['name'] ?>"><?php echo $val['name'] ?></option>
@@ -283,7 +283,7 @@
                                                                                     <tbody>
                                                                                         <tr id="materialrow_<?php echo $v['task_info']['id']; ?>_1" name="<?php echo $v['task_info']['id']; ?>">
                                                                                             <td>
-                                                                                                <select class="form-control select_group return_material" data-row-id="row_1" id="returnmaterial_1" name="returnmaterial[]" style="width:100%;">
+                                                                                                <select class="select_group return_material" data-placeholder="Choose Material" data-row-id="row_1" id="returnmaterial_1" name="returnmaterial[]" style="width:100%;">
                                                                                                     <option value=""></option>
                                                                                                     <?php foreach ($materials as $k => $value) : ?>
                                                                                                         <option value="<?php echo $value['name'] ?>"><?php echo $value['name'] ?></option>
@@ -473,7 +473,7 @@
                                                             <tbody>
                                                                 <tr id="row_1">
                                                                     <td>
-                                                                        <select class="form-control select_group material" data-row-id="row_1" id="material_1" name="material[]" style="width:100%;" required>
+                                                                        <select class="select_group material" data-placeholder="Choose Material"  data-row-id="row_1" id="material_1" name="material[]" style="width:100%;" required>
                                                                             <option value=""></option>
                                                                             <?php foreach ($materials as $k => $v) : ?>
                                                                                 <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
@@ -519,6 +519,8 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $(".select_group").select2();
+
             $("#manufacturingMainMenu").addClass('active');
             $("#taskMenu").addClass('active');
 
@@ -541,7 +543,7 @@
 
                         var html = '<tr id="row_' + row_id + '">' +
                             '<td>' +
-                            '<select class="form-control select_group material" data-row-id="' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;" >' +
+                            '<select class="select_group material" data-placeholder="Choose Material" data-row-id="' + row_id + '" id="material_' + row_id + '" name="material[]" style="width:100%;" >' +
                             '<option value=""></option>';
                         $.each(response, function(index, value) {
                             html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -559,7 +561,7 @@
                             $("#material_info_table tbody").html(html);
                         }
 
-
+                        $("#material_" + row_id).select2();
                     }
                 });
             })
@@ -583,7 +585,7 @@
 
                         var html = '<tr id="materialrow_' + row_name + '_' + row_index + '" name="' + row_name + '">' +
                             '<td>' +
-                            '<select class="form-control select_group return_material" data-row-id="' + row_index + '" id="returnmaterial_' + row_index + '" name="returnmaterial[]" style="width:100%;" >' +
+                            '<select class="select_group return_material" data-placeholder="Choose Material" data-row-id="' + row_index + '" id="returnmaterial_' + row_index + '" name="returnmaterial[]" style="width:100%;" >' +
                             '<option value=""></option>';
                         $.each(response, function(index, value) {
                             html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -600,7 +602,7 @@
                         } else {
                             $("#return_material_info_table tbody").html(html);
                         }
-
+                        $("#returnmaterial_" + row_index).select2();
 
                     }
                 });
@@ -624,7 +626,7 @@
 
                         var html = '<tr id="row_' + row_name + '_' + row_index + '" name="' + row_name + '">' +
                             '<td>' +
-                            '<select class="form-control select_group product" data-row-id="' + row_index + '" id="product_' + row_index + '" name="product[]" style="width:100%;" >' +
+                            '<select class="select_group product" data-placeholder="Choose Material" data-row-id="' + row_index + '" id="product_' + row_index + '" name="product[]" style="width:100%;" >' +
                             '<option value=""></option>';
                         $.each(response, function(index, value) {
                             html += '<option value="' + value.name + '">' + value.name + '</option>';
@@ -643,7 +645,7 @@
                             $("#product_info_table tbody").html(html);
                         }
 
-
+                        $("#product_" + row_index).select2();
                     }
                 });
             })

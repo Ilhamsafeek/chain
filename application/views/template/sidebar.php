@@ -18,7 +18,7 @@
                             <li id="userMenu"><a href="<?php echo base_url('users'); ?>">Users</a></li>
                             <li id="suppliersMenu"><a href="<?php echo base_url('suppliers'); ?>">Suppliers</a></li>
                             <li id="customersMenu"><a href="<?php echo base_url('customers'); ?>">Customers</a></li>
-                            <li id="employeesMenu"><a href="extras.html">Employees</a></li>
+                            <li id="employeesMenu"><a href="<?php echo base_url('employees'); ?>">Employees</a></li>
 
                         </ul>
                     </li>

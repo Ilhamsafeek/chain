@@ -55,8 +55,8 @@
 
                             <div class="form-group row"><label class="col-lg-2 col-form-label">Unit</label>
                                 <div class="col-lg-10">
-                                    <select class="form-control" id="type" name="unit">
-                                        <option value="">Select Unit</option>
+                                    <select class="select_group" id="type" name="unit" data-placeholder="Choose Unit" style="width:100%;">
+                                        <option value=""></option>
                                         <option value="Kg">Kg</option>
                                         <option value="g">g</option>
                                         <option value="mg">mg</option>

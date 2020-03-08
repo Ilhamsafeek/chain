@@ -119,13 +119,10 @@
 
 
 
-
-
-
             </div>
             <!-- /.box-body -->
 
-            <div class="box-footer">
+            <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
           </form>
