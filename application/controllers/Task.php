@@ -67,31 +67,32 @@ class Task extends Admin_Controller
     {
         $response = array();
 
-        $this->form_validation->set_rules('description', 'Description', 'trim|required');
-        $this->form_validation->set_rules('material[]', 'Material Name', 'trim|required');
-        $this->form_validation->set_rules('qty[]', 'Quantity', 'trim|required');
+        // $this->form_validation->set_rules('description', 'Description', 'trim|required');
+        // $this->form_validation->set_rules('material[]', 'Material Name', 'trim|required');
+        // $this->form_validation->set_rules('qty[]', 'Quantity', 'trim|required');
 
-        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+        // $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-        if ($this->form_validation->run() == TRUE) {
+        // if ($this->form_validation->run() == TRUE) {
 
             $create = $this->model_task->createTask();
             if ($create == true) {
-                $response['success'] = true;
-                $response['messages'] = 'Succesfully created';
+               
+                $this->session->set_flashdata('success', 'Successfully created');
+                redirect('task', 'refresh');
             } else {
-                $response['success'] = false;
-                $response['messages'] = 'Error in the database while creating the brand information';
+                $this->session->set_flashdata('error', 'Error occurred!!');
+                redirect('task', 'refresh');
             }
-        } else {
-            $response['success'] = false;
-            foreach ($_POST as $key => $value) {
-                $response['messages'][$key] = form_error($key);
-            }
+        // } else {
+        //     $response['success'] = false;
+        //     foreach ($_POST as $key => $value) {
+        //         $response['messages'][$key] = form_error($key);
+        //     }
         }
 
-        echo json_encode($response);
-    }
+       
+    
 
 
 

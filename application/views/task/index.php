@@ -56,7 +56,12 @@
                                                         <div class="panel panel-primary widget-messaging">
                                                             <div class="panel-heading">
                                                                 <div class="pull-right">
-                                                                    <a style="color:white" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
+
+                                                                    <div class="panel-btns">
+                                                                        <a href="chain.html" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>&nbsp&nbsp
+                                                                        <a style="color:white" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
+                                                                    </div><!-- panel-btns -->
+
                                                                 </div><!-- pull-right -->
                                                                 <h3 class="panel-title"><?php echo $v['task_info']['description']; ?></h3>
                                                             </div>
@@ -89,17 +94,14 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                        <h3>Issue Confirmation</h3>
+                                                                        <h4>Issue Confirmation</h4>
                                                                     </div>
                                                                     <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
                                                                         <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
                                                                         <input type="hidden" name="status" value="progress">
-                                                                        <div class="modal-body">
-                                                                            <p><strong>Do you really want to issue the ingredients?</strong></p>
-                                                                        </div>
 
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-white" data-dismiss="modal">Discard</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Discard</button>
                                                                             <button type="submit" class="btn btn-primary">Issue</button>
                                                                         </div>
                                                                     </form>
@@ -112,7 +114,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                        <h3>Delete Confirmation</h3>
+                                                                        <h4>Delete Confirmation</h4>
                                                                     </div>
                                                                     <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
                                                                         <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
@@ -153,8 +155,11 @@
                                                         <div class="panel panel-warning widget-messaging">
                                                             <div class="panel-heading">
                                                                 <div class="pull-right">
-                                                                    <a href="#" data-toggle="modal" data-target="#revertModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply" aria-hidden="true"></i></a>&nbsp&nbsp
-                                                                    <a href="#" data-toggle="modal" data-target="#deleteProgressModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
+                                                                    <div class="panel-btns">
+                                                                        <a href="chain.html" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>&nbsp&nbsp
+                                                                        <a href="#" data-toggle="modal" data-target="#revertModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply" aria-hidden="true"></i></a>
+                                                                        <a href="#" data-toggle="modal" data-target="#deleteProgressModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-trash-o "></i></a>
+                                                                    </div>
                                                                 </div><!-- pull-right -->
                                                                 <h3 class="panel-title"><?php echo $v['task_info']['description']; ?></h3>
                                                             </div>
@@ -186,7 +191,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                        <h3>Delete Confirmation</h3>
+                                                                        <h4>Delete Confirmation</h4>
                                                                     </div>
                                                                     <form role="form" action="<?php echo base_url('task/deletetask') ?>" method="post" id="issueForm">
                                                                         <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
@@ -208,7 +213,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                        <h3>Revert Confirmation</h3>
+                                                                        <h4>Revert Confirmation</h4>
                                                                     </div>
                                                                     <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
                                                                         <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
@@ -231,7 +236,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                        <h3>Record Final Production</h3>
+                                                                        <h4>Record Final Production</h4>
                                                                     </div>
 
                                                                     <form role="form" id="finalRecordForm" action="<?php echo base_url('task/completetask') ?>" method="post">
@@ -341,8 +346,10 @@
                                                         <div class="panel panel-success widget-messaging">
                                                             <div class="panel-heading">
                                                                 <div class="pull-right">
-                                                                    <a style="color:white" href="#" data-toggle="modal" data-target="#revertCompletedModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply"></i></a>
-
+                                                                    <div class="panel-btns">
+                                                                        <a href="chain.html" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>&nbsp&nbsp
+                                                                        <a href="#" data-toggle="modal" data-target="#revertCompletedModal<?php echo $v['task_info']['id']; ?>"><i class="fa fa-reply"></i></a>
+                                                                    </div><!-- panel-btns -->
                                                                 </div><!-- pull-right -->
                                                                 <h3 class="panel-title"><?php echo $v['task_info']['description']; ?></h3>
                                                             </div>
@@ -411,7 +418,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                        <h3>Revert Confirmation</h3>
+                                                                        <h4>Revert Confirmation</h4>
                                                                     </div>
                                                                     <form role="form" action="<?php echo base_url('task/updatetask') ?>" method="post" id="issueForm">
                                                                         <input type="hidden" name="task_id" value="<?php echo $v['task_info']['id']; ?>">
@@ -456,7 +463,7 @@
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
                                                                 <label class="col-form-label" for="description">Description</label>
-                                                                <input type="text" id="description" name="description" value="" placeholder="Description" class="form-control">
+                                                                <input type="text" id="description" name="description" value="" placeholder="Description" class="form-control" required>
                                                             </div>
                                                         </div>
 
@@ -473,7 +480,7 @@
                                                             <tbody>
                                                                 <tr id="row_1">
                                                                     <td>
-                                                                        <select class="select_group material" data-placeholder="Choose Material"  data-row-id="row_1" id="material_1" name="material[]" style="width:100%;" required>
+                                                                        <select class="select_group material" data-placeholder="Choose Material" data-row-id="row_1" id="material_1" name="material[]" style="width:100%;" required>
                                                                             <option value=""></option>
                                                                             <?php foreach ($materials as $k => $v) : ?>
                                                                                 <option value="<?php echo $v['name'] ?>"><?php echo $v['name'] ?></option>
