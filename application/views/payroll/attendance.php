@@ -21,9 +21,9 @@
         <?php echo $this->session->flashdata('success'); ?>
       </div>
     <?php elseif ($this->session->flashdata('error')) : ?>
-      <div class="alert alert-error alert-dismissible" role="alert">
+      <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <?php echo $this->session->flashdata('error'); ?>
+        <?php var_dump( $this->session->flashdata('error')); ?>
       </div>
     <?php endif; ?>
 
@@ -159,7 +159,7 @@
                         <h4 class="modal-title"><b>Add Attendance</b></h4>
                       </div>
                       <div class="modal-body">
-                        <form class="form-horizontal" method="POST" action="attendance_add.php">
+                        <form class="form-horizontal" method="POST" action="<?php echo base_url('payroll/createAttendance'); ?>">
                           <div class="form-group">
                             <label for="employee" class="col-sm-3 control-label">Employee ID</label>
 
@@ -321,39 +321,41 @@
   });
 
   $(function() {
-      $('.edit').click(function(e) {
-        e.preventDefault();
-        $('#edit').modal('show');
-        var id = $(this).data('id');
-        getRow(id);
-      });
-
-      $('.delete').click(function(e) {
-        e.preventDefault();
-        $('#delete').modal('show');
-        var id = $(this).data('id');
-        getRow(id);
-      });
+    $('.edit').click(function(e) {
+      e.preventDefault();
+      $('#edit').modal('show');
+      var id = $(this).data('id');
+      getRow(id);
     });
 
-    
-function getRow(id){
-  var base_url = "<?php echo base_url(); ?>";
-  $.ajax({
-    type: 'POST',
-    url: base_url + '/payroll/attendanceById/',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('#datepicker_edit').val(response.date);
-      $('#attendance_date').html(response.date);
-      $('#edit_time_in').val(response.time_in);
-      $('#edit_time_out').val(response.time_out);
-      $('#attid').val(response.attid);
-      $('#employee_name').html(response.name);
-      $('#del_attid').val(response.attid);
-      $('#del_employee_name').html(response.name);
-    }
+    $('.delete').click(function(e) {
+      e.preventDefault();
+      $('#delete').modal('show');
+      var id = $(this).data('id');
+      getRow(id);
+    });
   });
-}
+
+
+  function getRow(id) {
+    var base_url = "<?php echo base_url(); ?>";
+    $.ajax({
+      type: 'POST',
+      url: base_url + '/payroll/attendanceById/',
+      data: {
+        id: id
+      },
+      dataType: 'json',
+      success: function(response) {
+        $('#datepicker_edit').val(response.date);
+        $('#attendance_date').html(response.date);
+        $('#edit_time_in').val(response.time_in);
+        $('#edit_time_out').val(response.time_out);
+        $('#attid').val(response.attid);
+        $('#employee_name').html(response.name);
+        $('#del_attid').val(response.attid);
+        $('#del_employee_name').html(response.name);
+      }
+    });
+  }
 </script>

@@ -22,26 +22,92 @@ class Model_payroll extends CI_Model
 
 	public function getAttendanceById($id)
 	{
-		if(isset($_POST['id'])){
-			$id = $_POST['id'];
-			$sql = "SELECT *, attendance.id as attid FROM attendance LEFT JOIN employees ON employees.emp_id=attendance.employee_id WHERE attendance.id = '$id'";
-			$query = $this->db->query($sql);
-			return $query->row_array();
-	
-		
-		}
+
+		$sql = "SELECT *, attendance.id as attid FROM attendance LEFT JOIN employees ON employees.emp_id=attendance.employee_id WHERE attendance.id = '$id'";
+		$query = $this->db->query($sql);
+		return $query->row_array();
 	}
 
-	public function create($data = '')
+	public function searchAttendanceById($emp_id, $date)
 	{
 
-		if ($data) {
-			$create = $this->db->insert('employees', $data);
-			$this->db->insert_id();
+		$sql = "SELECT * FROM attendance WHERE employee_id = '$emp_id' AND date = '$date'";
+		$query = $this->db->query($sql);
+		return $query->row_array();
+	}
+
+	public function createAttendance($schedule_id)
+	{
+		$employee = $_POST['employee'];
+		$date = $_POST['date'];
+		$time_in = $_POST['time_in'];
+		$time_in = date('H:i:s', strtotime($time_in));
+		$time_out = $_POST['time_out'];
+		$time_out = date('H:i:s', strtotime($time_out));
 
 
-			return ($create == true) ? true : false;
+		$sql = "SELECT * FROM schedules WHERE id = ?";
+		$query = $this->db->query($sql, array($schedule_id));
+		$scherow = $query->row_array();
+
+		$logstatus = ($time_in > $scherow['time_in']) ? 0 : 1;
+
+		$id = $this->db->insert_id();
+    	$data = array(
+
+            'employee_id' => $employee,
+            'date' => $date,
+            'time_in' => $time_in,
+            'time_out' => $time_out,
+            'status' => $logstatus,
+            
+    	);
+
+		$insert = $this->db->insert('attendance', $data);
+
+		if ($insert) {
+			
+			$sql = "SELECT * FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id WHERE employees.emp_id = '$employee'";
+			
+			$query = $this->db->query($sql);
+			$srow = $query->row_array();
+
+			if ($srow['time_in'] > $time_in) {
+				$time_in = $srow['time_in'];
+			}
+
+			if ($srow['time_out'] < $time_out) {
+				$time_out = $srow['time_out'];
+			}
+
+			$time_in = new DateTime($time_in);
+			$time_out = new DateTime($time_out);
+			$interval = $time_in->diff($time_out);
+			$hrs = $interval->format('%h');
+			$mins = $interval->format('%i');
+			$mins = $mins / 60;
+			$int = $hrs + $mins;
+			if ($int > 4) {
+				$int = $int - 1;
+			}
+
+			$data2 = array(
+
+				'num_hr' => $int	
+			);
+
+			$this->db->where('id', $id);
+			$update = $this->db->update('attendance', $data2);
+
+			return ($update == true) ? true : false;
 		}
+	}
+	public function searchSceduleById($id)
+	{
+
+		$sql = "SELECT * FROM schedules WHERE id = '$id'";
+		$query = $this->db->query($sql);
+		return $query->row_array();
 	}
 
 	public function edit($data = array(), $id = null)
@@ -84,7 +150,7 @@ class Model_payroll extends CI_Model
 		return $query->num_rows();
 	}
 
-	
+
 	public function lateToday()
 	{
 		$today = date('Y-m-d');

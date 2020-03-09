@@ -54,50 +54,35 @@ class Payroll extends Admin_Controller
 		$this->render_template('payroll/attendance', $this->data);
 	}
 
-	public function create()
+	public function createAttendance()
 	{
 
 		if (!in_array('createUser', $this->permission)) {
 			redirect('dashboard', 'refresh');
 		}
 
-		$this->form_validation->set_rules('roles', 'Role', 'required');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]|is_unique[users.username]');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
-		$this->form_validation->set_rules('cpassword', 'Confirm password', 'trim|required|matches[password]');
-		$this->form_validation->set_rules('fname', 'First name', 'trim|required');
-
-
-		if ($this->form_validation->run() == TRUE) {
-			// true case
-			$password = $this->password_hash($this->input->post('password'));
-			$data = array(
-				'username' => $this->input->post('username'),
-				'password' => $password,
-				'email' => $this->input->post('email'),
-				'firstname' => $this->input->post('fname'),
-				'lastname' => $this->input->post('lname'),
-				'phone' => $this->input->post('phone'),
-				'gender' => $this->input->post('gender'),
-				'role_id' => $this->input->post('roles')
-			);
-
-			$create = $this->model_users->create($data);
-			if ($create == true) {
-				$this->session->set_flashdata('success', 'Successfully created');
-				redirect('users/', 'refresh');
+			
+			$employee = $this->model_employees->getEmployeeData($this->input->post('employee'));
+			if (!$employee) {
+				$this->session->set_flashdata('error', 'Employee not found');
+				redirect('payroll/attendance', 'refresh');
 			} else {
-				$this->session->set_flashdata('errors', 'Error occurred!!');
-				redirect('users/create', 'refresh');
+				$attendance = $this->model_payroll->searchAttendanceById($employee['emp_id'], $this->input->post('date'));
+				if ($attendance) {
+					$this->session->set_flashdata('error', 'Employee attendance for the day exist');
+					redirect('payroll/attendance', 'refresh');
+				} else {
+					$attendance = $this->model_payroll->createAttendance($employee['schedule_id']);
+					if ($attendance == true) {
+						$this->session->set_flashdata('success', 'Successfully created');
+						redirect('payroll/attendance', 'refresh');
+					} else {
+						$this->session->set_flashdata('errors', 'Error occurred!!');
+						redirect('payroll/attendance', 'refresh');
+					}
+				}
 			}
-		} else {
-			// false case
-			$role_data = $this->model_roles->getRoleData();
-			$this->data['role_data'] = $role_data;
-
-			$this->render_template('users/create', $this->data);
-		}
+		
 	}
 
 	public function attendanceById()

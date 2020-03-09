@@ -10,7 +10,7 @@ class Model_employees extends CI_Model
 	public function getEmployeeData($employeeId = null) 
 	{
 		if($employeeId) {
-			$sql = "SELECT * FROM employees WHERE id = ?";
+			$sql = "SELECT * FROM employees WHERE emp_id = ?";
 			$query = $this->db->query($sql, array($employeeId));
 			return $query->row_array();
 		}

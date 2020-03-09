@@ -1,5 +1,5 @@
 
-            <div class="leftpanel" style=" position: fixed; padding-top: 50px;">
+            <div class="leftpanel" style=" position: fixed; top:50px">
                 <div class="media profile-left">
                     <a class="pull-left profile-thumb" href="">
                         <img class="img-circle" src="<?php echo base_url('assets/images/photos-profile.png '); ?>" alt=""></a>
