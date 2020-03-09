@@ -23,7 +23,7 @@
     <?php elseif ($this->session->flashdata('error')) : ?>
       <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <?php var_dump( $this->session->flashdata('error')); ?>
+        <?php var_dump($this->session->flashdata('error')); ?>
       </div>
     <?php endif; ?>
 
@@ -32,73 +32,67 @@
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <?php
 
-              echo "<h3>" . $employee_count . "</h3>";
-              ?>
+          <div class="panel panel-success-alt noborder">
+            <div class="panel-heading noborder">
 
-              <p>Total Employees</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-stalker"></i>
+              <div class="media-body">
+                <h1 class="mt5"><?php echo  $employee_count; ?>
+                  <h5 class="md-title nomargin">Total Employees</h5>
+                </h1>
+              </div>
+
             </div>
           </div>
+
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <?php
+        <div class="panel panel-warning-alt noborder">
+            <div class="panel-heading noborder">
 
-              echo "<h3>" . $ontime_percent . "<sup style='font-size: 20px'>%</sup></h3>";
-              ?>
+          <div class="media-body">
+            <h1 class="mt5"><?php echo  $ontime_percent; ?>
+            <sup style="font-size: 20px">%</sup>
+              <h5 class="md-title nomargin">On Time Percentage</h5>
+              </h1>
+              </div>
 
-              <p>On Time Percentage</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
             </div>
           </div>
+
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <?php
+        <div class="panel panel-default-alt noborder">
+            <div class="panel-heading noborder">
 
-              echo "<h3>" . $ontime_today . "</h3>"
-              ?>
+          <div class="media-body">
+            <h1 class="mt5"><?php echo  $ontime_today; ?>
+              <h5 class="md-title nomargin">On Time Today</h5>
+              </h1>
+              </div>
 
-              <p>On Time Today</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-clock"></i>
             </div>
           </div>
+
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <?php
+        <div class="panel panel-info-alt noborder">
+            <div class="panel-heading noborder">
 
-              echo "<h3>" . $late_today . "</h3>"
-              ?>
+          <div class="media-body">
+            <h1 class="mt5"><?php echo  $late_today; ?>
+              <h5 class="md-title nomargin">Late Today</h5>
+              </h1>
+              </div>
 
-              <p>Late Today</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-alert-circled"></i>
             </div>
           </div>
+
         </div>
-        <!-- ./col -->
+
       </div>
 
 
@@ -149,60 +143,7 @@
                 <?php endif; ?>
 
 
-                <!-- Add -->
-                <div class="modal fade" id="addnew">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><b>Add Attendance</b></h4>
-                      </div>
-                      <div class="modal-body">
-                        <form class="form-horizontal" method="POST" action="<?php echo base_url('payroll/createAttendance'); ?>">
-                          <div class="form-group">
-                            <label for="employee" class="col-sm-3 control-label">Employee ID</label>
 
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" id="employee" name="employee" required>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="datepicker_add" class="col-sm-3 control-label">Date</label>
-
-                            <div class="col-sm-9">
-                              <div class="date">
-                                <input type="text" class="form-control" id="datepicker_add" name="date" autocomplete="off" required>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="time_in" class="col-sm-3 control-label">Time In</label>
-
-                            <div class="col-sm-9">
-                              <div class="bootstrap-timepicker">
-                                <input type="text" class="form-control timepicker" id="time_in" name="time_in">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="time_out" class="col-sm-3 control-label">Time Out</label>
-
-                            <div class="col-sm-9">
-                              <div class="bootstrap-timepicker">
-                                <input type="text" class="form-control timepicker" id="time_out" name="time_out">
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
                 <!-- Edit -->
                 <div class="modal fade" id="edit">
@@ -293,22 +234,73 @@
           <img src="https://plugin.intuitcdn.net/transactions-list-ui/3.21.10/images/1369e3744cf993faa355b5f7f4833b1a.svg" width="200px">
         </div>
         <div class="row text-center">
-          <h2><strong>Add a new user to manage your activities under roles</strong></h2>
+          <h2><strong>Mark Attendance to Manage Payroll system</strong></h2>
         </div>
         <div class="row">
-          <a href="<?php echo base_url('users/create') ?>" class="btn btn-primary btn-md"><i class="fa fa-plus"></i> Create new user</a>
+          <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-md"><i class="fa fa-plus"></i> Mark Attendance</a>
         </div>
       </div>
     <?php } ?>
 
+    <!-- Add -->
+    <div class="modal fade" id="addnew">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><b>Add Attendance</b></h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('payroll/createAttendance'); ?>">
+              <div class="form-group">
+                <label for="employee" class="col-sm-3 control-label">Employee ID</label>
 
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="employee" name="employee" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="datepicker_add" class="col-sm-3 control-label">Date</label>
 
+                <div class="col-sm-9">
+                  <div class="date">
+                    <input type="text" class="form-control" id="datepicker_add" name="date" autocomplete="off" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="time_in" class="col-sm-3 control-label">Time In</label>
 
+                <div class="col-sm-9">
+                  <div class="bootstrap-timepicker">
+                    <input type="text" class="form-control timepicker" id="time_in" name="time_in">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="time_out" class="col-sm-3 control-label">Time Out</label>
 
+                <div class="col-sm-9">
+                  <div class="bootstrap-timepicker">
+                    <input type="text" class="form-control timepicker" id="time_out" name="time_out">
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div><!-- contentpanel -->
 </div><!-- mainpanel -->
 </div><!-- mainwrapper -->
+
 </section>
 
 

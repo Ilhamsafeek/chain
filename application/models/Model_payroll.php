@@ -201,9 +201,10 @@ class Model_payroll extends CI_Model
 		$sql = "SELECT * FROM attendance WHERE status = 1";
 		$query = $this->db->query($sql);
 		$early = $query->num_rows;
-
+		$percentage=0;
+		if($percentage!=0){
 		$percentage = ($early / $total) * 100;
-
+		}
 		return number_format($percentage, 2);
 	}
 
