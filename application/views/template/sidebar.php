@@ -60,7 +60,7 @@
                     <li class="parent" id="payrollMainMenu"><a href="chain.html"><i class="fa fa-cubes"></i> <span>Payroll</span></a>
                         <ul class="children">
                             <li id="attendanceMenu"><a href="<?php echo base_url('payroll/attendance'); ?>">Attendance</a></li>
-                            <li id="finishedProductsMenu"><a href="<?php echo base_url('finalstock'); ?>">Finished Products</a></li>
+                            <li id="summaryMenu"><a href="<?php echo base_url('payroll/summary'); ?>">Summary</a></li>
                            
                         </ul>
                     </li>

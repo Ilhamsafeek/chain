@@ -125,15 +125,15 @@ class Model_payroll extends CI_Model
 			'date' => $date,
 			'time_in' => $time_in,
 			'time_out' => $time_out,
-			
+
 		);
 
-	
+
 		$this->db->where('id', $id);
 		$update = $this->db->update('attendance', $data);
-		
+
 		if ($update) {
-			
+
 			$sql = "SELECT * FROM attendance WHERE id = '$id'";
 			$query = $this->db->query($sql);
 			$row = $query->row_array();
@@ -142,7 +142,7 @@ class Model_payroll extends CI_Model
 			$sql = "SELECT * FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id WHERE employees.emp_id = '$emp'";
 			$query = $this->db->query($sql);
 			$srow = $query->row_array();
-			
+
 			//updates
 			$logstatus = ($time_in > $srow['time_in']) ? 0 : 1;
 			//
@@ -166,22 +166,20 @@ class Model_payroll extends CI_Model
 				$int = $int - 1;
 			}
 
-			
+
 			$data2 = array(
 
 				'num_hr' => $int,
 				'status' => $logstatus,
-				
+
 			);
 
 			$this->db->where('id', $id);
 			$update = $this->db->update('attendance', $data2);
 			return ($update == true) ? true : false;
-		} 
-		
-
-		
+		}
 	}
+
 
 	public function deleteAttendance($id)
 	{
@@ -201,9 +199,9 @@ class Model_payroll extends CI_Model
 		$sql = "SELECT * FROM attendance WHERE status = 1";
 		$query = $this->db->query($sql);
 		$early = $query->num_rows;
-		$percentage=0;
-		if($percentage!=0){
-		$percentage = ($early / $total) * 100;
+		$percentage = 0;
+		if ($percentage != 0) {
+			$percentage = ($early / $total) * 100;
 		}
 		return number_format($percentage, 2);
 	}
@@ -225,4 +223,23 @@ class Model_payroll extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
+
+
+	public function getDeduction()
+	{
+
+		$sql = "SELECT *, SUM(amount) as total_amount FROM deductions";
+		$query = $this->db->query($sql);
+		
+		return $query->row_array()['total_amount'];
+	}
+
+
+	public function getPayrollDeltails(){
+
+		
+
+	}
+
+
 }

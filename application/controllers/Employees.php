@@ -97,7 +97,6 @@ class Employees extends Admin_Controller
 
 		if ($id) {
 			$this->form_validation->set_rules('name', 'Name', 'trim|required');
-			$this->form_validation->set_rules('address', 'Address', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required');
 			$this->form_validation->set_rules('phone', 'Phone', 'trim|required|min_length[10]');
 

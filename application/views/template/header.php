@@ -9,7 +9,8 @@
     <title>Chain The powerful ERP</title>
     <link href="<?php echo base_url('assets/css/style.default.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/morris.css'); ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/bootstrap-timepicker.min.css'); ?>" rel="stylesheet">    <link href="<?php echo base_url('assets/css/select2.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/bootstrap-timepicker.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/select2.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/animate.delay.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap-override.css'); ?>" rel="stylesheet">
@@ -22,6 +23,8 @@
     <link href="<?php echo base_url('assets/css/style.datatables.css'); ?>" rel="stylesheet">
     <link href="//cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css" rel="stylesheet">
 
+
+    <script src="<?php echo base_url('assets/js/daterangepicker.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-migrate-1.2.1.min.js'); ?>"></script>
