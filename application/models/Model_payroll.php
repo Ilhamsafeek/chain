@@ -53,22 +53,22 @@ class Model_payroll extends CI_Model
 		$logstatus = ($time_in > $scherow['time_in']) ? 0 : 1;
 
 		$id = $this->db->insert_id();
-    	$data = array(
+		$data = array(
 
-            'employee_id' => $employee,
-            'date' => $date,
-            'time_in' => $time_in,
-            'time_out' => $time_out,
-            'status' => $logstatus,
-            
-    	);
+			'employee_id' => $employee,
+			'date' => $date,
+			'time_in' => $time_in,
+			'time_out' => $time_out,
+			'status' => $logstatus,
+
+		);
 
 		$insert = $this->db->insert('attendance', $data);
 
 		if ($insert) {
-			
+
 			$sql = "SELECT * FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id WHERE employees.emp_id = '$employee'";
-			
+
 			$query = $this->db->query($sql);
 			$srow = $query->row_array();
 
@@ -93,7 +93,7 @@ class Model_payroll extends CI_Model
 
 			$data2 = array(
 
-				'num_hr' => $int	
+				'num_hr' => $int
 			);
 
 			$this->db->where('id', $id);
@@ -110,12 +110,77 @@ class Model_payroll extends CI_Model
 		return $query->row_array();
 	}
 
-	public function edit($data = array(), $id = null)
+	public function editAttendance()
 	{
-		$this->db->where('id', $id);
-		$update = $this->db->update('employees', $data);
 
-		return ($update == true) ? true : false;
+
+		$id = $_POST['id'];
+		$date = $_POST['edit_date'];
+		$time_in = $_POST['edit_time_in'];
+		$time_in = date('H:i:s', strtotime($time_in));
+		$time_out = $_POST['edit_time_out'];
+		$time_out = date('H:i:s', strtotime($time_out));
+		$data = array(
+
+			'date' => $date,
+			'time_in' => $time_in,
+			'time_out' => $time_out,
+			
+		);
+
+	
+		$this->db->where('id', $id);
+		$update = $this->db->update('attendance', $data);
+		
+		if ($update) {
+			
+			$sql = "SELECT * FROM attendance WHERE id = '$id'";
+			$query = $this->db->query($sql);
+			$row = $query->row_array();
+			$emp = $row['employee_id'];
+
+			$sql = "SELECT * FROM employees LEFT JOIN schedules ON schedules.id=employees.schedule_id WHERE employees.emp_id = '$emp'";
+			$query = $this->db->query($sql);
+			$srow = $query->row_array();
+			
+			//updates
+			$logstatus = ($time_in > $srow['time_in']) ? 0 : 1;
+			//
+
+			if ($srow['time_in'] > $time_in) {
+				$time_in = $srow['time_in'];
+			}
+
+			if ($srow['time_out'] < $time_out) {
+				$time_out = $srow['time_out'];
+			}
+
+			$time_in = new DateTime($time_in);
+			$time_out = new DateTime($time_out);
+			$interval = $time_in->diff($time_out);
+			$hrs = $interval->format('%h');
+			$mins = $interval->format('%i');
+			$mins = $mins / 60;
+			$int = $hrs + $mins;
+			if ($int > 4) {
+				$int = $int - 1;
+			}
+
+			
+			$data2 = array(
+
+				'num_hr' => $int,
+				'status' => $logstatus,
+				
+			);
+
+			$this->db->where('id', $id);
+			$update = $this->db->update('attendance', $data2);
+			return ($update == true) ? true : false;
+		} 
+		
+
+		
 	}
 
 	public function deleteAttendance($id)

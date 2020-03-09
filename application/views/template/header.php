@@ -9,7 +9,7 @@
     <title>Chain The powerful ERP</title>
     <link href="<?php echo base_url('assets/css/style.default.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/morris.css'); ?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/select2.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/bootstrap-timepicker.min.css'); ?>" rel="stylesheet">    <link href="<?php echo base_url('assets/css/select2.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/animate.delay.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/animate.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap-override.css'); ?>" rel="stylesheet">
@@ -37,6 +37,7 @@
     <script src="<?php echo base_url('assets/js/morris.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/raphael-2.1.0.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-wizard.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap-timepicker.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/select2.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/custom.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/dashboard.js'); ?>"></script>

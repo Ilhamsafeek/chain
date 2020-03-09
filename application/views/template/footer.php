@@ -1,6 +1,20 @@
 <script>
     jQuery(document).ready(function() {
+        //Date picker
+        $('#datepicker_add').datepicker({
+            autoclose: true,
+            dateFormat: 'yy-mm-dd'
+        })
+        $('#datepicker_edit').datepicker({
+            autoclose: true,
+            dateFormat: 'yy-mm-dd'
+        })
 
+        //Timepicker
+
+        $('.timepicker').timepicker({
+            showInputs: false
+        })
 
         var shTable = jQuery('#shTable').DataTable({
             "fnDrawCallback": function(oSettings) {
@@ -16,6 +30,7 @@
 
         // Date Picker
         jQuery('#datepicker').datepicker({
+            autoclose: true,
             dateFormat: 'dd/mm/yy',
 
         });

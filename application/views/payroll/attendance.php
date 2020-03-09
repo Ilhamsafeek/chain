@@ -172,7 +172,7 @@
 
                             <div class="col-sm-9">
                               <div class="date">
-                                <input type="text" class="form-control" id="datepicker_add" name="date" required>
+                                <input type="text" class="form-control" id="datepicker_add" name="date" autocomplete="off" required>
                               </div>
                             </div>
                           </div>
@@ -214,14 +214,14 @@
                         <h4 class="modal-title"><b><span id="employee_name"></span></b></h4>
                       </div>
                       <div class="modal-body">
-                        <form class="form-horizontal" method="POST" action="attendance_edit.php">
+                        <form class="form-horizontal" method="POST" action="<?php echo base_url('payroll/editAttendance'); ?>">
                           <input type="hidden" id="attid" name="id">
                           <div class="form-group">
                             <label for="datepicker_edit" class="col-sm-3 control-label">Date</label>
 
                             <div class="col-sm-9">
                               <div class="date">
-                                <input type="text" class="form-control" id="datepicker_edit" name="edit_date">
+                                <input type="text" class="form-control" id="datepicker_edit" name="edit_date" autocomplete="off">
                               </div>
                             </div>
                           </div>

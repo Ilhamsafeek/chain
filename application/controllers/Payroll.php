@@ -61,27 +61,45 @@ class Payroll extends Admin_Controller
 			redirect('dashboard', 'refresh');
 		}
 
-			
-			$employee = $this->model_employees->getEmployeeData($this->input->post('employee'));
-			if (!$employee) {
-				$this->session->set_flashdata('error', 'Employee not found');
+
+		$employee = $this->model_employees->getEmployeeData($this->input->post('employee'));
+		if (!$employee) {
+			$this->session->set_flashdata('error', 'Employee not found');
+			redirect('payroll/attendance', 'refresh');
+		} else {
+			$attendance = $this->model_payroll->searchAttendanceById($employee['emp_id'], $this->input->post('date'));
+			if ($attendance) {
+				$this->session->set_flashdata('error', 'Employee attendance for the day exist');
 				redirect('payroll/attendance', 'refresh');
 			} else {
-				$attendance = $this->model_payroll->searchAttendanceById($employee['emp_id'], $this->input->post('date'));
-				if ($attendance) {
-					$this->session->set_flashdata('error', 'Employee attendance for the day exist');
+				$attendance = $this->model_payroll->createAttendance($employee['schedule_id']);
+				if ($attendance == true) {
+					$this->session->set_flashdata('success', 'Successfully created');
 					redirect('payroll/attendance', 'refresh');
 				} else {
-					$attendance = $this->model_payroll->createAttendance($employee['schedule_id']);
-					if ($attendance == true) {
-						$this->session->set_flashdata('success', 'Successfully created');
-						redirect('payroll/attendance', 'refresh');
-					} else {
-						$this->session->set_flashdata('errors', 'Error occurred!!');
-						redirect('payroll/attendance', 'refresh');
-					}
+					$this->session->set_flashdata('errors', 'Error occurred!!');
+					redirect('payroll/attendance', 'refresh');
 				}
 			}
+		}
+	}
+
+	public function editAttendance()
+	{
+
+		if (!in_array('createUser', $this->permission)) {
+			redirect('dashboard', 'refresh');
+		}
+
+		$attendance = $this->model_payroll->editAttendance();
+		if ($attendance == true) {
+			$this->session->set_flashdata('success', 'Successfully Edited');
+			redirect('payroll/attendance', 'refresh');
+		} else {
+			$this->session->set_flashdata('errors', 'Error occurred!!');
+			redirect('payroll/attendance', 'refresh');
+		}
+		
 		
 	}
 
