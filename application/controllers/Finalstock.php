@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Finalstock extends Admin_Controller
 {
@@ -23,61 +23,45 @@ class Finalstock extends Admin_Controller
     */
     public function index()
     {
-        if(!in_array('createProduct', $this->permission)) {
+        if (!in_array('createProduct', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
 
-        $this->form_validation->set_rules('name', 'Product Name', 'trim|required|is_unique[materials.name]');
-        $this->form_validation->set_rules('unit', 'Unit', 'trim|required');
-        $this->form_validation->set_rules('reorderlevel', 'Re Order Level', 'trim|required|numeric');
-        $this->form_validation->set_rules('price', 'Price', 'trim|required|numeric');
+        $product_data = $this->model_finalstock->getProductData();
 
+        $product = array();
+        foreach ($product_data as $k => $v) {
 
-        if ($this->form_validation->run() == TRUE) {
-            // true case
-
-            $data = array(
-                'name' => $this->input->post('name'),
-                'unit' => $this->input->post('unit'),
-                'reorderlevel' => $this->input->post('reorderlevel'),
-                'price' => $this->input->post('price'),
-
-            );
-
-            $create = $this->model_finalstock->createProduct($data);
-            if($create == true) {
-                $this->session->set_flashdata('success', 'Successfully created');
-                redirect('finalstock/', 'refresh');
-            }
-            else {
-                $this->session->set_flashdata('errors', 'Error occurred!!');
-                redirect('finalstock/', 'refresh');
-            }
+            $product[$k]['product_info'] = $v;
         }
-        else {
-            // false case
-            $product_data = $this->model_finalstock->getProductData();
 
-            $product = array();
-            foreach ($product_data as $k => $v) {
+        $this->data['product_data'] = $product;
 
-                $product[$k]['product_info'] = $v;
-            }
+        $material_data = $this->model_mainstock->getMaterialData();
 
-            $this->data['product_data'] = $product;
+        $material = array();
+        foreach ($material_data as $k => $v) {
 
-            $material_data = $this->model_mainstock->getMaterialData();
+            $material[$k]['material_info'] = $v;
+        }
 
-            $material = array();
-            foreach ($material_data as $k => $v) {
+        $this->data['$material_data'] = $material;
+        $this->render_template('finalstock/index', $this->data);
+    }
 
-                $material[$k]['material_info'] = $v;
-            }
-
-            $this->data['$material_data'] = $material;
-            $this->render_template('finalstock/index', $this->data);
+    public function create()
+    {
+        $create = $this->model_finalstock->create();
+        if ($create == true) {
+            $this->session->set_flashdata('success', 'Successfully created');
+            redirect('finalstock/', 'refresh');
+        } else {
+            $this->session->set_flashdata('errors', 'Error occurred!!');
+            redirect('finalstock/', 'refresh');
         }
     }
+
+
 
     /*
     * It Fetches the products data from the product table
@@ -85,7 +69,7 @@ class Finalstock extends Admin_Controller
     */
     public function fetchProductData()
     {
-        if(!in_array('viewProduct', $this->permission)) {
+        if (!in_array('viewProduct', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
 
@@ -108,16 +92,16 @@ class Finalstock extends Admin_Controller
 
             // button
             $buttons = '';
-            if(in_array('updateProduct', $this->permission)) {
-                $buttons .= '<a href="'.base_url('products/update/'.$value['id']).'" class="btn btn-default"><i class="fa fa-pencil"></i></a>';
+            if (in_array('updateProduct', $this->permission)) {
+                $buttons .= '<a href="' . base_url('products/update/' . $value['id']) . '" class="btn btn-default"><i class="fa fa-pencil"></i></a>';
             }
 
-            if(in_array('deleteProduct', $this->permission)) {
-                $buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc('.$value['id'].')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
+            if (in_array('deleteProduct', $this->permission)) {
+                $buttons .= ' <button type="button" class="btn btn-default" onclick="removeFunc(' . $value['id'] . ')" data-toggle="modal" data-target="#removeModal"><i class="fa fa-trash"></i></button>';
             }
 
 
-            $img = '<img src="'.base_url($value['image']).'" alt="'.$value['name'].'" class="img-circle" width="50" height="50" />';
+            $img = '<img src="' . base_url($value['image']) . '" alt="' . $value['name'] . '" class="img-circle" width="50" height="50" />';
 
             $availability = ($value['active'] == 1) ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Inactive</span>';
 
@@ -140,53 +124,19 @@ class Finalstock extends Admin_Controller
     * If the validation is successfully then it updates the data into the database
     * and it stores the operation message into the session flashdata and display on the manage product page
     */
-    public function update($product_id)
+    public function edit($id = null)
     {
-        if(!in_array('updateProduct', $this->permission)) {
-            redirect('dashboard', 'refresh');
-        }
 
-        if(!$product_id) {
-            redirect('dashboard', 'refresh');
-        }
+        if ($id) {
 
-        $this->form_validation->set_rules('product_name', 'Product name', 'trim|required');
-        $this->form_validation->set_rules('price', 'Price', 'trim|required');
-        $this->form_validation->set_rules('active', 'active', 'trim|required');
-
-        if ($this->form_validation->run() == TRUE) {
-            // true case
-
-            $data = array(
-                'name' => $this->input->post('product_name'),
-                'price' => $this->input->post('price'),
-                'description' => $this->input->post('description'),
-                'category_id' => json_encode($this->input->post('category')),
-                'store_id' => json_encode($this->input->post('store')),
-                'active' => $this->input->post('active'),
-            );
-
-
-            if($_FILES['product_image']['size'] > 0) {
-                $upload_image = $this->upload_image();
-                $upload_image = array('image' => $upload_image);
-
-                $this->model_products->update($upload_image, $product_id);
+            $edit = $this->model_finalstock->edit($id);
+            if ($edit == true) {
+                $this->session->set_flashdata('success', 'Successfully removed');
+                redirect('finalstock/', 'refresh');
+            } else {
+                $this->session->set_flashdata('error', 'Error occurred!!');
+                redirect('finalstock/', 'refresh');
             }
-
-            $update = $this->model_products->update($data, $product_id);
-            if($update == true) {
-                $this->session->set_flashdata('success', 'Successfully updated');
-                redirect('products/', 'refresh');
-            }
-            else {
-                $this->session->set_flashdata('errors', 'Error occurred!!');
-                redirect('products/update/'.$product_id, 'refresh');
-            }
-        }
-        else {
-
-            $this->render_template('mainstock/edit', $this->data);
         }
     }
 
@@ -197,34 +147,26 @@ class Finalstock extends Admin_Controller
     public function deleteproduct($id = null)
     {
 
-        if(!in_array('deleteCustomer', $this->permission)) {
+        if (!in_array('deleteCustomer', $this->permission)) {
             redirect('dashboard', 'refresh');
         }
 
-        if($id) {
-            if($this->input->post('confirm')) {
+        if ($id) {
+            if ($this->input->post('confirm')) {
 
 
                 $delete = $this->model_finalstock->deleteProduct($id);
-                if($delete == true) {
+                if ($delete == true) {
                     $this->session->set_flashdata('success', 'Successfully removed');
                     redirect('finalstock/', 'refresh');
-                }
-                else {
+                } else {
                     $this->session->set_flashdata('error', 'Error occurred!!');
-                    redirect('finalstock/deleteproduct/'.$id, 'refresh');
+                    redirect('finalstock/deleteproduct/' . $id, 'refresh');
                 }
-
-            }
-            else {
+            } else {
                 $this->data['id'] = $id;
                 $this->render_template('finalstock/deleteproduct', $this->data);
             }
         }
-
-
-
-
     }
-
 }

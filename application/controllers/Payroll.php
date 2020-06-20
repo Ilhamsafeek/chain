@@ -181,4 +181,30 @@ class Payroll extends Admin_Controller
 		$this->data['late_today'] =  $this->model_payroll->lateToday();
 		$this->render_template('payroll/payroll_summary/index', $this->data);
 	}
+
+
+
+
+	public function schedule()
+	{
+
+		if (!in_array('viewUser', $this->permission)) {
+			echo $this->permission;
+		}
+
+		$schedule_data = $this->model_payroll->getScheduleData();
+
+		$result = array();
+		foreach ($schedule_data as $k => $v) {
+
+			$result[$k]['schedule_info'] = $v;
+
+		}
+
+		$this->data['schedule_data'] = $result;
+
+
+		$this->render_template('payroll/schedule/index', $this->data);
+	}
+
 }

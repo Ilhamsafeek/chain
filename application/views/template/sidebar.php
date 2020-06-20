@@ -44,24 +44,25 @@
      
                         </ul>
                     </li>     
-                    <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-truck"></i>
+                    <!-- <li><a href="messages.html"><span class="pull-right badge">5</span><i class="fa fa-truck"></i>
                             <span>Distribution</span></a></li>               
-                 
+                  -->
                     <li class="parent"><a href="chain.html"><i class="fa fa-file-pdf-o"></i> <span>Reports</span></a>
-                        <ul class="children">
+                        <!-- <ul class="children">
                             <li><a href="notfound.html">404 Page</a></li>
                             <li><a href="blank.html">Blank Page</a></li>
                             <li><a href="calendar.html">Calendar</a></li>
                             <li><a href="invoice.html">Invoice</a></li>
                             <li><a href="locked.html">Locked Screen</a></li>
                    
-                        </ul>
+                        </ul> -->
                     </li>
                     <li class="parent" id="payrollMainMenu"><a href="chain.html"><i class="fa fa-cubes"></i> <span>Payroll</span></a>
                         <ul class="children">
                             <li id="attendanceMenu"><a href="<?php echo base_url('payroll/attendance'); ?>">Attendance</a></li>
                             <li id="summaryMenu"><a href="<?php echo base_url('payroll/summary'); ?>">Summary</a></li>
-                           
+                            <li id="scheduleMenu"><a href="<?php echo base_url('payroll/schedule'); ?>">Schedule</a></li>
+
                         </ul>
                     </li>
 

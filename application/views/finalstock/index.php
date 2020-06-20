@@ -29,73 +29,92 @@
         <?php endif; ?>
 
         <div class="row">
-            <div class="col-lg-5">
+
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+
+                            <div class="ibox-tools">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#addModal">
+                                        <i class="fa fa-plus"></i> New Product
+                                    </button>
+
+                                    <div class="modal fade" id="addModal" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="demoModalLabel">Add New Finished Product</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <form role="form" action="<?php echo base_url('finalstock/create') ?>" method="post">
+
+                                                    <div class="confirmation-modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                                <div class="modal-body">
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-8">
+                                                                            <div class="form-group">
+                                                                                <label class="font-normal">Material Name</label>
+                                                                                <input type="text" id="name" name="name" placeholder="Material Name" class="form-control" autocomplete="off" required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label class="font-normal">Unit</label>
+                                                                                <select class="select_group" id="type" name="unit" data-placeholder="Choose Unit" style="width:100%;" required>
+                                                                                    <option value=""></option>
+                                                                                    <option value="Kg">Kg</option>
+                                                                                    <option value="g">g</option>
+                                                                                    <option value="mg">mg</option>
+                                                                                    <option value="l">l</option>
+                                                                                    <option value="Pieces">Pieces</option>
+                                                                                </select> </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label class="font-normal">R.O.L</label>
+                                                                                <input type="text" id="reorderlevel" name="reorderlevel" placeholder="Re Order Level" class="form-control" autocomplete="off" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label class="font-normal">Price</label>
+                                                                                <input type="text" id="price" name="price" placeholder="Unit Cost" class="form-control" autocomplete="off" required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer d-flex justify-content-around">
+                                                            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                </form>
+
+                                            </div>
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-btns">
-                            <a href="chain.html" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>
-                            <a href="chain.html" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i class="fa fa-times"></i></a>
-                        </div><!-- panel-btns -->
-                        <h3 class="panel-title">Add Final Production Details</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body">
-
-
-                        <form role="form" action="<?php base_url('finalstock/') ?>" method="post">
-                            <?php echo validation_errors(); ?>
-
-
-                            <div class="form-group row"><label class="col-lg-2 col-form-label">Product Name</label>
-
-                                <div class="col-lg-10"><input type="text" id="name" name="name" placeholder="Product Name" class="form-control" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row"><label class="col-lg-2 col-form-label">Unit</label>
-                                <div class="col-lg-10">
-                                    <select class="select_group" id="type" name="unit" data-placeholder="Choose Unit" style="width:100%;">
-                                        <option value=""></option>
-                                        <option value="Kg">Kg</option>
-                                        <option value="g">g</option>
-                                        <option value="mg">mg</option>
-                                        <option value="l">l</option>
-                                        <option value="Pieces">Pieces</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row"><label class="col-lg-2 col-form-label">R.O.L</label>
-
-                                <div class="col-lg-10"><input type="text" id="reorderlevel" name="reorderlevel" placeholder="Re Order Level" class="form-control" autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row"><label class="col-lg-2 col-form-label">Price</label>
-
-                                <div class="col-lg-10"><input type="text" id="price" name="price" placeholder="Unit Cost" class="form-control" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                    <button class="btn btn-primary" type="submit">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div><!-- panel-body -->
-                </div><!-- panel -->
-
-
-
-            </div>
-            <div class="col-lg-7">
-
+                </div>
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <div class="panel-btns">
-                            <a href="chain.html" class="panel-minimize tooltips" data-toggle="tooltip" title="Minimize Panel"><i class="fa fa-minus"></i></a>
-                            <a href="chain.html" class="panel-close tooltips" data-toggle="tooltip" title="Close Panel"><i class="fa fa-times"></i></a>
-                        </div><!-- panel-btns -->
+
                         <h3 class="panel-title">Manage Products</h3>
                     </div>
                     <div class="panel-body">
@@ -107,6 +126,7 @@
                                     <th>Unit</th>
                                     <th>R O L</th>
                                     <th>Price</th>
+                                    <th>Quantity</th>
                                     <?php if (in_array('updateUser', $user_permission) && in_array('deleteUser', $user_permission)) : ?>
                                         <th>Action</th>
                                     <?php endif; ?>
@@ -122,9 +142,10 @@
                                             <td class="text-navy"><?php echo $v['product_info']['unit']; ?></td>
                                             <td class="text-primary"><?php echo $v['product_info']['reorderlevel']; ?></td>
                                             <td class="text-danger"><?php echo $v['product_info']['price']; ?></td>
+                                            <th></th>
                                             <td>
                                                 <?php if (in_array('updateUser', $user_permission)) : ?>
-                                                    <a class="btn btn-default"><i class="fa fa-edit"></i></a>
+                                                    <a class="btn btn-default" href="#" data-toggle="modal" data-target="#editModal<?php echo $v['product_info']['id']; ?>"><i class="fa fa-edit"></i></a>
                                                 <?php endif; ?>
                                                 <?php if (in_array('deleteUser', $user_permission)) : ?>
                                                     <a class="btn btn-default" href="#" data-toggle="modal" data-target="#deleteModal<?php echo $v['product_info']['id']; ?>"><i class="fa fa-trash-o"></i></a>
@@ -132,24 +153,111 @@
                                                 <?php endif; ?>
                                             </td>
                                 </tr>
+                                <div class="modal fade" id="editModal<?php echo $v['product_info']['id']; ?>" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="demoModalLabel">Add New Finished Product</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <form role="form" action="<?php echo base_url('finalstock/edit/' . $v['product_info']['id']) ?>" method="post">
 
+                                                <div class="confirmation-modal-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+
+                                                            <div class="modal-body">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+
+                                                                        <div class="modal-body">
+
+                                                                            <div class="row">
+
+                                                                                <div class="col-sm-8">
+                                                                                    <div class="form-group">
+                                                                                        <label class="font-normal">Material Name</label>
+                                                                                        <input type="text" id="name" name="name" placeholder="Material Name" class="form-control" autocomplete="off" value="<?php echo $v['product_info']['name']; ?>" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group">
+                                                                                        <label class="font-normal">Unit</label>
+                                                                                        <select class="select_group" id="type" name="unit" data-placeholder="Choose Unit" style="width:100%;" required>
+                                                                                            <option value=""></option>
+                                                                                            <option value="Kg" <?php if ($v['product_info']['unit'] == 'Kg') {
+                                                                                                                    echo 'selected';
+                                                                                                                } ?>>Kg</option>
+                                                                                            <option value="g" <?php if ($v['product_info']['unit'] == 'g') {
+                                                                                                                    echo 'selected';
+                                                                                                                } ?>>g</option>
+                                                                                            <option value="mg" <?php if ($v['product_info']['unit'] == 'mg') {
+                                                                                                                    echo 'selected';
+                                                                                                                } ?>>mg</option>
+                                                                                            <option value="l" <?php if ($v['product_info']['unit'] == 'l') {
+                                                                                                                    echo 'selected';
+                                                                                                                } ?>>l</option>
+                                                                                            <option value="Pieces" <?php if ($v['product_info']['unit'] == 'Pieces') {
+                                                                                                                        echo 'selected';
+                                                                                                                    } ?>>Pieces</option>
+                                                                                        </select> </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group">
+                                                                                        <label class="font-normal">R.O.L</label>
+                                                                                        <input type="text" id="reorderlevel" name="reorderlevel" placeholder="Re Order Level" class="form-control" autocomplete="off" value="<?php echo $v['product_info']['reorderlevel']; ?>" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="form-group">
+                                                                                        <label class="font-normal">Price</label>
+                                                                                        <input type="text" id="price" name="price" placeholder="Unit Cost" class="form-control" autocomplete="off" value="<?php echo $v['product_info']['price']; ?>" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer d-flex justify-content-around">
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                    </div>
+                                            </form>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
                                 <div class="modal inmodal" id="deleteModal<?php echo $v['product_info']['id']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
+                                    <div class="modal-dialog">
 
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
-                                                <h4 class="modal-title">Confirm Delete?</h4>
+                                                <h5 class="modal-title" id="demoModalLabel">Delete Confirmation</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
+                                            <div class="modal-body">
+                                                <p>Do you Really want to delete?</p>
+                                            </div>
+
                                             <form role="form" action="<?php echo base_url('finalstock/deleteproduct/' . $v['product_info']['id']) ?>" method="post" id="issueForm">
-                                                <div class="confirmation-modal-body">
 
-                                                    <div class="modal-footer d-flex justify-content-around">
-                                                        <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                                                        <button type="submit" class="btn btn-primary" name="confirm" value="Confirm">Yes</button>
-                                                    </div>
+
+                                                <div class="modal-footer d-flex justify-content-around">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn btn-primary" name="confirm" value="Confirm">Yes</button>
                                                 </div>
-
 
                                             </form>
                                         </div>
@@ -170,7 +278,7 @@
 
             </div>
         </div>
-       
+
     </div>
 
 

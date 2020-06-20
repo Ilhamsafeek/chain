@@ -110,6 +110,15 @@ class Model_payroll extends CI_Model
 		return $query->row_array();
 	}
 
+	public function getScheduleData()
+	{
+		
+		$sql = "SELECT * FROM schedules";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
+
 	public function editAttendance()
 	{
 

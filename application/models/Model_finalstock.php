@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Model_finalstock extends CI_Model
 {
@@ -9,7 +9,7 @@ class Model_finalstock extends CI_Model
 
 	public function getProductData($product_id = null)
 	{
-		if($product_id) {
+		if ($product_id) {
 			$sql = "SELECT * FROM products WHERE id = ?";
 			$query = $this->db->query($sql, array($product_id));
 			return $query->row_array();
@@ -20,26 +20,31 @@ class Model_finalstock extends CI_Model
 		return $query->result_array();
 	}
 
-	
 
-	public function createProduct($data = '')
+
+	public function create()
 	{
-
-		if($data) {
-			$create = $this->db->insert('products', $data);
-			$this->db->insert_id();
-
-			
-			return ($create == true) ? true : false;
+		$data = array();
+		foreach ($_POST as $key => $value) {
+			$data[$key] = $value;
 		}
+		$create = $this->db->insert('products', $data);
+		$this->db->insert_id();
+
+
+		return ($create == true) ? true : false;
 	}
 
-	public function edit($data = array(), $id = null)
+	public function edit($id = null)
 	{
+		$data = array();
+		foreach ($_POST as $key => $value) {
+			$data[$key] = $value;
+		}
 		$this->db->where('id', $id);
-		$update = $this->db->update('materials', $data);
+		$update = $this->db->update('products', $data);
 
-		return ($update == true) ? true : false;	
+		return ($update == true) ? true : false;
 	}
 
 	public function deleteProduct($id)
@@ -55,5 +60,4 @@ class Model_finalstock extends CI_Model
 		$query = $this->db->query($sql, array(1));
 		return $query->num_rows();
 	}
-	
 }

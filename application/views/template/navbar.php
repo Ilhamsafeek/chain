@@ -5,7 +5,7 @@
     <div class="headerwrapper">
         <div class="header-left">
             <a href="index.html" class="logo">
-                <img src="images/images-logo.png" alt=""></a>
+                <img src="<?php  echo base_url('assets/images/lebaan-logo.png')?>" height="30px" alt=""></a>
             <div class="pull-right">
                 <a href="chain.html" class="menu-collapse">
                     <i class="fa fa-bars"></i>
@@ -16,9 +16,6 @@
         <div class="header-right">
 
             <div class="pull-right">
-
-                <form class="form form-search" action="search-results.html">
-                    <input type="search" class="form-control" placeholder="Search"></form>
 
                 <div class="btn-group btn-group-list btn-group-notification">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -138,9 +135,7 @@
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu">
                         <li><a href="#"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-star"></i> Activity Log</a></li>
                         <li><a href="<?php echo base_url('company') ?>"><i class="glyphicon glyphicon-cog"></i> General Settings</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i> Help</a></li>
                         <li class="divider">
                         </li>
                         <li><a href="<?php echo base_url('auth/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Sign Out</a></li>

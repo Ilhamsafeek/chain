@@ -6,7 +6,7 @@
     <div class="panel panel-signin">
         <div class="panel-body">
             <div class="logo text-center">
-                <img src="images/images-logo-primary.png" alt="Chain Logo"></div>
+                <img src="<?php  echo base_url('assets/images/lebaan-main-logo.png')?>" height="90px" alt="Chain Logo"></div>
             <br>
             <h4 class="text-center mb5">Already a Member?</h4>
             <p class="text-center">Sign in to your account</p>

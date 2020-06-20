@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '1234',
-	'database' => 'chain',
+	'hostname' => 'namslk.ipagemysql.com',
+	'username' => 'mertics',
+	'password' => 'm3rt1c5',
+	'database' => 'lebaan',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

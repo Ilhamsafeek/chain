@@ -36,6 +36,8 @@ class Customers extends Admin_Controller
 		$this->data['customer_data'] = $result;
 
 		$this->render_template('customers/index', $this->data);
+
+		
 	}
 
 	public function create()
